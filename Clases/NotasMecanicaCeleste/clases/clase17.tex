@@ -30,6 +30,78 @@ Este marco permite enfocarse exclusivamente en la geometría y dinámica plana d
 La reducción al plano orbital no es una aproximación. Es una consecuencia exacta de la conservación del momento angular: toda la dinámica relativa ocurre en un único plano fijo.
 \end{importante}
 
+\section{Análisis del vector de Laplace}
+El vector de excentricidad se define como:
+\[
+\vec{e} = \frac{\vec{v} \times \vec{h}}{\mu} - \frac{\vec{r}}{r}
+\]
+
+\subsection{Dirección y significado geométrico}
+Sus propiedades más importantes son:
+\begin{itemize}
+    \item \(\vec{e}\) es constante en magnitud y dirección,
+    \item está contenido en el plano orbital, pues es combinación lineal de \(\vec{r}\) y \(\vec{v}\),
+    \item apunta hacia el \textbf{periastro}, es decir, el punto de mínima distancia radial.
+\end{itemize}
+
+El ángulo \(\theta\) medido desde la dirección de \(\vec{e}\) hasta \(\vec{r}\) se denomina \textbf{verdadera anomalía}. Esta elección angular es especialmente natural, porque toma como referencia el eje geométricamente privilegiado de la órbita.
+
+\subsection{Cálculo de la magnitud \texorpdfstring{$e^2$}{e²}}
+Calculamos el producto escalar \(\vec{e} \cdot \vec{e}\) para obtener una expresión analítica en función de las integrales del movimiento:
+\[
+ e^2 = \left( \frac{\vec{v} \times \vec{h}}{\mu} - \frac{\vec{r}}{r} \right) \cdot \left( \frac{\vec{v} \times \vec{h}}{\mu} - \frac{\vec{r}}{r} \right)
+\]
+
+Desarrollando:
+\[
+ e^2 = \frac{|\vec{v} \times \vec{h}|^2}{\mu^2} - \frac{2}{\mu r}(\vec{v} \times \vec{h}) \cdot \vec{r} + 1
+\]
+
+\textbf{Paso A. Primer término: identidad de Lagrange}
+\[
+ |\vec{v} \times \vec{h}|^2 = v^2 h^2 - (\vec{v} \cdot \vec{h})^2
+\]
+Como \(\vec{h} = \vec{r} \times \vec{v}\), entonces \(\vec{v} \cdot \vec{h} = 0\). Por tanto:
+\[
+ |\vec{v} \times \vec{h}|^2 = v^2 h^2
+\]
+
+\textbf{Paso B. Segundo término: propiedad cíclica del triple producto escalar}
+\[
+ (\vec{v} \times \vec{h}) \cdot \vec{r} = \vec{h} \cdot (\vec{r} \times \vec{v}) = \vec{h} \cdot \vec{h} = h^2
+\]
+
+\textbf{Paso C. Ensamblaje y sustitución de la energía}
+\[
+ e^2 = \frac{v^2 h^2}{\mu^2} - \frac{2 h^2}{\mu r} + 1
+\]
+\[
+ e^2 = 1 + \frac{2h^2}{\mu^2}\left(\frac{v^2}{2} - \frac{\mu}{r}\right)
+\]
+
+Reconociendo que
+\[
+\mathcal{E} = \frac{v^2}{2} - \frac{\mu}{r},
+\]
+obtenemos la relación fundamental:
+\[
+\boxed{e^2 = 1 + \frac{2\mathcal{E}h^2}{\mu^2}}
+\]
+
+\begin{importante}
+Esta ecuación conecta directamente la energía del sistema con la forma geométrica de la órbita. La excentricidad no es un parámetro puramente geométrico aislado: está determinada por las constantes dinámicas del movimiento.
+\end{importante}
+
+\subsection{Clasificación de órbitas según la energía}
+La relación anterior permite clasificar las cónicas orbitales:
+\begin{itemize}
+    \item si \(\mathcal{E} < 0\), entonces \(0 \le e < 1\): la órbita es una \textbf{elipse},
+    \item si \(\mathcal{E} = 0\), entonces \(e = 1\): la órbita es una \textbf{parábola},
+    \item si \(\mathcal{E} > 0\), entonces \(e > 1\): la órbita es una \textbf{hipérbola}.
+\end{itemize}
+
+Así, la energía específica determina si la trayectoria es ligada, marginal o de escape.
+
 \section{Deducción de la ecuación polar de la trayectoria}
 Proyectamos ahora el vector de Laplace sobre el vector posición \(\vec{r}\) para obtener la relación funcional entre \(r\) y \(\theta\).
 

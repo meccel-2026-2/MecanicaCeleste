@@ -1,0 +1,238 @@
+\chapter{Clase 21: Determinación de órbita en el problema de dos cuerpos}
+
+En el marco de la mecánica celeste newtoniana, el problema de dos cuerpos constituye la base analítica sobre la cual se construyen aproximaciones más complejas y se describe la dinámica de sistemas astronómicos reales. Hasta este punto del curso hemos trabajado principalmente en el problema directo: dada una configuración orbital completamente especificada, es posible predecir la posición y velocidad de los cuerpos en cualquier instante futuro. En esta clase invertimos el flujo de información: partiendo de un estado cinemático instantáneo conocido, aprenderemos a reconstruir la geometría completa de la trayectoria.
+
+Este proceso se conoce como \textbf{determinación de órbita} y es fundamental tanto en astronomía observacional —donde se miden posiciones y velocidades de cuerpos recién descubiertos— como en ingeniería aeroespacial —donde se requiere navegación y control de satélites—.
+
+El procedimiento descrito aquí se fundamenta en los principios de conservación del momento angular y de la energía, así como en la existencia del vector de excentricidad.
+
+\section{Conjuntos de elementos orbitales}
+La descripción geométrica de una cónica en el espacio tridimensional requiere exactamente seis parámetros independientes. Dependiendo del contexto físico y de las características dinámicas del cuerpo en estudio, se utilizan distintas parametrizaciones equivalentes.
+
+\subsection{Elementos orbitales clásicos}
+Se expresan como la tupla
+\[
+\vec{\Theta}_{\mathrm{cl}} = (p, e, I, \Omega, \omega, f).
+\]
+Sus significados son:
+\begin{itemize}
+    \item \(p\): semilatus rectum, que determina la escala de la cónica,
+    \item \(e\): excentricidad, que fija la forma geométrica,
+    \item \(I\): inclinación orbital, ángulo entre el plano orbital y el plano de referencia,
+    \item \(\Omega\): longitud del nodo ascendente, orientación de la línea de nodos,
+    \item \(\omega\): argumento del periapsis, orientación del eje mayor dentro del plano orbital,
+    \item \(f\): anomalía verdadera, posición instantánea del cuerpo sobre la trayectoria.
+\end{itemize}
+
+\subsection{Elementos asteroidales}
+Se usan convencionalmente para cuerpos con órbitas elípticas ligadas:
+\[
+\vec{\Theta}_{\mathrm{ast}} = (a, e, I, \Omega, \omega, f).
+\]
+Aquí el semilatus rectum \(p\) se reemplaza por el semieje mayor \(a\), relacionado mediante
+\[
+ p = a(1-e^2).
+\]
+Esta parametrización es especialmente útil porque \(a\) está ligado directamente a la energía específica relativa y al período orbital.
+
+\subsection{Elementos cometarios}
+Se emplean para cuerpos con trayectorias casi parabólicas o hiperbólicas:
+\[
+\vec{\Theta}_{\mathrm{com}} = (q, e, I, \Omega, \omega, f).
+\]
+En este caso se prefiere usar la distancia al periapsis \(q\), definida por
+\[
+ q = a(1-e) = \frac{p}{1+e}.
+\]
+
+La elección entre estos conjuntos es convencional y no altera la descripción física del sistema. Todas las representaciones son intercambiables mediante transformaciones algebraicas elementales.
+
+\begin{importante}
+Los elementos orbitales no son cantidades arbitrarias: constituyen una manera geométrica compacta de codificar exactamente la misma información que contiene el vector de estado \(\{\vec{r},\vec{v}\}\).
+\end{importante}
+
+\section{Relación entre el vector de estado y los elementos orbitales}
+El estado completo de un sistema de dos cuerpos en un instante \(t\) se describe mediante el \textbf{vector de estado}:
+\[
+\vec{X}(t) =
+\begin{pmatrix}
+ x(t) \\
+ y(t) \\
+ z(t) \\
+ v_x(t) \\
+ v_y(t) \\
+ v_z(t)
+\end{pmatrix}
+=
+\begin{pmatrix}
+ \vec{r}(t) \\
+ \vec{v}(t)
+\end{pmatrix}
+\]
+Este vector contiene seis componentes escalares que especifican posición y velocidad en un sistema de referencia inercial.
+
+\subsection{¿Por qué seis elementos producen solo tres coordenadas espaciales?}
+Si únicamente se dispone de la posición \(\vec{r} = (x,y,z)\), es imposible determinar la orientación espacial de la órbita ni su forma geométrica. La posición solo indica un punto por el que pasa la trayectoria, pero no revela hacia dónde se dirige el cuerpo, ni el plano en el cual se mueve, ni la curvatura local de la trayectoria.
+
+Por esta razón, la proyección
+\[
+(p,e,I,\Omega,\omega,f) \longrightarrow (x,y,z)
+\]
+no es suficiente para reconstruir la dinámica completa.
+
+\subsection{El difeomorfismo estado-elementos}
+Cuando se incorpora también la velocidad \(\vec{v} = (v_x,v_y,v_z)\), el sistema de ecuaciones que relaciona el vector de estado con los elementos orbitales se vuelve completo y no degenerado. Matemáticamente, existe una correspondencia uno a uno entre el espacio de estados y el espacio de elementos orbitales, salvo en singularidades geométricas particulares, por ejemplo:
+\begin{itemize}
+    \item inclinación nula,
+    \item excentricidad exactamente cero,
+    \item casos límite parabólicos o rectilíneos.
+\end{itemize}
+
+Fuera de estas singularidades, la relación
+\[
+\vec{X} \longleftrightarrow (p,e,I,\Omega,\omega,f)
+\]
+es invertible y suave.
+
+\section{El problema de determinación de órbita}
+El núcleo de esta clase consiste en resolver analíticamente la transformación inversa: dado
+\[
+\vec{X} = (\vec{r},\vec{v})
+\]
+medido en un instante arbitrario, encontrar los seis elementos orbitales que describen la cónica kepleriana compatible con esas condiciones iniciales.
+
+El procedimiento se basa en la construcción de tres vectores geométricos fundamentales derivados directamente del estado instantáneo y constantes en el problema no perturbado:
+\begin{enumerate}
+    \item \textbf{Momento angular específico relativo:}
+\[
+\vec{h} = \vec{r} \times \vec{v}
+\]
+    Este vector es perpendicular al plano orbital y su magnitud determina la velocidad areal.
+    \item \textbf{Vector de excentricidad:}
+\[
+\vec{e} = \frac{\vec{v} \times \vec{h}}{\mu} - \frac{\vec{r}}{r}
+\]
+    Este vector yace en el plano orbital, apunta hacia el periapsis y cumple \(e = \|\vec{e}\|\).
+    \item \textbf{Vector nodal:}
+\[
+\vec{n} = \hat{k} \times \vec{h}
+\]
+    donde \(\hat{k}\) es el vector unitario del eje \(z\). Este vector apunta a lo largo de la línea de nodos, específicamente hacia el nodo ascendente.
+\end{enumerate}
+
+Con estos tres vectores, la geometría completa de la órbita queda algebraicamente determinada.
+
+\section{Construcción geométrica paso a paso}
+A continuación se detalla el algoritmo analítico para extraer cada elemento orbital a partir de \(\vec{r}\) y \(\vec{v}\).
+
+\subsection{Parámetros de tamaño y forma}
+\[
+ h = \|\vec{h}\|, \qquad p = \frac{h^2}{\mu}, \qquad e = \|\vec{e}\|
+\]
+Si se requiere el semieje mayor, por ejemplo en el caso elíptico o hiperbólico, entonces
+\[
+ a = \frac{p}{1-e^2}.
+\]
+
+\subsection{Inclinación orbital \texorpdfstring{$I$}{I}}
+La inclinación es el ángulo entre \(\vec{h}\) y el eje \(z\) inercial:
+\[
+ \cos I = \frac{\vec{h} \cdot \hat{k}}{h} = \frac{h_z}{h}.
+\]
+Dado que \(I \in [0,\pi]\), la función \(\arccos\) produce aquí un valor único y correcto sin ambigüedad cuadrantal.
+
+\subsection{Longitud del nodo ascendente \texorpdfstring{$\Omega$}{Omega}}
+Se calcula a partir del vector nodal:
+\[
+ \cos\Omega = \frac{\vec{n} \cdot \hat{i}}{n} = \frac{n_x}{n}.
+\]
+Aquí aparece la primera ambigüedad de cuadrante, pues \(\arccos\) solo devuelve valores en \([0,\pi]\).
+
+\subsection{Argumento del periapsis \texorpdfstring{$\omega$}{omega}}
+Es el ángulo entre \(\vec{n}\) y \(\vec{e}\), medido dentro del plano orbital:
+\[
+ \cos\omega = \frac{\vec{n} \cdot \vec{e}}{ne}.
+\]
+También aquí el valor principal de \(\arccos\) no basta para decidir el cuadrante correcto.
+
+\subsection{Anomalía verdadera \texorpdfstring{$f$}{f}}
+Es el ángulo entre \(\vec{e}\) y \(\vec{r}\):
+\[
+ \cos f = \frac{\vec{e} \cdot \vec{r}}{er}.
+\]
+De nuevo, hace falta un criterio adicional para resolver la ambigüedad angular.
+
+\section{La pesadilla de los cuadrantes}
+Las funciones trigonométricas inversas estándar, en particular el arco coseno, son multivaluadas y sus implementaciones numéricas devuelven únicamente el valor principal en \([0,\pi]\). En mecánica celeste, los ángulos \(\Omega\), \(\omega\) y \(f\) deben definirse en el intervalo \([0,2\pi)\) para preservar la orientación correcta y el sentido del movimiento.
+
+Resolver esta ambigüedad exige inspeccionar signos de proyecciones auxiliares.
+
+\subsection{Corrección para \texorpdfstring{$\Omega$}{Omega}}
+El nodo ascendente se identifica mediante el signo de la componente \(y\) del vector nodal:
+\[
+ \Omega =
+\begin{cases}
+\arccos\left(\frac{n_x}{n}\right), & \text{si } n_y \ge 0 \\
+2\pi - \arccos\left(\frac{n_x}{n}\right), & \text{si } n_y < 0
+\end{cases}
+\]
+
+\subsection{Corrección para \texorpdfstring{$\omega$}{omega}}
+El argumento del periapsis requiere examinar la componente \(z\) del vector de excentricidad:
+\[
+ \omega =
+\begin{cases}
+\arccos\left(\frac{\vec{n} \cdot \vec{e}}{ne}\right), & \text{si } e_z \ge 0 \\
+2\pi - \arccos\left(\frac{\vec{n} \cdot \vec{e}}{ne}\right), & \text{si } e_z < 0
+\end{cases}
+\]
+
+\subsection{Corrección para \texorpdfstring{$f$}{f}}
+La anomalía verdadera se corrige usando la velocidad radial
+\[
+ v_r = \frac{\vec{r} \cdot \vec{v}}{r}.
+\]
+Entonces,
+\[
+ f =
+\begin{cases}
+\arccos\left(\frac{\vec{e} \cdot \vec{r}}{er}\right), & \text{si } v_r \ge 0 \\
+2\pi - \arccos\left(\frac{\vec{e} \cdot \vec{r}}{er}\right), & \text{si } v_r < 0
+\end{cases}
+\]
+
+Estas correcciones garantizan que los elementos orbitales recuperados sean geométricamente consistentes con el vector de estado original, evitando reflexiones espurias introducidas por el uso ingenuo de las funciones trigonométricas inversas.
+
+\begin{importante}
+Toda implementación seria de determinación de órbita debe resolver explícitamente la ambigüedad cuadrantal. De lo contrario, puede obtener una órbita geométricamente correcta en forma pero incorrecta en orientación o en sentido de movimiento.
+\end{importante}
+
+\section{Órbita osculatriz y elementos osculatrices}
+La determinación de órbita descrita hasta aquí no requiere que la trayectoria real sea una cónica exacta. En presencia de perturbaciones —interacciones con terceros cuerpos, arrastre atmosférico, presión de radiación, achatamiento terrestre, entre otras— la dinámica se desvía del modelo kepleriano ideal. Sin embargo, en cualquier instante \(t\), el vector de estado \(\vec{X}(t)\) sigue estando bien definido.
+
+Al aplicar el algoritmo de determinación de órbita a \(\vec{X}(t)\) en un instante arbitrario, obtenemos un conjunto de elementos \(\vec{\Theta}(t)\) que describen una cónica hipotética que:
+\begin{enumerate}
+    \item tiene como foco el origen de coordenadas,
+    \item pasa exactamente por \(\vec{r}(t)\),
+    \item es tangente a la trayectoria real en ese punto porque comparte el mismo vector velocidad.
+\end{enumerate}
+
+A esta cónica se le denomina \textbf{órbita osculatriz}. Sus parámetros se conocen como \textbf{elementos osculatrices}. En el problema puro de dos cuerpos, estos elementos son constantes en el tiempo. En sistemas perturbados, se convierten en funciones del tiempo
+\[
+\vec{\Theta}(t),
+\]
+cuya evolución está gobernada por ecuaciones de variación de parámetros, como las ecuaciones de Lagrange o de Gauss.
+
+\section{Síntesis analítica y comentarios finales}
+El proceso de determinación de órbita resume elegantemente la dualidad geométrica y dinámica de la mecánica celeste:
+\begin{itemize}
+    \item la \textbf{cinemática}, a través de \((\vec{r},\vec{v})\), proporciona el estado instantáneo,
+    \item la \textbf{dinámica}, a través de la conservación de \(\vec{h}\) y \(\vec{e}\), revela la estructura invariante del movimiento,
+    \item la \textbf{geometría}, a través de \((I,\Omega,\omega,f)\), traduce estas invariantes en parámetros observables y predictivos.
+\end{itemize}
+
+Es importante recordar que este formalismo supone un sistema de referencia inercial bien definido. Las transformaciones entre distintos marcos requieren matrices de rotación basadas en ángulos de Euler, tal como se discutió en la clase anterior.
+
+\begin{importante}
+La determinación de órbita constituye uno de los puentes más poderosos entre teoría y observación: transforma un estado instantáneo medido en una trayectoria completa, interpretable y predecible dentro del formalismo kepleriano.
+\end{importante}

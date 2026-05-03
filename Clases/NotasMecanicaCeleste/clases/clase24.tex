@@ -1,0 +1,154 @@
+\chapter{Clase 24: La órbita en el tiempo (parte 1)}
+
+En las clases precedentes se estableció un puente bidireccional entre el vector de estado instantáneo
+\[
+\vec{X} = (\vec{r},\vec{v})
+\]
+y los elementos orbitales clásicos. Aprendimos que, conocidos los seis elementos orbitales clásicos —\(a\), \(e\), \(I\), \(\Omega\), \(\omega\) y \(f\)—, es posible reconstruir analíticamente la posición espacial \(\vec{r}\) y el vector velocidad \(\vec{v}\) del sistema relativo mediante rotaciones de Euler y ecuaciones paramétricas planas. Sin embargo, esta descripción geométrica tiene una limitación fundamental: no especifica \textbf{cómo} evoluciona el cuerpo a lo largo de su trayectoria con el paso del tiempo.
+
+De los seis elementos orbitales, cinco —\(a\), \(e\), \(I\), \(\Omega\) y \(\omega\)— son constantes de movimiento en el problema no perturbado de dos cuerpos. El único que varía con el tiempo es la anomalía verdadera \(f\). La pregunta central de esta clase es, por tanto: ¿cómo calcular la anomalía verdadera como función del tiempo, \(f(t)\)? Este desafío constituye el núcleo del problema temporal de Kepler.
+
+La mecánica newtoniana indica que, entre todas las cantidades cinemáticas y geométricas asociadas a la cónica, el área barrida por el vector relativo es la única que posee una dependencia temporal explícita, lineal y completamente predecible.
+
+\section{La ley de las áreas y la predicción temporal}
+La constancia del momento angular específico relativo
+\[
+\vec{h} = \vec{r} \times \vec{v}
+\]
+implica directamente que la tasa de barrido del área por el vector posición es invariable. Matemáticamente, el área diferencial \(dA\) barrida en un intervalo \(dt\) corresponde a la mitad del área del paralelogramo formado por \(\vec{r}\) y \(d\vec{r}\):
+\[
+ dA = \frac{1}{2}\,\|\vec{r} \times d\vec{r}\| = \frac{1}{2}\,\|\vec{r} \times \vec{v}\,dt\| = \frac{1}{2}h\,dt
+\]
+
+Integrando esta relación desde el instante de paso por el periapsis \(t_p\), donde por definición el área barrida es nula, hasta un tiempo arbitrario \(t\), obtenemos:
+\[
+ A(t) = \frac{1}{2}h(t-t_p).
+\]
+
+Esta expresión revela que el área crece linealmente con el tiempo. El problema analítico consiste ahora en invertir esta relación: dado un tiempo \(t\), conocemos \(A(t)\), pero necesitamos traducir ese valor escalar en una posición angular sobre la cónica.
+
+La anomalía verdadera \(f\) no es adecuada para esta integración directa debido a la complejidad de la ecuación polar
+\[
+ r = \frac{p}{1+e\cos f}.
+\]
+Por esta razón, se introduce un parámetro angular auxiliar que simplifica notablemente la geometría del problema: la \textbf{anomalía excéntrica} \(E\).
+
+\begin{importante}
+El problema del tiempo en órbitas keplerianas no se resuelve directamente con la anomalía verdadera. La clave es encontrar una variable intermedia cuya relación con el área sea algebraicamente simple.
+\end{importante}
+
+\section{La anomalía excéntrica y su construcción geométrica}
+Para definir \(E\), consideremos una elipse con semieje mayor \(a\) y semieje menor \(b\), centrada en el origen de un sistema cartesiano auxiliar \((x_c,y_c)\). Si circunscribimos una circunferencia de radio \(a\) alrededor de la elipse, cualquier punto \(P\) sobre la curva elíptica puede proyectarse paralelamente al eje menor hasta intersectar la circunferencia en un punto \(Q\). La anomalía excéntrica \(E\) se define como el ángulo polar de \(Q\), medido desde el semieje mayor positivo y con centro en el centro geométrico de la elipse.
+
+Esta construcción geométrica permite escribir las coordenadas del punto sobre la elipse en forma paramétrica:
+\[
+ x_c = a\cos E,
+\]
+\[
+ y_c = b\sin E.
+\]
+
+A diferencia de la anomalía verdadera, que se mide desde el foco y cuya velocidad angular varía según la segunda ley de Kepler, la anomalía excéntrica no tiene una interpretación cinemática directa. Su utilidad reside en sus propiedades trigonométricas y algebraicas, que la hacen ideal para la integración temporal.
+
+\section{Relación entre la anomalía verdadera y la anomalía excéntrica}
+Es posible expresar la distancia radial \(r\) directamente en función de \(E\) sin pasar primero por la anomalía verdadera. Trasladando el origen desde el centro geométrico hasta el foco, es decir, desplazando una distancia \(ae\) en la dirección del periapsis, y aplicando el teorema de Pitágoras, se obtiene:
+\[
+ r^2 = (a\cos E - ae)^2 + (b\sin E)^2.
+\]
+
+Usando la relación
+\[
+ b^2 = a^2(1-e^2)
+\]
+y desarrollando algebraicamente, los términos se simplifican hasta dar la expresión compacta
+\[
+ r = a(1-e\cos E).
+\]
+
+Esta fórmula es mucho más manejable analíticamente que la ecuación polar clásica y evita la singularidad trigonométrica del denominador.
+
+Para conectar \(E\) con la anomalía verdadera \(f\), aplicamos identidades de ángulo medio a la geometría focal. El resultado exacto es
+\[
+ \tan\left(\frac{f}{2}\right) = \sqrt{\frac{1+e}{1-e}}\,\tan\left(\frac{E}{2}\right).
+\]
+
+De aquí se deduce que, para órbitas elípticas \((0<e<1)\), el valor absoluto de la anomalía verdadera suele ser mayor que el de la anomalía excéntrica, salvo en los puntos singulares del periapsis y del apoapsis, donde ambas coinciden. Esto refleja físicamente que el cuerpo barre más ángulo verdadero cerca del periapsis, donde su velocidad orbital es mayor.
+
+\section{Cálculo del área del sector elíptico}
+El paso crucial para vincular la geometría con el tiempo consiste en calcular analíticamente el área \(\Delta A\) del sector elíptico barrido desde el periapsis hasta la posición angular correspondiente a \(E\).
+
+Utilizando la propiedad de afinidad entre la elipse y su circunferencia circunscrita, el área del sector elíptico se obtiene escalando el área del sector circular correspondiente y restando el área del triángulo formado por el foco, el centro y el punto proyectado. El resultado final puede escribirse como
+\[
+ \Delta A = \frac{1}{2}ab(E-e\sin E).
+\]
+
+Cuando \(E = 2\pi\), recuperamos el área total de la elipse:
+\[
+ A_{\text{elipse}} = \pi ab,
+\]
+lo que confirma la consistencia geométrica de la expresión anterior.
+
+\begin{importante}
+La fórmula \(\Delta A = \frac{1}{2}ab(E-e\sin E)\) es el verdadero punto de contacto entre la geometría elíptica y la dinámica temporal del problema de Kepler.
+\end{importante}
+
+\section{Deducción de la ecuación de Kepler}
+Finalmente, igualamos la expresión dinámica del área barrida en función del tiempo con la expresión geométrica en función de la anomalía excéntrica:
+\[
+ \frac{1}{2}h(t-t_p) = \frac{1}{2}ab(E-e\sin E).
+\]
+
+Sustituimos las relaciones geométricas conocidas del problema de dos cuerpos:
+\[
+ b = a\sqrt{1-e^2},
+\qquad
+ h = \sqrt{\mu a(1-e^2)}.
+\]
+
+Al simplificar, el factor \(\sqrt{1-e^2}\) se cancela y la ecuación se reorganiza como
+\[
+ \sqrt{\frac{\mu}{a^3}}(t-t_p) = E - e\sin E.
+\]
+
+Definimos ahora dos cantidades fundamentales:
+\begin{itemize}
+    \item el \textbf{movimiento medio}
+\[
+ n \equiv \sqrt{\frac{\mu}{a^3}},
+\]
+    que representa la velocidad angular promedio que tendría el cuerpo si se moviera en una órbita circular del mismo período;
+    \item la \textbf{anomalía media}
+\[
+ M \equiv n(t-t_p),
+\]
+    una variable angular auxiliar que crece linealmente con el tiempo.
+\end{itemize}
+
+Con estas definiciones obtenemos la ecuación fundamental de la propagación temporal orbital:
+\[
+ M = E - e\sin E.
+\]
+
+Esta es la \textbf{ecuación de Kepler}. Se trata de una ecuación trascendental que relaciona linealmente el tiempo, a través de \(M\), con la posición geométrica, a través de \(E\). Dado un tiempo \(t\), calcular \(M\) es inmediato; sin embargo, despejar \(E\) requiere métodos numéricos o aproximaciones analíticas, ya que \(E\) aparece tanto linealmente como dentro de una función trigonométrica.
+
+\section{Síntesis analítica y comentarios finales}
+En esta clase se estableció la estructura matemática necesaria para resolver el problema de la evolución temporal en el sistema de dos cuerpos. Los resultados clave son:
+\begin{enumerate}
+    \item El área barrida es la única cantidad que evoluciona linealmente con el tiempo debido a la conservación de \(\vec{h}\).
+    \item La anomalía excéntrica \(E\) actúa como un parámetro geométrico intermedio que linealiza la dependencia de la distancia radial
+\[
+ r = a(1-e\cos E)
+\]
+y simplifica el cálculo del área sectorial.
+    \item La ecuación de Kepler
+\[
+ M = E - e\sin E
+\]
+cierra el ciclo entre tiempo y geometría, permitiendo predecir la posición orbital para cualquier \(t>t_p\).
+\end{enumerate}
+
+La resolución práctica de esta ecuación para \(E\), seguida de la transformación a \(f\) y luego a \(\vec{r}(t)\), constituye la base de todos los algoritmos de propagación orbital en astrodinámica y mecánica celeste.
+
+\begin{importante}
+La dificultad del problema temporal no radica en la física, sino en la inversión analítica de la ecuación de Kepler. Todo el resto del formalismo orbital descansa sobre esa inversión.
+\end{importante}

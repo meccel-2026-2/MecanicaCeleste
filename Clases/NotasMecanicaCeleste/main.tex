@@ -27,16 +27,16 @@
 % -------------------------------------------------
 % CONFIGURACIÓN VISUAL
 % -------------------------------------------------
-\definecolor{azulUdeA}{HTML}{026937}
+\definecolor{verdeUdeA}{HTML}{007A33}
 \definecolor{grisClaro}{HTML}{F4F6F8}
 \definecolor{grisTexto}{HTML}{2E2E2E}
 \definecolor{grisSec}{HTML}{6C757D}
 
 \hypersetup{
     colorlinks=true,
-    linkcolor=azulUdeA,
-    urlcolor=azulUdeA,
-    citecolor=azulUdeA,
+    linkcolor=verdeUdeA,
+    urlcolor=verdeUdeA,
+    citecolor=verdeUdeA,
     pdftitle={Notas de Clase - Mecánica Celeste},
     pdfauthor={Daniel Soto Villada}
 }
@@ -50,14 +50,14 @@
 
 % Estilo de capítulos y secciones
 \titleformat{\chapter}[display]
-  {\bfseries\Huge\color{azulUdeA}}
+  {\bfseries\Huge\color{verdeUdeA}}
   {\filleft\Large\chaptername\ \thechapter}
   {1ex}
   {\titlerule\vspace{1ex}\filright}
   [\vspace{1ex}\titlerule]
 
 \titleformat{\section}
-  {\bfseries\Large\color{azulUdeA}}
+  {\bfseries\Large\color{verdeUdeA}}
   {\thesection}{0.7em}{}
 
 \titleformat{\subsection}
@@ -71,18 +71,18 @@
 \fancyhead[R]{\textcolor{grisSec}{Daniel Soto Villada}}
 \fancyfoot[C]{\textcolor{grisSec}{\thepage}}
 \renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\headrule}{\hbox to\headwidth{\color{azulUdeA}\leaders\hrule height \headrulewidth\hfill}}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{verdeUdeA}\leaders\hrule height \headrulewidth\hfill}}
 
 % Índice más limpio
-\renewcommand{\cftchapfont}{\bfseries\color{azulUdeA}}
+\renewcommand{\cftchapfont}{\bfseries\color{verdeUdeA}}
 \renewcommand{\cftsecfont}{\color{grisTexto}}
-\renewcommand{\cftchappagefont}{\bfseries\color{azulUdeA}}
+\renewcommand{\cftchappagefont}{\bfseries\color{verdeUdeA}}
 \renewcommand{\cftsecpagefont}{\color{grisTexto}}
 
 % Caja para definiciones/ideas importantes
 \newtcolorbox{importante}{
   colback=grisClaro,
-  colframe=azulUdeA,
+  colframe=verdeUdeA,
   boxrule=0.8pt,
   arc=2mm,
   left=2mm,right=2mm,top=1mm,bottom=1mm
@@ -115,12 +115,11 @@
     {\large\textcolor{grisSec}{\Instituto}\par}
 
     \vspace{2.2cm}
-    {\Huge\bfseries\textcolor{azulUdeA}{\TituloDocumento}\par}
-    \vspace{0.5cm}
-    {\Large\textcolor{grisSec}{Plantilla académica profesional}\par}
+    {\Huge\bfseries\textcolor{verdeUdeA}{\TituloDocumento}\par}
+
 
     \vspace{2.4cm}
-    \begin{tcolorbox}[colback=grisClaro,colframe=azulUdeA,boxrule=0.9pt,arc=2mm,width=0.78\textwidth]
+    \begin{tcolorbox}[colback=grisClaro,colframe=verdeUdeA,boxrule=0.9pt,arc=2mm,width=0.78\textwidth]
         \centering
         {\Large\bfseries \NombreEstudiante}\par
         \vspace{0.2cm}
@@ -149,6 +148,10 @@
 \input{clases/clase17}
 \input{clases/clase18}
 \input{clases/clase20}
+\input{clases/clase21}
+\input{clases/clase23}
+\input{clases/clase24}
+\input{clases/clase26}
 
 % ---------- FINAL ----------
 \backmatter

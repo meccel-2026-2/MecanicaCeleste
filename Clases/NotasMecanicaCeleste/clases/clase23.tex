@@ -1,0 +1,202 @@
+\chapter{Clase 23: La velocidad relativa y el hodógrafo en el problema de dos cuerpos}
+
+En el desarrollo de la mecánica celeste newtoniana, la descripción completa del movimiento relativo de un sistema de dos cuerpos requiere conocer no solo la geometría de la trayectoria, sino también la cinemática instantánea del cuerpo en cada punto de la misma. En clases anteriores se estableció cómo, dados los elementos orbitales clásicos \((p,e,I,\Omega,\omega,f)\), es posible determinar el vector de posición \(\vec{r}\) en cualquier instante. En esta clase abordaremos el problema complementario: cómo calcular el vector velocidad \(\vec{v}\), qué propiedades geométricas posee y por qué su comportamiento revela una de las estructuras más elegantes de toda la mecánica celeste: el \textbf{hodógrafo}.
+
+El desarrollo se apoya en la relación entre el vector de estado y los elementos orbitales, en la conservación de la energía específica y del momento angular específico, y en la estructura del vector de excentricidad.
+
+\section{Del vector de estado a los elementos orbitales}
+El estado dinámico completo de un sistema de dos cuerpos en un instante arbitrario \(t\) se describe mediante el \textbf{vector de estado}:
+\[
+\vec{X}(t) =
+\begin{pmatrix}
+ x(t) \\
+ y(t) \\
+ z(t) \\
+ v_x(t) \\
+ v_y(t) \\
+ v_z(t)
+\end{pmatrix}
+=
+\begin{pmatrix}
+ \vec{r}(t) \\
+ \vec{v}(t)
+\end{pmatrix}
+\]
+Este vector contiene seis componentes escalares que especifican posición y velocidad en un sistema de referencia inercial.
+
+\subsection{¿Por qué seis elementos orbitales producen solo tres coordenadas espaciales?}
+Si únicamente se dispone del vector posición \(\vec{r}=(x,y,z)\), es imposible determinar la orientación espacial de la órbita ni su curvatura. La posición solo indica un punto geométrico por el que pasa la trayectoria, pero no revela la dirección del movimiento, el plano orbital ni si la curva es cerrada o abierta. Matemáticamente, la aplicación
+\[
+(p,e,I,\Omega,\omega,f) \longrightarrow (x,y,z)
+\]
+no es invertible, pues proyecta seis parámetros sobre solo tres coordenadas y destruye información esencial sobre la tangente a la curva.
+
+\subsection{El difeomorfismo estado-elementos}
+Cuando se incorpora también la velocidad \(\vec{v}=(v_x,v_y,v_z)\), el sistema de ecuaciones que relaciona el estado cinemático con los elementos orbitales se vuelve completo y no degenerado. Existe entonces una correspondencia biyectiva, suave y con jacobiano no nulo entre el espacio de estados y el espacio de elementos orbitales, salvo en singularidades geométricas especiales. En forma simbólica:
+\[
+\vec{X} \longleftrightarrow (p,e,I,\Omega,\omega,f)
+\]
+La velocidad completa la información geométrica porque fija el plano orbital mediante \(\vec{h}=\vec{r}\times\vec{v}\), determina la excentricidad y el tamaño orbital a través de la energía específica, y localiza el periapsis mediante el vector de excentricidad.
+
+\begin{importante}
+Conocer \((\vec{r},\vec{v})\) es equivalente a conocer la cónica completa y la posición instantánea del cuerpo sobre ella. Esa equivalencia es la base analítica de toda determinación de órbita.
+\end{importante}
+
+\section{El problema de la velocidad relativa}
+Una vez determinada la geometría orbital, surge una pregunta natural: ¿cuál es la magnitud y dirección del vector velocidad relativa en un punto arbitrario de la trayectoria? Resolver este problema no requiere integrar nuevamente las ecuaciones de movimiento; basta con explotar las constantes de movimiento ya conocidas: la energía específica relativa \(\epsilon\) y el momento angular específico relativo \(h\).
+
+\subsection{Energía específica relativa en el periapsis}
+En el periapsis, el vector posición y el vector velocidad son perpendiculares. Por tanto, la magnitud del momento angular específico se simplifica a
+\[
+ h = rv.
+\]
+Además, la distancia al periapsis es
+\[
+ q = a(1-e).
+\]
+Sustituyendo en la definición de energía específica:
+\[
+\epsilon = \frac{v^2}{2} - \frac{\mu}{r} = \frac{h^2}{2q^2} - \frac{\mu}{q}.
+\]
+Usando la relación geométrica
+\[
+ h^2 = \mu p = \mu a(1-e^2)
+\]
+y que \(q=a(1-e)\), se obtiene, tras una simplificación algebraica directa,
+\[
+\epsilon = -\frac{\mu}{2a}.
+\]
+Este resultado es fundamental: la energía específica relativa de una órbita kepleriana depende exclusivamente del semieje mayor \(a\), independientemente de la excentricidad.
+
+\subsection{Energía específica en un punto arbitrario}
+Dado que \(\epsilon\) es una constante de movimiento, su valor en cualquier punto de la trayectoria coincide con el obtenido en el periapsis. Igualando la expresión general con el valor anterior:
+\[
+\frac{v^2}{2} - \frac{\mu}{r} = -\frac{\mu}{2a}
+\]
+Despejando \(v^2\), obtenemos inmediatamente la ecuación fundamental de la rapidez orbital.
+
+\section{Magnitud de la velocidad: la ecuación vis-viva}
+La manipulación algebraica de la expresión anterior conduce directamente a
+\[
+ v^2 = \mu\left(\frac{2}{r} - \frac{1}{a}\right).
+\]
+A esta relación se le conoce como la \textbf{ecuación vis-viva}.
+
+\subsection{Propiedades analíticas de la vis-viva}
+\begin{enumerate}
+    \item \textbf{Independencia direccional:} dada una distancia \(r\) y una rapidez \(v\), el semieje mayor queda determinado unívocamente por
+\[
+ a = \frac{\mu}{\frac{2\mu}{r} - v^2}.
+\]
+    Nótese que \(a\) no depende de la dirección del vector velocidad. Dos cuerpos lanzados desde la misma posición con la misma rapidez pero direcciones distintas tienen el mismo tamaño orbital, aunque diferente orientación y excentricidad.
+    \item \textbf{Límites físicos:} para órbitas elípticas \((a>0)\), se requiere \(v < \sqrt{2\mu/r}\), que es la velocidad de escape local. Para trayectorias parabólicas, \(a \to \infty\) y \(v=\sqrt{2\mu/r}\). Para órbitas hiperbólicas \((a<0)\), se cumple \(v > \sqrt{2\mu/r}\).
+    \item \textbf{Velocidades características:} en una elipse, la velocidad es máxima en el periapsis y mínima en el apoapsis:
+\[
+ v_p = \sqrt{\frac{\mu}{a}\frac{1+e}{1-e}}, \qquad
+ v_a = \sqrt{\frac{\mu}{a}\frac{1-e}{1+e}}.
+\]
+\end{enumerate}
+
+\begin{importante}
+La ecuación vis-viva conecta de manera directa la cinemática local con la energía global de la órbita. Es una de las fórmulas más útiles de toda la astrodinámica.
+\end{importante}
+
+\section{Dirección de la velocidad y ángulo de trayectoria}
+Conocer la magnitud \(v=\|\vec{v}\|\) no basta para determinar el vector completo. La dirección se obtiene aprovechando la definición del momento angular específico:
+\[
+\vec{h} = \vec{r} \times \vec{v}.
+\]
+Tomando magnitudes:
+\[
+ h = rv\sin\phi,
+\]
+donde \(\phi\) es el ángulo entre \(\vec{r}\) y \(\vec{v}\), conocido como \textbf{ángulo de trayectoria}.
+
+Despejando:
+\[
+ \sin\phi = \frac{h}{rv}.
+\]
+Esta relación permite determinar la inclinación del vector velocidad respecto a la dirección local horizontal.
+
+\subsection{Ambigüedad cuadrantal y velocidad radial}
+Como \(h\), \(r\) y \(v\) son positivos, el valor de \(\sin\phi\) restringe \(\phi\) al primer o segundo cuadrante. Para resolver esta ambigüedad se proyecta la velocidad sobre la dirección radial:
+\[
+ v_r = \vec{v} \cdot \hat{r} = v\cos\phi.
+\]
+Alternativamente, derivando la ecuación de la cónica, se obtiene
+\[
+ v_r = \frac{\mu}{h}e\sin f.
+\]
+El signo de \(v_r\), o equivalentemente de \(\sin f\), determina si el cuerpo se aleja del periapsis \((0<f<\pi)\) o se acerca a él \((\pi<f<2\pi)\), fijando así el cuadrante correcto de \(\phi\).
+
+\section{El hodógrafo: geometría en el espacio de velocidades}
+Uno de los resultados más sorprendentes del problema de dos cuerpos es que el vector velocidad describe una circunferencia en el espacio de velocidades. A este lugar geométrico se le denomina \textbf{hodógrafo}.
+
+\subsection{Derivación analítica}
+Partimos de la definición del vector de excentricidad:
+\[
+\vec{e} = \frac{\vec{v} \times \vec{h}}{\mu} - \hat{r}.
+\]
+Evaluando las componentes de \(\vec{v}\) en el sistema perifocal, donde el eje \(x\) apunta al periapsis y el eje \(y\) es transversal, se obtiene
+\[
+ v_x = -\frac{\mu}{h}\sin f, \qquad
+ v_y = \frac{\mu}{h}(e+\cos f), \qquad
+ v_z = 0.
+\]
+Eliminando la anomalía verdadera \(f\) mediante \(\sin^2 f + \cos^2 f = 1\), resulta
+\[
+ v_x^2 + \left(v_y - \frac{\mu e}{h}\right)^2 = \left(\frac{\mu}{h}\right)^2.
+\]
+Esta es la ecuación canónica de una circunferencia en el plano \(v_xv_y\).
+
+\subsection{Interpretación geométrica del hodógrafo}
+La circunferencia del hodógrafo tiene:
+\begin{itemize}
+    \item \textbf{Centro:} \(\left(0,\frac{\mu e}{h}\right)\),
+    \item \textbf{Radio:} \(R_v = \frac{\mu}{h}\).
+\end{itemize}
+
+Su comportamiento en casos particulares es muy instructivo:
+\begin{itemize}
+    \item si \(e=0\), el centro coincide con el origen y la velocidad es constante en magnitud,
+    \item si \(e=1\), la circunferencia pasa por el origen, reflejando que la velocidad tiende a cero en el infinito parabólico,
+    \item si \(e>1\), el origen queda fuera de la circunferencia, indicando que la velocidad nunca se anula.
+\end{itemize}
+
+El hodógrafo transforma así un problema de geometría cónica en el espacio de posiciones en un problema circular en el espacio de velocidades.
+
+\begin{importante}
+El hodógrafo es una de las manifestaciones más elegantes de la simetría oculta del problema kepleriano: la complejidad geométrica de las cónicas se reduce a una circunferencia en el espacio de velocidades.
+\end{importante}
+
+\section{Componentes de la velocidad en el sistema inercial}
+Hasta ahora hemos trabajado en el sistema perifocal, natural de la cónica. Para predecir el vector de estado en un marco inercial arbitrario, es necesario rotar las componentes de la velocidad mediante los ángulos de Euler \((\Omega,I,\omega)\). La matriz
+\[
+\mathbf{M}(\Omega,I,\omega)=\mathbf{R}_z(\Omega)\mathbf{R}_x(I)\mathbf{R}_z(\omega)
+\]
+transforma vectores desde el sistema perifocal al sistema inercial.
+
+Aplicando esta transformación a las componentes perifocales \((v_x,v_y,0)\), se obtienen las componentes inerciales explícitas:
+\[
+\dot{x} = \frac{\mu}{h}\left[-\cos\Omega\sin(\omega+f)-\cos I\sin\Omega\cos(\omega+f)\right]-\frac{\mu e}{h}\left(\cos\Omega\sin\omega+\cos\omega\cos I\sin\Omega\right)
+\]
+\[
+\dot{y} = \frac{\mu}{h}\left[-\sin\Omega\sin(\omega+f)+\cos I\cos\Omega\cos(\omega+f)\right]+\frac{\mu e}{h}\left(-\sin\Omega\sin\omega+\cos\omega\cos I\cos\Omega\right)
+\]
+\[
+\dot{z} = \frac{\mu}{h}\left[\sin I\cos(\omega+f)+e\cos\omega\sin I\right].
+\]
+
+Estas expresiones cierran el ciclo de predicción: dados los elementos orbitales y un valor de \(f\), es posible reconstruir completamente el vector de estado \(\vec{X}=(\vec{r},\vec{v})\) en cualquier marco de referencia inercial.
+
+\section{Síntesis analítica y comentarios finales}
+El estudio de la velocidad en el problema de dos cuerpos revela una conexión profunda entre energía, geometría y álgebra vectorial:
+\begin{enumerate}
+    \item La ecuación vis-viva vincula directamente la cinemática local con el tamaño global de la órbita, mostrando que la energía específica dicta el destino energético del sistema.
+    \item El hodógrafo muestra que la dinámica kepleriana posee una simetría oculta en el espacio de velocidades, donde la complejidad de las cónicas se reduce a movimientos circulares simples.
+    \item La transformación inercial de la velocidad confirma que, aunque la magnitud y dirección relativa dependen únicamente de \(r\) y \(f\), su proyección espacial exige la rotación completa mediante los ángulos orbitales.
+\end{enumerate}
+
+\begin{importante}
+La velocidad relativa no es solo una derivada temporal de la posición: es un objeto geométrico con estructura propia, capaz de revelar invariantes profundas del problema kepleriano y de conectar la teoría analítica con las aplicaciones prácticas de la astrodinámica.
+\end{importante}

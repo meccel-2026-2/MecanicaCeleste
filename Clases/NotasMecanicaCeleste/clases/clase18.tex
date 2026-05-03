@@ -47,112 +47,278 @@ Dos descripciones típicas en este sistema son:
 Estas expresiones conservan su forma funcional dentro del sistema natural, independientemente de cómo esté orientada la órbita en el espacio físico.
 
 \section{El sistema de referencia del observador y el problema de alineación}
-En la práctica astronómica, las posiciones y velocidades se miden respecto a un sistema de referencia fijo o inercial, denominado \textbf{sistema del observador} $(x,y,z)$. Este sistema puede ser, por ejemplo:
+En la práctica astronómica, las posiciones y velocidades se miden respecto a un sistema de referencia fijo o inercial, denominado \textbf{sistema del observador} \((x,y,z)\). Este sistema puede ser, por ejemplo:
 \begin{itemize}
     \item el plano ecuatorial terrestre,
     \item el plano de la eclíptica,
     \item el plano tangente a la esfera celeste en la dirección de un objeto.
 \end{itemize}
 
-El problema fundamental es que casi nunca el sistema de ejes utilizado en las observaciones coincide con el sistema natural de la órbita. El plano orbital puede estar inclinado respecto al plano de referencia y la línea de ápsides, es decir, la dirección de $\vec{e}$, puede formar un ángulo arbitrario con el eje $x$ del observador.
+El problema fundamental es que casi nunca el sistema de ejes utilizado en las observaciones coincide con el sistema natural de la órbita. El plano orbital puede estar inclinado respecto al plano de referencia y la línea de ápsides, es decir, la dirección de \(\vec{e}\), puede formar un ángulo arbitrario con el eje \(x\) del observador.
 
-Por lo tanto, para comparar predicciones teóricas con datos observacionales, es necesario establecer una transformación matemática rigurosa que relacione las coordenadas del sistema natural $(x',y',z')$ con las del sistema del observador $(x,y,z)$. Como el movimiento orbital es estrictamente plano, la transformación se reduce inicialmente a una \textbf{rotación en el plano orbital}, la cual se embebe naturalmente en el espacio tridimensional mediante una rotación alrededor del eje $z$ perpendicular al plano.
+Por lo tanto, para comparar predicciones teóricas con datos observacionales, es necesario establecer una transformación matemática rigurosa que relacione las coordenadas del sistema natural \((x',y')\) con las del sistema del observador \((x,y)\). Como el movimiento sigue siendo plano en esta etapa, la transformación se reduce inicialmente a una \textbf{rotación en el plano}.
 
 \begin{importante}
 La dificultad observacional no está en la ecuación de la órbita, sino en que los datos rara vez están expresados en el sistema donde esa ecuación adopta su forma más simple.
 \end{importante}
 
-\section{Rotación de la cónica en el espacio tridimensional}
+\section{Rotación de la cónica en el plano}
 Consideremos dos sistemas cartesianos ortonormales que comparten el mismo origen:
 \begin{itemize}
-    \item sistema del observador: base $\{\hat{i}, \hat{j}, \hat{k}\}$,
-    \item sistema natural de la cónica: base $\{\hat{i}', \hat{j}', \hat{k}'\}$.
+    \item sistema del observador: base \(\{\hat{i}, \hat{j}\}\),
+    \item sistema natural de la cónica: base \(\{\hat{i}', \hat{j}'\}\).
 \end{itemize}
 
-El sistema natural está rotado un ángulo $\theta$ respecto al sistema del observador, alrededor del eje $z$, en sentido antihorario. El vector posición $\vec{r}$ es el mismo objeto geométrico, pero sus componentes cambian con la base elegida:
-$$ \vec{r} = x\hat{i} + y\hat{j} + z\hat{k} = x'\hat{i}' + y'\hat{j}' + z'\hat{k}' $$
+El sistema natural está rotado un ángulo \(\theta\) respecto al sistema del observador, en sentido antihorario. El vector posición \(\vec{r}\) es el mismo objeto geométrico, pero sus componentes cambian con la base elegida:
+\[
+\vec{r} = x\hat{i} + y\hat{j} = x'\hat{i}' + y'\hat{j}'
+\]
 
 \subsection{Relación entre vectores unitarios}
-Para expresar los componentes en una base en función de los de la otra, proyectamos los vectores unitarios rotados sobre la base fija. Dado que la rotación ocurre en el plano $x$-$y$, el eje $z$ permanece invariante:
-$$ \hat{i}' = \cos\theta\,\hat{i} + \sin\theta\,\hat{j} $$
-$$ \hat{j}' = -\sin\theta\,\hat{i} + \cos\theta\,\hat{j} $$
-$$ \hat{k}' = \hat{k} $$
+Para expresar los componentes en una base en función de los de la otra, proyectamos los vectores unitarios rotados sobre la base fija:
+\[
+\hat{i}' = \cos\theta\,\hat{i} + \sin\theta\,\hat{j}
+\]
+\[
+\hat{j}' = -\sin\theta\,\hat{i} + \cos\theta\,\hat{j}
+\]
 
-Sustituyendo en $\vec{r} = x'\hat{i}' + y'\hat{j}' + z'\hat{k}'$ y agrupando términos respecto a $\hat{i}$, $\hat{j}$ y $\hat{k}$, obtenemos:
-$$ x\hat{i} + y\hat{j} + z\hat{k} = (x'\cos\theta - y'\sin\theta)\hat{i} + (x'\sin\theta + y'\cos\theta)\hat{j} + z'\hat{k} $$
+Sustituyendo en \(\vec{r} = x'\hat{i}' + y'\hat{j}'\) y agrupando términos respecto a \(\hat{i}\) y \(\hat{j}\), obtenemos:
+\[
+ x\hat{i} + y\hat{j} = (x'\cos\theta - y'\sin\theta)\hat{i} + (x'\sin\theta + y'\cos\theta)\hat{j}
+\]
 
-Igualando componentes, se deduce la \textbf{regla de rotación directa en 3D}:
-$$ \begin{cases} 
- x = x'\cos\theta - y'\sin\theta \\ 
- y = x'\sin\theta + y'\cos\theta \\ 
- z = z' 
-\end{cases} $$
+Igualando componentes, se deduce la \textbf{regla de rotación directa}:
+\[
+\begin{cases}
+ x = x'\cos\theta - y'\sin\theta \\
+ y = x'\sin\theta + y'\cos\theta
+\end{cases}
+\]
 
-\section{Derivación analítica de la matriz de rotación \texorpdfstring{$\mathbf{R}_z(\theta)$}{Rz(theta)}}
-El sistema anterior puede escribirse de manera compacta mediante álgebra matricial. Definimos los vectores columna de coordenadas tridimensionales:
-$$ \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \mathbf{R}_z(\theta)\begin{pmatrix} x' \\ y' \\ z' \end{pmatrix} $$
+\section{Derivación analítica de la matriz de rotación \texorpdfstring{$R_z(\theta)$}{Rz(theta)}}
+El sistema anterior puede escribirse de manera compacta mediante álgebra matricial. Definimos los vectores columna de coordenadas:
+\[
+\begin{pmatrix} x \\ y \end{pmatrix} = \mathbf{R}_z(\theta)\begin{pmatrix} x' \\ y' \end{pmatrix}
+\]
 
-Aquí, $\mathbf{R}_z(\theta)$ es la \textbf{matriz de rotación en el espacio tridimensional alrededor del eje $z$}:
-$$ \mathbf{R}_z(\theta) = \begin{pmatrix} 
-\cos\theta & -\sin\theta & 0 \\ 
-\sin\theta & \cos\theta & 0 \\ 
-0 & 0 & 1 
-\end{pmatrix} $$
+Aquí, \(\mathbf{R}_z(\theta)\) es la \textbf{matriz de rotación en el plano \(x\)-\(y\) alrededor del eje \(z\)}:
+\[
+\mathbf{R}_z(\theta) =
+\begin{pmatrix}
+\cos\theta & -\sin\theta \\
+\sin\theta & \cos\theta
+\end{pmatrix}
+\]
 
 \subsection{Propiedades analíticas de \texorpdfstring{$\mathbf{R}_z(\theta)$}{Rz(theta)}}
-Esta matriz posee propiedades fundamentales en $\mathbb{R}^3$:
+Esta matriz posee propiedades fundamentales:
 \begin{enumerate}
     \item \textbf{Ortogonalidad:}
-$$ \mathbf{R}_z^T(\theta)\mathbf{R}_z(\theta) = \mathbf{I}_3 $$
-    lo cual garantiza que la transformación preserva productos escalares, distancias y ángulos en el espacio tridimensional.
+\[
+\mathbf{R}_z^T(\theta)\mathbf{R}_z(\theta) = \mathbf{I}
+\]
+    lo cual garantiza que la transformación preserva productos escalares, distancias y ángulos.
     \item \textbf{Determinante unitario:}
-$$ \det(\mathbf{R}_z) = \cos^2\theta + \sin^2\theta = 1 $$
-    indicando que la rotación es propia y no incluye reflexiones ni inversiones de paridad.
+\[
+\det(\mathbf{R}_z) = \cos^2\theta + \sin^2\theta = 1
+\]
+    indicando que la rotación es propia y no incluye reflexiones.
     \item \textbf{Preservación de la norma:}
-$$ x^2 + y^2 + z^2 = x'^2 + y'^2 + z'^2 $$
-    consistente con la invariancia de la distancia radial $r = |\vec{r}|$ y la estructura métrica euclidiana.
+\[
+ x^2 + y^2 = x'^2 + y'^2
+\]
+    consistente con la invariancia de la distancia radial \(r = |\vec{r}|\).
 \end{enumerate}
 
-Esta matriz es la herramienta fundamental para trasladar cualquier descripción geométrica de la cónica desde su sistema natural al sistema del observador, manteniendo la coherencia tridimensional.
+Esta matriz es la herramienta fundamental para trasladar cualquier descripción geométrica de la cónica desde su sistema natural al sistema del observador.
 
 \section{La rotación inversa y el cambio de signo angular}
-Con frecuencia necesitamos hacer el camino contrario: dada una posición observada $(x,y,z)$, queremos recuperar sus coordenadas en el sistema natural $(x',y',z')$ para aplicar directamente la ecuación polar o las leyes de Kepler.
+Hasta ahora se ha trabajado en el caso plano, donde bastaba una sola rotación alrededor del eje \(z\). Sin embargo, para describir una órbita real en un sistema inercial del observador es necesario introducir explícitamente las tres coordenadas \((x,y,z)\) y la orientación espacial completa del plano orbital.
 
-La transformación inversa se obtiene multiplicando por la inversa de la matriz de rotación:
-$$ \begin{pmatrix} x' \\ y' \\ z' \end{pmatrix} = \mathbf{R}_z^{-1}(\theta)\begin{pmatrix} x \\ y \\ z \end{pmatrix} $$
+La idea central sigue siendo la misma: el sistema natural de la órbita es el sistema donde la cónica tiene la forma más simple. Lo que cambia es que ahora ese sistema debe incrustarse dentro de un espacio tridimensional.
 
-Como $\mathbf{R}_z(\theta)$ es ortogonal, su inversa coincide con su traspuesta:
-$$ \mathbf{R}_z^{-1}(\theta) = \mathbf{R}_z^T(\theta) = \begin{pmatrix} 
-\cos\theta & \sin\theta & 0 \\ 
--\sin\theta & \cos\theta & 0 \\ 
-0 & 0 & 1 
-\end{pmatrix} $$
+\subsection{Rotación inversa en el caso plano como antesala del caso espacial}
+En dos dimensiones, la transformación inversa se obtenía mediante
+\[
+\begin{pmatrix} x' \\ y' \end{pmatrix} = \mathbf{R}_z^{-1}(\theta)\begin{pmatrix} x \\ y \end{pmatrix}
+\]
+y, como \(\mathbf{R}_z\) es ortogonal,
+\[
+\mathbf{R}_z^{-1}(\theta) = \mathbf{R}_z^T(\theta) = \mathbf{R}_z(-\theta).
+\]
 
-Analíticamente, esto equivale a cambiar el signo del ángulo:
-$$ \mathbf{R}_z^{-1}(\theta) = \mathbf{R}_z(-\theta) $$
+Este resultado sigue siendo válido en tres dimensiones para cualquier matriz de rotación elemental: la transformación inversa se obtiene invirtiendo el orden de las rotaciones y cambiando el signo de los ángulos.
 
-Por tanto, la rotación inversa en 3D se escribe como:
-$$ \begin{cases} 
- x' = x\cos\theta + y\sin\theta \\ 
- y' = -x\sin\theta + y\cos\theta \\ 
- z' = z 
-\end{cases} $$
+\subsection{Unicidad de la transformación en el espacio}
+En el problema tridimensional no aparecen matrices distintas para posición y para velocidad. La misma transformación geométrica que orienta el sistema perifocal dentro del espacio inercial actúa sobre cualquier vector del plano orbital. Por ello, una vez construida la matriz total de rotación, esta sirve tanto para transformar \(\vec{r}\) como \(\vec{v}\), o cualquier otro vector expresado en el sistema natural.
 
-\subsection{Unicidad de la matriz de transformación}
-Solo existe una matriz de rotación plana que conecta ambos marcos. La misma matriz \(\mathbf{R}_z(\theta)\), o su traspuesta según la dirección del cambio de base, se utiliza tanto para pasar del sistema del observador al sistema natural como para hacer la transformación inversa.
+\section{Síntesis y preparación para la tridimensionalidad}
+Los resultados obtenidos hasta aquí muestran que la descripción plana de la cónica es solamente una etapa intermedia. Para conectar la órbita con el sistema del observador es necesario reconstruir la geometría en tres dimensiones usando coordenadas \((x,y,z)\).
 
-Esta propiedad simplifica el tratamiento analítico y computacional, ya que no se requieren transformaciones distintas para ida y vuelta: basta con ajustar el signo del ángulo o trasponer la matriz.
+\subsection{7.4 Deducción tridimensional en coordenadas \texorpdfstring{$x,y,z$}{x,y,z}}
+Introducimos el sistema natural tridimensional de la órbita, también llamado \textbf{sistema perifocal}, con base ortonormal \(\{\hat{p},\hat{q},\hat{w}\}\):
+\begin{itemize}
+    \item \(\hat{p}\) apunta hacia el periastro,
+    \item \(\hat{q}\) yace en el plano orbital y es perpendicular a \(\hat{p}\),
+    \item \(\hat{w}\) es paralelo al momento angular específico \(\vec{h}\).
+\end{itemize}
 
-\section{Síntesis}
-Los resultados centrales de esta clase son:
+En este sistema, la órbita sigue contenida en un plano, por lo que la coordenada perpendicular vale cero. Así, la posición relativa y la velocidad relativa se escriben como
+\[
+\vec{r}_{\mathrm{pf}} =
+\begin{pmatrix}
+ r\cos f \\
+ r\sin f \\
+ 0
+\end{pmatrix}
+\]
+\[
+\vec{v}_{\mathrm{pf}} =
+\sqrt{\frac{\mu}{p}}
+\begin{pmatrix}
+ -\sin f \\
+ e+\cos f \\
+ 0
+\end{pmatrix}
+\]
+donde \(f\) es la verdadera anomalía.
+
+El problema consiste en expresar estos vectores en el sistema inercial del observador \(\{\hat{i},\hat{j},\hat{k}\}\), es decir, en términos de las coordenadas \((x,y,z)\). Para ello deben introducirse tres ángulos orbitales:
 \begin{enumerate}
-    \item La ecuación polar \(r(\theta) = p/(1+e\cos\theta)\) y las ecuaciones paramétricas son válidas de forma natural en el sistema alineado con la cónica.
-    \item Las observaciones astronómicas se realizan en un sistema de referencia que, en general, no coincide con el sistema natural de la órbita.
-    \item La relación entre ambos sistemas se resuelve mediante una rotación plana descrita por la matriz \(\mathbf{R}_z(\theta)\), que es ortogonal, de determinante unitario y preserva la métrica euclidiana.
-    \item La transformación inversa se obtiene con \(\theta \to -\theta\), garantizando la reversibilidad analítica del cambio de coordenadas.
+    \item la longitud del nodo ascendente \(\Omega\),
+    \item la inclinación orbital \(i\),
+    \item el argumento del periastro \(\omega\).
 \end{enumerate}
 
-Este marco bidimensional es el primer paso hacia la descripción completa de la órbita en el espacio tridimensional. En clases posteriores, esta rotación plana se combinará con rotaciones adicionales asociadas al nodo ascendente y a la inclinación orbital para construir la matriz completa que conecta el sistema perifocal con un sistema inercial de referencia.
+La construcción geométrica se hace en tres pasos.
+
+\textbf{Paso 1. Rotación por \(\omega\) alrededor de \(z\).}  
+Esta rotación orienta el eje \(\hat{p}\) dentro del plano orbital. La matriz asociada es
+\[
+\mathbf{R}_z(\omega)=
+\begin{pmatrix}
+\cos\omega & -\sin\omega & 0 \\
+\sin\omega & \cos\omega & 0 \\
+0 & 0 & 1
+\end{pmatrix}.
+\]
+
+\textbf{Paso 2. Rotación por \(i\) alrededor de \(x\).}  
+Esta rotación inclina el plano orbital respecto al plano de referencia:
+\[
+\mathbf{R}_x(i)=
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & \cos i & -\sin i \\
+0 & \sin i & \cos i
+\end{pmatrix}.
+\]
+
+\textbf{Paso 3. Rotación por \(\Omega\) alrededor de \(z\).}  
+Esta última rotación fija la dirección de la línea de nodos en el sistema inercial:
+\[
+\mathbf{R}_z(\Omega)=
+\begin{pmatrix}
+\cos\Omega & -\sin\Omega & 0 \\
+\sin\Omega & \cos\Omega & 0 \\
+0 & 0 & 1
+\end{pmatrix}.
+\]
+
+La matriz total que transforma del sistema perifocal al sistema inercial es entonces
+\[
+\mathbf{Q} = \mathbf{R}_z(\Omega)\,\mathbf{R}_x(i)\,\mathbf{R}_z(\omega).
+\]
+Por tanto,
+\[
+\vec{r}_{\mathrm{I}} = \mathbf{Q}\,\vec{r}_{\mathrm{pf}},
+\qquad
+\vec{v}_{\mathrm{I}} = \mathbf{Q}\,\vec{v}_{\mathrm{pf}}.
+\]
+
+Al desarrollar el producto matricial y aplicar la matriz a la posición perifocal, se obtiene la deducción explícita en coordenadas cartesianas tridimensionales:
+\[
+\begin{pmatrix}
+ x \\
+ y \\
+ z
+\end{pmatrix}
+=
+\mathbf{Q}
+\begin{pmatrix}
+ r\cos f \\
+ r\sin f \\
+ 0
+\end{pmatrix}
+=
+ r
+\begin{pmatrix}
+ \cos\Omega\cos(\omega+f)-\sin\Omega\sin(\omega+f)\cos i \\
+ \sin\Omega\cos(\omega+f)+\cos\Omega\sin(\omega+f)\cos i \\
+ \sin(\omega+f)\sin i
+\end{pmatrix}.
+\]
+
+De aquí se leen directamente las coordenadas espaciales de la órbita:
+\[
+ x = r\bigl[\cos\Omega\cos(\omega+f)-\sin\Omega\sin(\omega+f)\cos i\bigr]
+\]
+\[
+ y = r\bigl[\sin\Omega\cos(\omega+f)+\cos\Omega\sin(\omega+f)\cos i\bigr]
+\]
+\[
+ z = r\sin(\omega+f)\sin i.
+\]
+
+Estas expresiones constituyen la forma explícita de la órbita kepleriana en el espacio tridimensional del observador.
+
+\begin{importante}
+La coordenada \(z\) aparece únicamente porque el plano orbital está inclinado. Si \(i=0\), entonces \(z=0\) y se recupera exactamente el caso plano estudiado antes.
+\end{importante}
+
+\subsection*{7.5 Velocidad tridimensional en el sistema inercial}
+La misma matriz \(\mathbf{Q}\) transforma la velocidad desde el sistema perifocal al sistema inercial. Por tanto,
+\[
+\begin{pmatrix}
+ \dot{x} \\
+ \dot{y} \\
+ \dot{z}
+\end{pmatrix}
+=
+\mathbf{Q}
+\sqrt{\frac{\mu}{p}}
+\begin{pmatrix}
+ -\sin f \\
+ e+\cos f \\
+ 0
+\end{pmatrix}.
+\]
+
+Desarrollando componente a componente:
+\[
+\dot{x} = \sqrt{\frac{\mu}{p}}\left[-\cos\Omega\sin(\omega+f)-\sin\Omega\cos(\omega+f)\cos i + e\bigl(-\cos\Omega\sin\omega-\sin\Omega\cos\omega\cos i\bigr)\right]
+\]
+\[
+\dot{y} = \sqrt{\frac{\mu}{p}}\left[-\sin\Omega\sin(\omega+f)+\cos\Omega\cos(\omega+f)\cos i + e\bigl(-\sin\Omega\sin\omega+\cos\Omega\cos\omega\cos i\bigr)\right]
+\]
+\[
+\dot{z} = \sqrt{\frac{\mu}{p}}\left[\cos(\omega+f)\sin i + e\cos\omega\sin i\right].
+\]
+
+Así, la órbita queda completamente descrita en el sistema del observador mediante las seis componentes \((x,y,z,\dot{x},\dot{y},\dot{z})\).
+
+\subsection*{7.6 Interpretación geométrica final}
+La dinámica kepleriana sigue siendo plana en su naturaleza: el cuerpo se mueve siempre en un plano fijo perpendicular a \(\vec{h}\). Sin embargo, para un observador inercial, ese plano puede encontrarse arbitrariamente orientado en el espacio. La tridimensionalidad no introduce una nueva fuerza ni una nueva ecuación orbital; introduce una nueva \textbf{geometría de orientación}.
+
+En consecuencia:
+\begin{itemize}
+    \item la ecuación polar fija la forma de la órbita en su plano natural,
+    \item los ángulos \(\Omega\), \(i\) y \(\omega\) fijan la orientación del plano y del periastro en el espacio,
+    \item las fórmulas de \((x,y,z)\) y \((\dot{x},\dot{y},\dot{z})\) permiten comparar directamente la teoría con observaciones y simulaciones numéricas.
+\end{itemize}
+
+Este es el puente completo entre la solución analítica del problema de dos cuerpos y su representación en un sistema inercial tridimensional.
 
 \begin{importante}
 La geometría de las cónicas no solo determina la forma de la trayectoria orbital. También fija la estructura algebraica de las transformaciones de coordenadas que hacen posible comparar teoría, simulación y observación.

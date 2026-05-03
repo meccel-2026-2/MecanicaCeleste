@@ -90,121 +90,41 @@ Los ángulos espaciales fundamentales son:
 
 Estos tres ángulos, junto con \(p\), \(e\) y \(f\), determinan completamente la orientación y forma de la órbita en el espacio tridimensional.
 
-\section{Matriz de rotación de Euler en 3D: Derivación analítica y significado geométrico}
-La transformación desde el sistema perifocal (natural de la cónica) al sistema del observador (inercial o de referencia) se construye mediante una secuencia de tres rotaciones elementales conocida como la convención de Euler 3-1-3. Esta secuencia está diseñada para alinear progresivamente los ejes del marco orbital con los del marco de referencia, respetando la jerarquía geométrica de los elementos orbitales.
-
-\subsection{Secuencia de rotaciones y justificación geométrica}
-Partimos del sistema perifocal $\{ \hat{P}, \hat{Q}, \hat{W} \}$, donde:
-\begin{itemize}
-    \item $\hat{P}$ apunta al periapsis (dirección de $\vec{e}$),
-    \item $\hat{W}$ es normal al plano orbital (dirección de $\vec{h}$),
-    \item $\hat{Q}$ completa el sistema diestro en el plano de la órbita.
-\end{itemize}
-Para llevar este marco al sistema del observador $\{ \hat{i}, \hat{j}, \hat{k} \}$, aplicamos las rotaciones en el siguiente orden:
+\section{Matriz de rotación de Euler en 3D}
+La transformación desde el sistema perifocal al sistema del observador se realiza mediante el producto de tres matrices de rotación elementales. La convención estándar aplica las rotaciones en el orden:
 \begin{enumerate}
-    \item \textbf{Rotación $\mathbf{R}_z(\omega)$ alrededor de $\hat{W}$:} Gira el sistema perifocal un ángulo $\omega$ (argumento del periapsis) hasta que el eje $\hat{P}$ coincide con la línea de nodos. El eje $\hat{W}$ permanece invariante.
-    \item \textbf{Rotación $\mathbf{R}_x(I)$ alrededor de la línea de nodos:} Inclina el plano orbital un ángulo $I$ (inclinación) hasta que coincide con el plano de referencia. La línea de nodos es el eje invariante de esta rotación.
-    \item \textbf{Rotación $\mathbf{R}_z(\Omega)$ alrededor de $\hat{k}$:} Rota el sistema alrededor del eje $z$ del observador un ángulo $\Omega$ (longitud del nodo ascendente) hasta alinear la línea de nodos con el eje $x$ del observador.
+    \item \(\mathbf{R}_z(\omega)\): alinea el eje perifocal \(x'\) con la línea de nodos,
+    \item \(\mathbf{R}_x(I)\): inclina el plano orbital respecto al plano de referencia,
+    \item \(\mathbf{R}_z(\Omega)\): alinea la línea de nodos con el eje \(x\) del observador.
 \end{enumerate}
-Dado que trabajamos con vectores columna y las rotaciones se aplican sucesivamente, la matriz total se obtiene multiplicando las matrices elementales de izquierda a derecha en el orden inverso de aplicación (primera rotación a la derecha):
-\[
-\mathbf{R}_{\text{Euler}} = \mathbf{R}_z(\Omega)\,\mathbf{R}_x(I)\,\mathbf{R}_z(\omega).
-\]
 
-\subsection{Definición de las matrices elementales}
-Utilizando notación trigonométrica explícita, las matrices elementales se definen como:
+La matriz de rotación de Euler resultante es:
 \[
-\mathbf{R}_z(\omega) =
-\begin{pmatrix}
-\cos\omega & -\sin\omega & 0 \\
-\sin\omega & \cos\omega & 0 \\
-0 & 0 & 1
-\end{pmatrix}, \quad
-\mathbf{R}_x(I) =
-\begin{pmatrix}
-1 & 0 & 0 \\
-0 & \cos I & -\sin I \\
-0 & \sin I & \cos I
-\end{pmatrix}, \quad
-\mathbf{R}_z(\Omega) =
-\begin{pmatrix}
-\cos\Omega & -\sin\Omega & 0 \\
-\sin\Omega & \cos\Omega & 0 \\
-0 & 0 & 1
-\end{pmatrix}.
+\mathbf{R}_{\text{Euler}} = \mathbf{R}_z(\Omega)\,\mathbf{R}_x(I)\,\mathbf{R}_z(\omega)
 \]
-
-\subsection{Derivación paso a paso del producto matricial}
-Primero calculamos el producto intermedio $\mathbf{M} = \mathbf{R}_x(I)\,\mathbf{R}_z(\omega)$:
-\[
-\mathbf{M} =
-\begin{pmatrix}
-1 & 0 & 0 \\
-0 & \cos I & -\sin I \\
-0 & \sin I & \cos I
-\end{pmatrix}
-\begin{pmatrix}
-\cos\omega & -\sin\omega & 0 \\
-\sin\omega & \cos\omega & 0 \\
-0 & 0 & 1
-\end{pmatrix}
-=
-\begin{pmatrix}
-\cos\omega & -\sin\omega & 0 \\
-\cos I \sin\omega & \cos I \cos\omega & -\sin I \\
-\sin I \sin\omega & \sin I \cos\omega & \cos I
-\end{pmatrix}.
-\]
-Esta matriz representa la rotación combinada que alinea el periapsis con la línea de nodos e inclina el plano orbital, pero aún sin rotar respecto al eje $z$ del observador.
-
-Ahora aplicamos la rotación final alrededor de $z$:
-\[
-\mathbf{R}_{\text{Euler}} = \mathbf{R}_z(\Omega)\,\mathbf{M} =
-\begin{pmatrix}
-\cos\Omega & -\sin\Omega & 0 \\
-\sin\Omega & \cos\Omega & 0 \\
-0 & 0 & 1
-\end{pmatrix}
-\begin{pmatrix}
-\cos\omega & -\sin\omega & 0 \\
-\cos I \sin\omega & \cos I \cos\omega & -\sin I \\
-\sin I \sin\omega & \sin I \cos\omega & \cos I
-\end{pmatrix}.
-\]
-Realizando la multiplicación fila por columna:
-\begin{itemize}
-    \item Fila 1: $R_{11} = \cos\Omega \cos\omega - \sin\Omega \cos I \sin\omega$, \quad $R_{12} = -\cos\Omega \sin\omega - \sin\Omega \cos I \cos\omega$, \quad $R_{13} = \sin\Omega \sin I$.
-    \item Fila 2: $R_{21} = \sin\Omega \cos\omega + \cos\Omega \cos I \sin\omega$, \quad $R_{22} = -\sin\Omega \sin\omega + \cos\Omega \cos I \cos\omega$, \quad $R_{23} = -\cos\Omega \sin I$.
-    \item Fila 3: $R_{31} = \sin I \sin\omega$, \quad $R_{32} = \sin I \cos\omega$, \quad $R_{33} = \cos I$.
-\end{itemize}
-Reemplazando, obtenemos la forma explícita final:
+Desarrollando el producto matricial:
 \[
 \mathbf{R}_{\text{Euler}} =
 \begin{pmatrix}
 \cos\Omega\cos\omega - \sin\Omega\sin\omega\cos I & -\cos\Omega\sin\omega - \sin\Omega\cos\omega\cos I & \sin\Omega\sin I \\
 \sin\Omega\cos\omega + \cos\Omega\sin\omega\cos I & -\sin\Omega\sin\omega + \cos\Omega\cos\omega\cos I & -\cos\Omega\sin I \\
 \sin\omega\sin I & \cos\omega\sin I & \cos I
-\end{pmatrix}.
+\end{pmatrix}
 \]
 
-\subsection{Transformación de coordenadas y propiedad de ortogonalidad}
-Dado que $\mathbf{R}_{\text{Euler}}$ es una matriz de rotación propia (ortogonal y con determinante $+1$), satisface:
+La posición en el sistema del observador se obtiene como
 \[
-\mathbf{R}_{\text{Euler}}^T \mathbf{R}_{\text{Euler}} = \mathbf{I}, \quad \det(\mathbf{R}_{\text{Euler}}) = 1.
+\vec{r}_{\text{obs}} = \mathbf{R}_{\text{Euler}}\,\vec{r}_{\text{per}}
 \]
-Esta propiedad garantiza que la transformación preserva la norma euclidiana $|\vec{r}| = r$, los productos escalares y la orientación diestra del sistema, lo cual es esencial para mantener la consistencia física entre marcos de referencia.
+donde
+\[
+\vec{r}_{\text{per}} = (r\cos f,\; r\sin f,\; 0)^T.
+\]
 
-La posición en el sistema del observador se obtiene proyectando el vector perifocal mediante:
+La transformación inversa usa la transpuesta, válida por la ortogonalidad de \(\mathbf{R}_{\text{Euler}}\):
 \[
-\vec{r}_{\text{obs}} = \mathbf{R}_{\text{Euler}}\,\vec{r}_{\text{per}},
+\vec{r}_{\text{per}} = \mathbf{R}_{\text{Euler}}^T\,\vec{r}_{\text{obs}}
 \]
-donde $\vec{r}_{\text{per}} = (r\cos f,\; r\sin f,\; 0)^T$ contiene las coordenadas en el plano orbital ($f$ es la verdadera anomalía). La tercera componente es nula porque el movimiento es estrictamente plano en el marco perifocal.
-
-Para la transformación inversa, basta con transponer la matriz:
-\[
-\vec{r}_{\text{per}} = \mathbf{R}_{\text{Euler}}^T\,\vec{r}_{\text{obs}}.
-\]
-Analíticamente, esto equivale a invertir el sentido de cada rotación elemental ($\omega \to -\omega$, $I \to -I$, $\Omega \to -\Omega$) y aplicarlas en orden inverso, operación que se reduce exactamente a la transpuesta gracias a la ortogonalidad. Este formalismo cierra el puente entre la geometría kepleriana y la observación astrométrica, permitiendo pasar unívocamente entre elementos orbitales y coordenadas cartesianas inerciales.
 
 \begin{importante}
 La matriz de Euler resume de manera compacta toda la orientación espacial de la órbita. La forma de la cónica se mantiene intacta; lo que cambia es su orientación con respecto al observador.

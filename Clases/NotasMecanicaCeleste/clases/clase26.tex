@@ -1,0 +1,237 @@
+\chapter{Clase 26: La órbita en el tiempo (parte 2)}
+
+En la clase anterior se establecieron las bases geométricas para relacionar el estado cinemático instantáneo con la forma de la trayectoria mediante los elementos orbitales. Sin embargo, una descripción puramente geométrica no especifica de manera explícita cómo evoluciona la posición del cuerpo a lo largo de su órbita en función del tiempo físico. En esta clase abordamos el núcleo del \textbf{problema de Kepler}: determinar la posición y la velocidad de un sistema de dos cuerpos en un instante arbitrario \(t\), partiendo de condiciones iniciales conocidas y de las constantes de movimiento.
+
+El desarrollo se fundamenta en la integración del teorema de las áreas, la introducción de la anomalía media como parámetro temporal lineal, la deducción y resolución de la ecuación de Kepler y, finalmente, la síntesis de un algoritmo completo de propagación orbital. Además, se introducen las funciones de Lagrange \(f\) y \(g\), una formulación alternativa que permite propagar el estado sin recurrir explícitamente a los elementos orbitales.
+
+\section{El teorema de áreas y la tercera ley planetaria}
+\subsection{Integración del barrido areal}
+Como se demostró previamente, la constancia del momento angular específico relativo
+\[
+\vec{h} = \vec{r} \times \vec{v}
+\]
+implica que la tasa de barrido del área es constante:
+\[
+\frac{dA}{dt} = \frac{1}{2}h.
+\]
+
+Integrando desde el instante de paso por el periapsis \(t_p\) hasta un tiempo arbitrario \(t\), el área acumulada es
+\[
+A(t) = \frac{1}{2}h(t-t_p).
+\]
+
+Esta relación es la única cantidad geométrica del problema que posee una dependencia temporal explícita, lineal y predecible.
+
+\subsection{El período orbital y la tercera ley de Kepler}
+Para una órbita cerrada, el cuerpo completa una revolución cuando el área barrida coincide con el área total de la elipse,
+\[
+A_{\text{elipse}} = \pi ab,
+\]
+donde \(a\) es el semieje mayor y \(b\) el semieje menor. Igualando con la expresión dinámica para un período completo \(T\):
+\[
+\pi ab = \frac{1}{2}hT.
+\]
+
+Sustituyendo las relaciones
+\[
+ b = a\sqrt{1-e^2},
+ \qquad
+ h = \sqrt{\mu a(1-e^2)},
+\]
+y simplificando, obtenemos
+\[
+ T = \frac{2\pi a^{3/2}}{\sqrt{\mu}}.
+\]
+Elevando al cuadrado:
+\[
+ T^2 = \frac{4\pi^2}{\mu}a^3.
+\]
+
+Esta es la formulación clásica de la \textbf{tercera ley de Kepler}: el cuadrado del período orbital es proporcional al cubo del semieje mayor, con una constante que depende solo del parámetro gravitacional del sistema.
+
+\subsection{El movimiento medio y el teorema armónico}
+Definimos la \textbf{velocidad angular media} o \textbf{movimiento medio} \(n\) como
+\[
+ n \equiv \frac{2\pi}{T} = \sqrt{\frac{\mu}{a^3}}.
+\]
+Esto conduce al \textbf{teorema armónico}:
+\[
+ n^2 a^3 = \mu.
+\]
+
+El movimiento medio es constante para una órbita kepleriana no perturbada y será la herramienta temporal básica para propagar la órbita.
+
+\begin{importante}
+Mientras la anomalía verdadera cambia de manera no uniforme, la anomalía media crece linealmente con el tiempo. Ese contraste es la clave para resolver el problema temporal kepleriano.
+\end{importante}
+
+\section{La anomalía media y la ecuación de Kepler}
+\subsection{Definición de la anomalía media}
+La anomalía media \(M\) es un parámetro angular auxiliar que crece linealmente con el tiempo a partir del paso por el periapsis:
+\[
+ M(t) = n(t-t_p).
+\]
+
+Geométricamente, \(M\) representa el ángulo que habría barrido un cuerpo ficticio si se moviera sobre la circunferencia auxiliar con velocidad angular constante \(n\). No corresponde a un ángulo físico real en el espacio, pero su linealidad temporal la convierte en la variable ideal para describir la evolución temporal de la órbita.
+
+\subsection{Deducción de la ecuación de Kepler}
+El vínculo entre el tiempo, a través de \(M\), y la geometría orbital, a través de \(E\), se obtiene igualando la expresión geométrica del área del sector elíptico con la expresión dinámica del área barrida. Del análisis geométrico se tiene:
+\[
+ \Delta A = \frac{1}{2}ab(E-e\sin E).
+\]
+
+Igualando con
+\[
+\Delta A = \frac{1}{2}h(t-t_p)
+\]
+y usando que
+\[
+ h = nab,
+\]
+se obtiene la \textbf{ecuación de Kepler}:
+\[
+ M = E - e\sin E.
+\]
+
+Esta es una ecuación trascendental que relaciona la anomalía media \(M\), conocida a partir del tiempo transcurrido, con la anomalía excéntrica \(E\), que determina la posición geométrica. Como \(E\) aparece tanto linealmente como dentro de una función trigonométrica, no puede despejarse mediante operaciones algebraicas elementales.
+
+\subsection{Interpretación geométrica original}
+Kepler interpretó esta ecuación comparando áreas en la circunferencia circunscrita a la elipse. La anomalía media es proporcional al área del sector circular menos el área de un triángulo correctivo. Esta construcción muestra por qué \(M\) y \(E\) difieren: la excentricidad \(e\) introduce una corrección geométrica que rompe la proporcionalidad lineal entre tiempo y ángulo real.
+
+\section{Métodos de resolución de la ecuación de Kepler}
+Dada la naturaleza trascendental de
+\[
+ M = E - e\sin E,
+\]
+su resolución requiere métodos numéricos o aproximaciones analíticas. Estos métodos son esenciales en astrodinámica moderna.
+
+\subsection{Método de Newton--Raphson}
+El método más eficiente y ampliamente usado consiste en plantear la búsqueda de raíces de la función
+\[
+ F(E) = E - e\sin E - M.
+\]
+
+Aplicando Newton--Raphson:
+\[
+ E_{k+1} = E_k - \frac{F(E_k)}{F'(E_k)},
+\]
+y dado que
+\[
+ F'(E) = 1 - e\cos E,
+\]
+obtenemos la recurrencia
+\[
+ E_{k+1} = E_k - \frac{E_k - e\sin E_k - M}{1 - e\cos E_k}.
+\]
+
+Este método converge cuadráticamente y suele requerir solo unas pocas iteraciones para alcanzar alta precisión.
+
+\subsection{Método del punto fijo}
+Kepler propuso originalmente una iteración más simple, reescribiendo la ecuación como
+\[
+ E = M + e\sin E.
+\]
+La recurrencia asociada es
+\[
+ E_{k+1} = M + e\sin E_k.
+\]
+
+Este método converge linealmente y es más lento que Newton--Raphson, sobre todo cuando \(e\) se aproxima a 1, pero tiene la ventaja de no involucrar derivadas ni denominadores sensibles.
+
+\subsection{Solución analítica por series de Fourier}
+Para aplicaciones teóricas y perturbativas, es útil expresar \(E\) como una serie de Fourier en términos de \(M\). Usando coeficientes de Bessel \(J_n\), puede escribirse:
+\[
+ E = M + \sum_{n=1}^{\infty} \frac{2}{n}J_n(ne)\sin(nM).
+\]
+
+Esta serie converge para \(e<1\). Para excentricidades pequeñas \((e \ll 1)\), truncando en orden \(e^2\), se obtiene la aproximación clásica
+\[
+ E \approx M + e\sin M + \frac{e^2}{2}\sin 2M.
+\]
+
+\subsection{Ejemplo práctico: posición de la Tierra}
+Supongamos la posición de la Tierra 60 días después del paso por el periapsis. Si
+\[
+ n \approx 0.9856^\circ/\text{d},
+\]
+entonces la anomalía media es aproximadamente
+\[
+ M = 59.14^\circ.
+\]
+Para obtener la posición real se resuelve
+\[
+ 59.14^\circ = E - 0.0167\sin E.
+\]
+Usando Newton--Raphson con \(E_0=M\), la convergencia es rápida y produce un valor muy próximo a \(E \approx 59.38^\circ\). Luego, usando la relación entre \(E\) y \(f\), se obtiene la anomalía verdadera y, finalmente, la posición física del planeta en su órbita.
+
+\begin{importante}
+El problema de Kepler no consiste en integrar nuevamente la ecuación de movimiento. Consiste en invertir de manera eficiente y precisa una ecuación trascendental para recuperar la geometría orbital a partir del tiempo.
+\end{importante}
+
+\section{Síntesis del algoritmo de predicción orbital}
+El problema de los dos cuerpos en el tiempo se resuelve completamente mediante una secuencia algorítmica que transforma un estado inicial
+\[
+\vec{X}(t_0) = (\vec{r}_0,\vec{v}_0)
+\]
+en un estado futuro \(\vec{X}(t)\). Los pasos fundamentales son:
+\begin{enumerate}
+    \item Calcular los vectores invariantes:
+\[
+\vec{h} = \vec{r}_0 \times \vec{v}_0,
+\qquad
+\vec{e} = \frac{\vec{v}_0 \times \vec{h}}{\mu} - \frac{\vec{r}_0}{r_0}.
+\]
+    \item Determinar los elementos escalares:
+\[
+ p = \frac{h^2}{\mu}, \qquad e = \|\vec{e}\|, \qquad a = \frac{p}{1-e^2}, \qquad n = \sqrt{\frac{\mu}{|a|^3}}.
+\]
+    \item Calcular la anomalía inicial \(f_0\), luego \(E_0\), y después
+\[
+ M_0 = E_0 - e\sin E_0.
+\]
+    \item Propagar temporalmente:
+\[
+ M(t) = M_0 + n(t-t_0).
+\]
+    \item Resolver la ecuación de Kepler para obtener \(E(t)\).
+    \item Convertir a anomalía verdadera:
+\[
+ f(t) = 2\arctan\left(\sqrt{\frac{1+e}{1-e}}\tan\frac{E}{2}\right).
+\]
+    \item Reconstruir \(\vec{r}(t)\) y \(\vec{v}(t)\) usando las ecuaciones paramétricas de la cónica y las rotaciones de Euler \((\Omega,i,\omega)\).
+\end{enumerate}
+
+Esta secuencia constituye la base de todos los algoritmos clásicos de propagación orbital.
+
+\section{Las funciones de Lagrange \texorpdfstring{$f$}{f} y \texorpdfstring{$g$}{g}}
+Existe una formulación alternativa para propagar el estado orbital que evita la conversión explícita a elementos orbitales y, por tanto, evita singularidades numéricas en casos de excentricidad o inclinación nula. Como el movimiento kepleriano es plano, el vector posición en cualquier instante puede expresarse como una combinación lineal del vector posición y velocidad iniciales:
+\[
+ \vec{r}(t) = f(t,t_0)\,\vec{r}_0 + g(t,t_0)\,\vec{v}_0.
+\]
+
+Derivando respecto al tiempo, la velocidad resulta
+\[
+ \vec{v}(t) = \dot{f}(t,t_0)\,\vec{r}_0 + \dot{g}(t,t_0)\,\vec{v}_0.
+\]
+
+Las funciones escalares \(f\) y \(g\), junto con sus derivadas, dependen únicamente de la geometría de la trayectoria y del tiempo transcurrido. En el marco de las \textbf{variables universales}, estas funciones se escriben de manera unificada para elipses, parábolas e hipérbolas usando las funciones de Stumpff:
+\[
+ f = 1 - \frac{\mu}{r_0}x^2 c_2(\alpha x^2),
+ \qquad
+ g = \Delta t - \mu x^3 c_3(\alpha x^2),
+\]
+donde \(x\) es una variable universal que satisface una ecuación de Kepler generalizada y
+\[
+ \alpha = \frac{1}{a}.
+\]
+
+Esta formulación es computacionalmente robusta y es preferida en propagadores de alta precisión que deben manejar cambios de régimen orbital o configuraciones cercanas a singularidades geométricas.
+
+\section{Comentarios finales y perspectiva teórica}
+La clase 26 cierra el ciclo de la solución analítica del problema de los dos cuerpos. Hemos pasado de la geometría estática de las cónicas a la dinámica temporal mediante la integración del teorema de áreas, la introducción de la anomalía media y la resolución de la ecuación de Kepler.
+
+Es importante subrayar que, aunque la ecuación de Kepler es trascendental, su resolución numérica es extraordinariamente eficiente y estable. Además, la existencia de las funciones de Lagrange muestra que el espacio de estado admite una evolución lineal en términos de funciones escalares derivadas de la geometría kepleriana.
+
+\begin{importante}
+La formulación temporal del problema de dos cuerpos no solo permite predecir órbitas. También constituye la base conceptual de la teoría de perturbaciones, de la navegación espacial moderna y de los algoritmos numéricos de propagación orbital de alta precisión.
+\end{importante}
