@@ -578,56 +578,56 @@ Esta demostración no solo valida la expresión geométrica solicitada, sino que
 \subsection*{Inciso a) Derivación analítica de la aceleración en coordenadas cilíndricas}
 Para obtener la expresión de la aceleración en el sistema de coordenadas cilíndricas, partimos de la definición del vector posición y de las propiedades de derivación vectorial expuestas en la Sección 4.1.2 (Sistemas de coordenadas) y la Sección 4.1.6 (Derivada vectorial) del libro guía. En coordenadas cilíndricas, el vector posición de una partícula se escribe como:
 $$
-\vec{r}(t) = r(t) \vec{e}_r + z(t) \vec{e}_z,
+\vec{r}(t) = r(t) \hat{e}_r + z(t) \hat{e}_z,
 $$
-donde $\vec{e}_r$, $\vec{e}_\theta$ y $\vec{e}_z$ forman una base ortonormal de mano derecha que depende explícitamente de la coordenada angular $\theta(t)$. Las expresiones cartesianas de estos vectores unitarios, definidas en la Sección 4.1.2, son:
+donde $\hat{e}_r$, $\hat{e}_\theta$ y $\hat{e}_z$ forman una base ortonormal de mano derecha que depende explícitamente de la coordenada angular $\theta(t)$. Las expresiones cartesianas de estos vectores unitarios, definidas en la Sección 4.1.2, son:
 $$
-\vec{e}_r = \cos\theta \, \vec{e}_x + \sin\theta \, \vec{e}_y, \quad 
-\vec{e}_\theta = -\sin\theta \, \vec{e}_x + \cos\theta \, \vec{e}_y, \quad 
-\vec{e}_z = \vec{e}_z.
+\hat{e}_r = \cos\theta \, \hat{e}_x + \sin\theta \, \hat{e}_y, \quad
+\hat{e}_\theta = -\sin\theta \, \hat{e}_x + \cos\theta \, \hat{e}_y, \quad
+\hat{e}_z = \hat{e}_z.
 $$
 La velocidad es la derivada temporal del vector posición. Aplicando la regla de la cadena y considerando que los vectores base varían con el tiempo debido a la dependencia de $\theta(t)$, obtenemos:
 $$
-\vec{v} = \frac{d\vec{r}}{dt} = \dot{r} \vec{e}_r + r \frac{d\vec{e}_r}{dt} + \dot{z} \vec{e}_z.
+\vec{v} = \frac{d\vec{r}}{dt} = \dot{r} \hat{e}_r + r \frac{d\hat{e}_r}{dt} + \dot{z} \hat{e}_z.
 $$
-Calculamos las derivadas temporales de los vectores unitarios. Dado que $\vec{e}_x$ y $\vec{e}_y$ son constantes en un sistema inercial:
+Calculamos las derivadas temporales de los vectores unitarios. Dado que $\hat{e}_x$ y $\hat{e}_y$ son constantes en un sistema inercial:
 $$
-\frac{d\vec{e}_r}{dt} = \dot{\theta}(-\sin\theta \, \vec{e}_x + \cos\theta \, \vec{e}_y) = \dot{\theta} \vec{e}_\theta,
+\frac{d\hat{e}_r}{dt} = \dot{\theta}(-\sin\theta \, \hat{e}_x + \cos\theta \, \hat{e}_y) = \dot{\theta} \hat{e}_\theta,
 $$
 $$
-\frac{d\vec{e}_\theta}{dt} = \dot{\theta}(-\cos\theta \, \vec{e}_x - \sin\theta \, \vec{e}_y) = -\dot{\theta} \vec{e}_r, \quad \frac{d\vec{e}_z}{dt} = \vec{0}.
+\frac{d\hat{e}_\theta}{dt} = \dot{\theta}(-\cos\theta \, \hat{e}_x - \sin\theta \, \hat{e}_y) = -\dot{\theta} \hat{e}_r, \quad \frac{d\hat{e}_z}{dt} = \vec{0}.
 $$
 Sustituyendo en la expresión de la velocidad, recuperamos el resultado estándar de la Sección 5.2.1 (Cantidades cinemáticas):
 $$
-\vec{v} = \dot{r} \vec{e}_r + r\dot{\theta} \vec{e}_\theta + \dot{z} \vec{e}_z.
+\vec{v} = \dot{r} \hat{e}_r + r\dot{\theta} \hat{e}_\theta + \dot{z} \hat{e}_z.
 $$
 La aceleración es la derivada temporal de la velocidad. Aplicamos nuevamente la regla del producto a cada componente:
 $$
-\vec{a} = \frac{d\vec{v}}{dt} = \frac{d}{dt}(\dot{r} \vec{e}_r) + \frac{d}{dt}(r\dot{\theta} \vec{e}_\theta) + \frac{d}{dt}(\dot{z} \vec{e}_z).
+\vec{a} = \frac{d\vec{v}}{dt} = \frac{d}{dt}(\dot{r} \hat{e}_r) + \frac{d}{dt}(r\dot{\theta} \hat{e}_\theta) + \frac{d}{dt}(\dot{z} \hat{e}_z).
 $$
 Desarrollamos cada término por separado:
 \begin{enumerate}
-    \item $\frac{d}{dt}(\dot{r} \vec{e}_r) = \ddot{r} \vec{e}_r + \dot{r} \frac{d\vec{e}_r}{dt} = \ddot{r} \vec{e}_r + \dot{r}\dot{\theta} \vec{e}_\theta$.
-    \item $\frac{d}{dt}(r\dot{\theta} \vec{e}_\theta) = (\dot{r}\dot{\theta} + r\ddot{\theta}) \vec{e}_\theta + r\dot{\theta} \frac{d\vec{e}_\theta}{dt} = (\dot{r}\dot{\theta} + r\ddot{\theta}) \vec{e}_\theta - r\dot{\theta}^2 \vec{e}_r$.
-    \item $\frac{d}{dt}(\dot{z} \vec{e}_z) = \ddot{z} \vec{e}_z$.
+    \item $\frac{d}{dt}(\dot{r} \hat{e}_r) = \ddot{r} \hat{e}_r + \dot{r} \frac{d\hat{e}_r}{dt} = \ddot{r} \hat{e}_r + \dot{r}\dot{\theta} \hat{e}_\theta$.
+    \item $\frac{d}{dt}(r\dot{\theta} \hat{e}_\theta) = (\dot{r}\dot{\theta} + r\ddot{\theta}) \hat{e}_\theta + r\dot{\theta} \frac{d\hat{e}_\theta}{dt} = (\dot{r}\dot{\theta} + r\ddot{\theta}) \hat{e}_\theta - r\dot{\theta}^2 \hat{e}_r$.
+    \item $\frac{d}{dt}(\dot{z} \hat{e}_z) = \ddot{z} \hat{e}_z$.
 \end{enumerate}
-Agrupamos los componentes a lo largo de cada vector unitario. Para la componente radial $\vec{e}_r$:
+Agrupamos los componentes a lo largo de cada vector unitario. Para la componente radial $\hat{e}_r$:
 $$
 a_r = \ddot{r} - r\dot{\theta}^2.
 $$
-Para la componente azimuthal $\vec{e}_\theta$:
+Para la componente azimuthal $\hat{e}_\theta$:
 $$
 a_\theta = \dot{r}\dot{\theta} + \dot{r}\dot{\theta} + r\ddot{\theta} = 2\dot{r}\dot{\theta} + r\ddot{\theta}.
 $$
-Para la componente vertical $\vec{e}_z$:
+Para la componente vertical $\hat{e}_z$:
 $$
 a_z = \ddot{z}.
 $$
 Reensamblando el vector aceleración, obtenemos finalmente la expresión solicitada:
 $$
-\vec{a} = (\ddot{r} - r\dot{\theta}^2)\vec{e}_r + (r\ddot{\theta} + 2\dot{r}\dot{\theta})\vec{e}_\theta + \ddot{z}\vec{e}_z.
+\vec{a} = (\ddot{r} - r\dot{\theta}^2)\hat{e}_r + (r\ddot{\theta} + 2\dot{r}\dot{\theta})\hat{e}_\theta + \ddot{z}\hat{e}_z.
 $$
-Este resultado coincide exactamente con la Ecuación (5.2) de la Sección 5.2.1 del libro guía, validando la consistencia entre el formalismo vectorial y la derivación explícita en coordenadas curvilíneas.
+Este resultado coincide exactamente con la Ecuación (5.2) de la Sección 5.2.1 del libro guía, validando la consistencia entre el formalismo vectorial y la derivación explícita en coordenadas curvilíneas. La clave de la deducción radica en reconocer que los vectores unitarios cilíndricos no son constantes en el tiempo, sino que rotan con la partícula, introduciendo así los términos centrípeto ($-r\dot{\theta}^2$) y de Coriolis ($2\dot{r}\dot{\theta}$) de manera natural y rigurosa.
 
 \subsection*{Inciso b) Sistema de ecuaciones diferenciales de movimiento}
 El postulado de fuerza en mecánica newtoniana establece que la aceleración de una partícula es igual al campo de aceleración aplicado. Como se formula en la Sección 5.2.3 (La ecuación de movimiento), la ecuación diferencial del movimiento es:
