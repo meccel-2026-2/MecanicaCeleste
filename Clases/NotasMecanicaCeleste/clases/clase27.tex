@@ -1,0 +1,125 @@
+\chapter{Clase 27: El problema de los tres cuerpos -- motivación y un nuevo formalismo}
+
+El estudio de la mecánica celeste ha estado históricamente ligado a la necesidad de predecir y comprender el movimiento de los cuerpos bajo la influencia gravitatoria mutua. Desde los primeros intentos de Claudio Ptolomeo y sus epiciclos, pasando por la revolución cinemática de Johannes Kepler en los primeros años del siglo XVII, hasta la formulación dinámica de Isaac Newton en los \emph{Principia Mathematica}, la disciplina ha evolucionado desde descripciones geométricas empíricas hacia teorías físicas fundamentadas en postulados universales.
+
+La contribución de Newton fue decisiva al establecer que el mismo conjunto de leyes que gobierna la caída de los cuerpos en la Tierra rige también el movimiento planetario. Sin embargo, la formulación newtoniana enfrenta una barrera analítica severa cuando se aplica a sistemas con más de dos cuerpos interactuando simultáneamente. En esta clase se estudia la motivación que llevó a la comunidad científica a buscar alternativas al enfoque vectorial tradicional y se presentan los fundamentos conceptuales de lo que se conoce como el \textbf{formalismo analítico o escalar de la mecánica}.
+
+\section{El problema de los \texorpdfstring{$N$}{N} cuerpos: enfoques y limitaciones}
+El problema de los \(N\) cuerpos se formula como el sistema de ecuaciones diferenciales acopladas que describe la evolución temporal de \(N\) partículas puntuales que interactúan mediante la ley de gravitación universal newtoniana:
+\[
+ m_i \frac{d^2 \vec{r}_i}{dt^2} = -G \sum_{\substack{j=1 \\ j \neq i}}^{N} \frac{m_i m_j}{\|\vec{r}_i - \vec{r}_j\|^3}(\vec{r}_i - \vec{r}_j),
+ \quad i = 1,2,\dots,N.
+\]
+
+donde \(\vec{r}_i\) es el vector posición de la partícula \(i\), \(m_i\) su masa y \(G\) la constante de gravitación universal.
+
+Históricamente, se han contemplado tres vías principales para abordar este problema:
+\begin{enumerate}
+    \item \textbf{Observación directa de la realidad:} el universo mismo actúa como un integrador numérico perfecto. Observar sistemas astronómicos reales permite seguir su evolución, pero no proporciona por sí solo una capacidad predictiva generalizable.
+    \item \textbf{Solución matemática analítica:} se busca expresar las coordenadas \(\vec{r}_i(t)\) como funciones cerradas o series de la variable temporal. Para \(N \ge 3\), los resultados clásicos muestran que no existen primeras integrales algebraicas independientes adicionales a las conocidas, lo que impide una solución general cerrada.
+    \item \textbf{Solución numérica:} mediante algoritmos de integración paso a paso se obtienen trayectorias aproximadas. Esta es la herramienta práctica dominante, aunque no siempre revela con claridad las simetrías o propiedades estructurales del sistema.
+\end{enumerate}
+
+La imposibilidad de una solución analítica cerrada para \(N \ge 3\) no significa que el problema sea inútil o irresoluble en la práctica. Significa que hace falta un cambio de perspectiva teórica.
+
+\begin{importante}
+El paso del problema de dos cuerpos al de tres cuerpos no es simplemente un aumento cuantitativo en el número de ecuaciones. Es un cambio cualitativo en la estructura matemática del problema.
+\end{importante}
+
+\section{Sistemas jerárquicos frente a configuraciones peculiares}
+En la naturaleza, la mayoría de los sistemas gravitacionales no son configuraciones aleatorias de masas comparables. Por el contrario, tienden a organizarse en \textbf{sistemas jerárquicos}, donde las masas y las distancias relativas difieren en varios órdenes de magnitud. Ejemplos clásicos son:
+\begin{itemize}
+    \item el Sistema Solar, donde el Sol domina la dinámica global,
+    \item los sistemas planeta--satélite,
+    \item estrellas binarias con un tercer compañero distante.
+\end{itemize}
+
+En un sistema jerárquico, la dinámica puede aproximarse como la superposición de varios problemas de dos cuerpos casi independientes, complementados con correcciones perturbativas.
+
+Sin embargo, existen configuraciones especiales o \textbf{no jerárquicas} en las que la aproximación de dos cuerpos falla de manera radical. En tales sistemas pueden aparecer comportamientos contraintuitivos:
+\begin{itemize}
+    \item coincidencia de períodos orbitales no explicable por una versión ingenua de la tercera ley de Kepler,
+    \item distancias relativas casi constantes durante intervalos prolongados,
+    \item sensibilidad extrema a las condiciones iniciales, es decir, caos determinista.
+\end{itemize}
+
+Un ejemplo moderno de este tipo de fenómenos aparece en la dinámica alrededor de los puntos de Lagrange, como \(L_2\) en el sistema Sol--Tierra, donde se ubican observatorios espaciales como el JWST. Estas configuraciones no se comprenden adecuadamente mediante una aplicación directa y simplificada de la mecánica vectorial elemental, porque las restricciones geométricas y los equilibrios dinámicos se vuelven parte esencial de la descripción.
+
+\section{La necesidad de un nuevo formalismo: más allá de los vectores}
+El formalismo vectorial de la mecánica newtoniana exige el conocimiento explícito de \textbf{todas} las fuerzas que actúan sobre cada partícula. En sistemas simples esto es directo. Pero en sistemas con restricciones mecánicas —partículas unidas por cuerdas inextensibles, cuerpos que se deslizan sobre superficies, barras rígidas, etc.— aparecen las llamadas \textbf{fuerzas de ligadura o de restricción}.
+
+Estas fuerzas plantean dos dificultades fundamentales:
+\begin{enumerate}
+    \item \textbf{Son desconocidas a priori:} su magnitud y dirección dependen del estado dinámico y de las restricciones impuestas.
+    \item \textbf{Complican la formulación matemática:} al incluirlas explícitamente en la segunda ley de Newton, el número de incógnitas crece y obliga a introducir ecuaciones auxiliares de ligadura que hacen el análisis más rígido y menos transparente.
+\end{enumerate}
+
+Además, el formalismo vectorial está ligado de manera natural a coordenadas cartesianas en el espacio euclidiano tridimensional. Cuando las restricciones reducen los grados de libertad del sistema, trabajar con \(3N\) coordenadas introduce una redundancia matemática innecesaria. Esta limitación motivó la búsqueda de un enfoque alternativo: un formalismo basado en cantidades escalares, capaz de eliminar automáticamente las fuerzas de restricción y de adaptarse a la geometría intrínseca del sistema.
+
+\begin{importante}
+La gran idea de la mecánica analítica no es cambiar la física, sino cambiar el lenguaje matemático con el que la física se expresa.
+\end{importante}
+
+\section{El principio de d'Alembert y el trabajo virtual}
+La primera piedra angular del nuevo formalismo fue colocada por Jean le Rond d'Alembert. Su idea fundamental consistió en reemplazar el análisis directo de fuerzas por el análisis de \textbf{trabajo virtual}.
+
+Supongamos un sistema de partículas en equilibrio estático. Si se considera un desplazamiento infinitesimal \(\delta\vec{r}_i\) compatible con las restricciones del sistema, llamado desplazamiento virtual, d'Alembert postuló que la suma del trabajo realizado por las fuerzas aplicadas es nula:
+\[
+ \sum_i \vec{F}_i \cdot \delta\vec{r}_i = 0.
+\]
+
+La genialidad de este principio radica en que los desplazamientos virtuales son tangentes a las superficies de restricción. Como las fuerzas de ligadura suelen ser normales a esas superficies, su producto escalar con \(\delta\vec{r}_i\) se anula automáticamente. En consecuencia, las fuerzas de restricción desaparecen de la ecuación sin necesidad de calcularlas explícitamente.
+
+D'Alembert extendió este concepto a sistemas dinámicos reescribiendo la segunda ley de Newton en la forma
+\[
+ \vec{F}_i - m_i \frac{d^2\vec{r}_i}{dt^2} = \vec{0}.
+\]
+Interpretó el término \(-m_i\ddot{\vec{r}}_i\) como una fuerza de inercia efectiva. Así, un problema dinámico podía tratarse formalmente como si fuera un problema de equilibrio estático. El principio resultante, conocido como \textbf{principio de d'Alembert--Lagrange}, toma la forma
+\[
+ \sum_i \left(\vec{F}_i - m_i\frac{d^2\vec{r}_i}{dt^2}\right) \cdot \delta\vec{r}_i = 0.
+\]
+
+Esta ecuación contiene toda la información dinámica del sistema, pero aún está escrita en coordenadas cartesianas y requiere una transformación adicional para producir ecuaciones de movimiento realmente útiles.
+
+\section{La extensión de Lagrange: fuerzas efectivas y restricciones}
+Joseph-Louis Lagrange llevó la idea de d'Alembert a su máxima expresión en su \emph{Mécanique Analytique}. Si un sistema tiene \(K\) restricciones holónomas, entonces de las \(3N\) coordenadas cartesianas originales solo
+\[
+ M = 3N - K
+\]
+son verdaderamente independientes.
+
+Lagrange introdujo entonces el concepto de \textbf{coordenadas generalizadas}
+\[
+ \{q_j\}_{j=1}^{M},
+\]
+un conjunto mínimo de variables que describe unívocamente la configuración del sistema sin redundancias. Estas coordenadas no tienen por qué ser longitudes cartesianas; pueden ser ángulos, longitudes curvilíneas u otras variables adaptadas al problema.
+
+Al expresar los vectores posición \(\vec{r}_i\) y los desplazamientos virtuales \(\delta\vec{r}_i\) en términos de las coordenadas generalizadas \(q_j\) y sus variaciones \(\delta q_j\), el principio de d'Alembert se transforma en un sistema de ecuaciones dependiente únicamente de cantidades escalares. El resultado final, que se desarrollará con detalle en la siguiente clase, son las \textbf{ecuaciones de Euler--Lagrange}:
+\[
+ \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_j}\right) - \frac{\partial L}{\partial q_j} = 0,
+ \quad j = 1,2,\dots,M,
+\]
+donde
+\[
+ L = T - V
+\]
+es el lagrangiano del sistema, con \(T\) la energía cinética y \(V\) la energía potencial.
+
+La transición desde el principio de d'Alembert a las ecuaciones de Lagrange representa un cambio de paradigma: en lugar de sumar vectores fuerza en el espacio físico, se trabaja con una función escalar en el espacio de configuración. Las fuerzas de restricción no desaparecen por milagro, sino porque las coordenadas se construyen desde el principio para respetarlas.
+
+\begin{importante}
+La mecánica lagrangiana no evita las restricciones ignorándolas: las incorpora en la elección misma de las variables del problema.
+\end{importante}
+
+\section{Síntesis y transición hacia la mecánica analítica}
+En esta clase se establecieron los motivos fundamentales que impulsan el abandono del formalismo vectorial tradicional en favor de un enfoque escalar:
+\begin{enumerate}
+    \item la complejidad analítica del problema de los \(N\) cuerpos y la inexistencia de soluciones generales cerradas,
+    \item la existencia de sistemas no jerárquicos y configuraciones de equilibrio dinámico, como los puntos de Lagrange,
+    \item la dificultad intrínseca para modelar fuerzas de ligadura en sistemas con restricciones,
+    \item la redundancia matemática de las coordenadas cartesianas cuando los grados de libertad están reducidos.
+\end{enumerate}
+
+El principio de d'Alembert y su extensión por parte de Lagrange proporcionan un marco unificador que elimina las fuerzas de restricción por construcción geométrica y reduce la dinámica a la manipulación de funciones escalares. Este formalismo no solo simplifica la resolución de problemas clásicos, sino que además revela simetrías profundas del espacio y del tiempo y prepara el camino hacia desarrollos posteriores de la física teórica.
+
+En la siguiente clase se aplicarán rigurosamente estos conceptos al estudio de la mecánica lagrangiana, se deducirán las ecuaciones de movimiento desde un principio variacional y se resolverán problemas concretos de mecánica celeste usando coordenadas generalizadas.

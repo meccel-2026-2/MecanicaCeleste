@@ -1,0 +1,225 @@
+\chapter{Clase 29: El problema de los tres cuerpos y la mecánica lagrangiana}
+
+En el desarrollo histórico y pedagógico de la mecánica celeste, el paso del problema de dos cuerpos al problema general de \(N\) cuerpos revela una brecha analítica fundamental. Mientras que el problema de dos cuerpos admite una solución cerrada basada en la conservación del momento angular, la energía y el vector de excentricidad, la introducción de una tercera partícula gravitacionalmente interactuante rompe las simetrías que permitían la integración directa. Esta clase aborda precisamente la motivación física y matemática que condujo a abandonar el enfoque puramente vectorial newtoniano en favor de un \textbf{formalismo escalar o analítico}, sentando así las bases de la mecánica lagrangiana.
+
+El objetivo no es únicamente justificar por qué hace falta un nuevo lenguaje, sino también mostrar cómo ese nuevo lenguaje conduce naturalmente al principio de d'Alembert--Lagrange, a las coordenadas generalizadas, al lagrangiano \(L=T-U\), al principio de Hamilton y a las ecuaciones de Euler--Lagrange. La transición debe entenderse como un continuo conceptual: del problema de los tres cuerpos pasamos a la mecánica analítica porque la complejidad del primero exige la potencia estructural de la segunda.
+
+\section{Sistemas jerárquicos y configuraciones peculiares}
+Como se estableció en clases anteriores, muchos sistemas astronómicos reales pueden tratarse como \textbf{sistemas jerárquicos}, es decir, como superposiciones de subsistemas de dos cuerpos casi independientes. Esta aproximación funciona porque las masas y las escalas de distancia difieren en órdenes de magnitud tales que las perturbaciones mutuas son pequeñas y pueden incorporarse mediante teoría de perturbaciones.
+
+Sin embargo, existen configuraciones \textbf{no jerárquicas o peculiares} donde la aproximación de dos cuerpos falla de manera drástica. Un ejemplo clásico es la dinámica cerca del punto \(L_2\) del sistema Sol--Tierra, donde se ubican observatorios como el JWST. Aunque el telescopio está más lejos del Sol que la Tierra, su período orbital coincide casi exactamente con el período terrestre. Una aplicación aislada de la tercera ley de Kepler sugeriría otra cosa, pero la presencia simultánea de dos potenciales gravitacionales modifica la dinámica efectiva del sistema.
+
+Otro ejemplo ilustrativo es un sistema de tres masas dispuestas con condiciones iniciales cuidadosamente escogidas. Al integrar sus ecuaciones de movimiento, pueden observarse períodos casi coincidentes, equilibrios dinámicos precarios y una sensibilidad extrema a pequeñas variaciones iniciales, es decir, \textbf{caos determinista}. Estos comportamientos muestran que la suma vectorial directa de fuerzas newtonianas, aunque correcta en principio, deja de ser una herramienta analítica cómoda y transparente.
+
+\begin{importante}
+El problema de los tres cuerpos no exige cambiar las leyes físicas; exige cambiar el lenguaje matemático con el que describimos esas leyes.
+\end{importante}
+
+\section{Limitaciones del formalismo vectorial}
+La mecánica newtoniana clásica se basa en el postulado
+\[
+\vec{F}_{\text{total}} = \frac{d\vec{p}}{dt} = m\vec{a}.
+\]
+Para predecir la evolución de un sistema, debemos conocer explícitamente \textbf{todas} las fuerzas que actúan sobre cada partícula. En sistemas simples esto no representa mayor dificultad. Pero cuando aparecen \textbf{restricciones mecánicas} —cuerdas inextensibles, superficies rígidas, barras, péndulos, etc.— surgen las llamadas \textbf{fuerzas de ligadura o de restricción}.
+
+Estas fuerzas presentan dos dificultades estructurales:
+\begin{enumerate}
+    \item \textbf{Son desconocidas a priori:} su magnitud y dirección dependen del estado instantáneo del sistema y de la geometría de la restricción.
+    \item \textbf{Introducen redundancia matemática:} si un sistema tiene \(N\) partículas, se requieren \(3N\) coordenadas cartesianas. Pero si existen \(K\) restricciones holónomas, solo
+\[
+M = 3N - K
+\]
+coordenadas son realmente independientes.
+\end{enumerate}
+
+Trabajar entonces con \(3N\) ecuaciones vectoriales acopladas, incluyendo fuerzas desconocidas de restricción, vuelve innecesariamente engorroso un problema cuya geometría real puede tener muchos menos grados de libertad.
+
+\section{El principio de los trabajos virtuales y la idea de d'Alembert}
+La primera piedra del nuevo formalismo fue colocada por Jean le Rond d'Alembert. Su contribución fundamental consistió en reemplazar el análisis directo de fuerzas por el análisis de \textbf{trabajo virtual}.
+
+\subsection{Desplazamiento virtual}
+Un \textbf{desplazamiento virtual} \(\delta\vec{r}_i\) es un desplazamiento infinitesimal imaginario de la partícula \(i\)-ésima que:
+\begin{itemize}
+    \item se realiza instantáneamente, de modo que \(\delta t = 0\),
+    \item es compatible con las restricciones del sistema en el instante considerado,
+    \item no implica evolución temporal real, sino una variación geométrica admisible.
+\end{itemize}
+
+\subsection{Principio de los trabajos virtuales}
+Para un sistema en equilibrio estático, d'Alembert postuló que la suma del trabajo realizado por las fuerzas aplicadas sobre todos los desplazamientos virtuales compatibles es nula:
+\[
+\sum_i \vec{F}_i \cdot \delta\vec{r}_i = 0.
+\]
+
+La potencia de este principio radica en que los desplazamientos virtuales son tangentes a las superficies de restricción. Como las fuerzas de ligadura suelen ser normales a esas superficies, su producto escalar con \(\delta\vec{r}_i\) se anula. Así, las fuerzas de restricción desaparecen automáticamente de la formulación.
+
+\subsection{Extensión a la dinámica: principio de d'Alembert--Lagrange}
+D'Alembert extendió esta idea a sistemas en movimiento reescribiendo la segunda ley de Newton como
+\[
+\vec{F}_i - m_i\ddot{\vec{r}}_i = \vec{0}.
+\]
+Interpretando el término \(-m_i\ddot{\vec{r}}_i\) como una fuerza de inercia efectiva, convirtió el problema dinámico en una especie de problema de equilibrio virtual. El resultado es el \textbf{principio de d'Alembert--Lagrange}:
+\[
+\sum_i \left(\vec{F}_i - m_i\ddot{\vec{r}}_i\right)\cdot\delta\vec{r}_i = 0.
+\]
+
+Esta ecuación ya contiene toda la dinámica del sistema, pero todavía está escrita en coordenadas cartesianas. El siguiente paso consiste en expresar esos desplazamientos virtuales en variables intrínsecas adaptadas a la geometría real del problema.
+
+\section{Restricciones holónomas, grados de libertad y variables generalizadas}
+Una restricción puede expresarse matemáticamente como
+\[
+f_k(\vec{r}_1,\vec{r}_2,\dots,\vec{r}_N,t)=0, \qquad k=1,2,\dots,K.
+\]
+Cuando una restricción puede escribirse como una igualdad algebraica entre coordenadas y tiempo, se dice que es \textbf{holónoma}. Para estos sistemas, el número de coordenadas independientes es precisamente
+\[
+M = 3N-K,
+\]
+que coincide con el número de \textbf{grados de libertad}.
+
+En lugar de trabajar con las \(3N\) coordenadas cartesianas redundantes, introducimos un conjunto de \(M\) variables independientes
+\[
+\{q_j\}_{j=1}^{M},
+\]
+llamadas \textbf{coordenadas generalizadas}. Estas variables pueden ser longitudes, ángulos u otras cantidades físicas capaces de parametrizar el espacio de configuración sin redundancias.
+
+Las posiciones cartesianas pasan entonces a escribirse como funciones de estas coordenadas:
+\[
+\vec{r}_i = \vec{r}_i(q_1,q_2,\dots,q_M,t).
+\]
+La condición fundamental es que las \(q_j\) sean independientes, de modo que las variaciones virtuales \(\delta q_j\) puedan considerarse libres entre sí.
+
+\subsection{Transformación de desplazamientos virtuales}
+Aplicando la regla de la cadena y recordando que \(\delta t=0\), se obtiene:
+\[
+\delta\vec{r}_i = \sum_{j=1}^{M} \frac{\partial\vec{r}_i}{\partial q_j}\,\delta q_j.
+\]
+Esta relación conecta el espacio físico cartesiano con el espacio abstracto de configuración. Al sustituirla en el principio de d'Alembert--Lagrange, la dinámica queda proyectada sobre las direcciones permitidas por las variables generalizadas.
+
+\begin{importante}
+Las coordenadas generalizadas no son una simple comodidad algebraica. Son la expresión matemática de los verdaderos grados de libertad del sistema.
+\end{importante}
+
+\section{Hacia las ecuaciones de Euler--Lagrange}
+Sustituyendo la expresión de \(\delta\vec{r}_i\) en el principio de d'Alembert--Lagrange, obtenemos
+\[
+\sum_{j=1}^{M}\left[\sum_{i=1}^{N}\vec{F}_i\cdot\frac{\partial\vec{r}_i}{\partial q_j} - \sum_{i=1}^{N}m_i\ddot{\vec{r}}_i\cdot\frac{\partial\vec{r}_i}{\partial q_j}\right]\delta q_j = 0.
+\]
+
+El primer término define la \textbf{fuerza generalizada}
+\[
+Q_j \equiv \sum_{i=1}^{N} \vec{F}_i\cdot\frac{\partial\vec{r}_i}{\partial q_j}.
+\]
+El segundo término, usando identidades de cálculo y la definición de energía cinética total
+\[
+T = \frac{1}{2}\sum_{i=1}^{N} m_i\dot{\vec{r}}_i^{\,2},
+\]
+puede transformarse en
+\[
+\sum_{i=1}^{N}m_i\ddot{\vec{r}}_i\cdot\frac{\partial\vec{r}_i}{\partial q_j}
+=
+\frac{d}{dt}\left(\frac{\partial T}{\partial \dot{q}_j}\right)-\frac{\partial T}{\partial q_j}.
+\]
+
+Con esto, y aprovechando la independencia de las variaciones \(\delta q_j\), se llega a la forma general
+\[
+\frac{d}{dt}\left(\frac{\partial T}{\partial \dot{q}_j}\right)-\frac{\partial T}{\partial q_j}=Q_j,
+\qquad j=1,2,\dots,M.
+\]
+
+Si además las fuerzas son conservativas, existe un potencial \(U\) tal que
+\[
+Q_j = -\frac{\partial U}{\partial q_j}.
+\]
+Entonces resulta natural definir el \textbf{lagrangiano}
+\[
+L(q_j,\dot{q}_j,t)=T-U,
+\]
+y las ecuaciones de movimiento adoptan la forma canónica
+\[
+\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_j}\right)-\frac{\partial L}{\partial q_j}=0,
+\qquad j=1,2,\dots,M.
+\]
+
+Estas son las \textbf{ecuaciones de Euler--Lagrange}. A partir de este punto, la dinámica queda enteramente codificada en una función escalar.
+
+\section{El principio de Hamilton y la estructura variacional}
+La formulación lagrangiana puede reinterpretarse de manera aún más profunda mediante el \textbf{principio de Hamilton}. Dado un lagrangiano \(L\), definimos la acción
+\[
+S[q_j(t)] = \int_{t_1}^{t_2} L(q_j,\dot{q}_j,t)\,dt.
+\]
+
+El principio de Hamilton afirma que la trayectoria real seguida por el sistema es aquella para la cual la acción es estacionaria frente a variaciones compatibles de la trayectoria, manteniendo fijos los extremos:
+\[
+\delta S = \delta\int_{t_1}^{t_2}L\,dt = 0.
+\]
+
+Aplicando el cálculo de variaciones a esta condición se recuperan exactamente las ecuaciones de Euler--Lagrange. La dinámica deja entonces de interpretarse como el resultado de una suma vectorial instantánea de fuerzas y pasa a verse como un problema variacional global en el espacio de configuraciones.
+
+\begin{importante}
+La mecánica lagrangiana muestra que la naturaleza puede describirse no solo por ecuaciones diferenciales, sino también por principios de extremación. Esta es una de las ideas más profundas de toda la física teórica.
+\end{importante}
+
+\section{Simetrías, coordenadas cíclicas y leyes de conservación}
+Una de las grandes virtudes del formalismo lagrangiano es que revela constantes de movimiento a partir de simetrías, sin necesidad de resolver explícitamente las ecuaciones diferenciales.
+
+Si el lagrangiano no depende de una coordenada generalizada \(q_k\), es decir,
+\[
+\frac{\partial L}{\partial q_k}=0,
+\]
+entonces \(q_k\) es una \textbf{coordenada cíclica} y la ecuación correspondiente se reduce a
+\[
+\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_k}\right)=0.
+\]
+Esto implica la conservación del \textbf{momento generalizado conjugado}
+\[
+p_k \equiv \frac{\partial L}{\partial \dot{q}_k} = \text{constante}.
+\]
+
+De manera similar, si el lagrangiano no depende explícitamente del tiempo, se conserva la cantidad
+\[
+h = \sum_{j=1}^{M}\dot{q}_j\frac{\partial L}{\partial \dot{q}_j} - L,
+\]
+que, bajo condiciones usuales, coincide con la energía mecánica total.
+
+Estos resultados son manifestaciones particulares del \textbf{teorema de Noether}: a cada simetría continua del lagrangiano le corresponde una cantidad conservada. Translaciones espaciales se asocian al momento lineal, rotaciones al momento angular y traslaciones temporales a la energía.
+
+\section{Aplicación a la mecánica celeste}
+El formalismo lagrangiano no es solo una reformulación elegante; es una herramienta conceptual y computacional superior para la mecánica celeste.
+
+\subsection{Lagrangiano del problema de \texorpdfstring{$N$}{N} cuerpos}
+Para un sistema de \(N\) partículas que interactúan exclusivamente por gravedad newtoniana, no existen restricciones holónomas adicionales. Las coordenadas cartesianas \(\{\vec{r}_i\}\) pueden usarse como variables generalizadas. El lagrangiano se escribe entonces como
+\[
+L = \sum_{i=1}^{N}\frac{1}{2}m_i\dot{\vec{r}}_i^{\,2} + \frac{1}{2}\sum_{i=1}^{N}\sum_{\substack{j=1 \\ j \neq i}}^{N}\frac{Gm_im_j}{\|\vec{r}_i-\vec{r}_j\|}.
+\]
+
+El factor \(\tfrac{1}{2}\) evita la doble contabilidad de pares de interacción. Aplicando las ecuaciones de Euler--Lagrange, se recuperan las ecuaciones de movimiento newtonianas, pero ahora insertas en un marco donde las simetrías globales del sistema son más fáciles de identificar.
+
+\subsection{Reducción al problema de dos cuerpos y potencial efectivo}
+Cuando se aísla un par dentro de un sistema jerárquico, puede introducirse la coordenada del centro de masa \(\vec{R}_{\text{CM}}\) y el vector relativo \(\vec{r}=\vec{r}_1-\vec{r}_2\). La energía cinética se descompone de modo natural y, tras eliminar la coordenada cíclica asociada al centro de masa, se obtiene un lagrangiano efectivo para el movimiento relativo:
+\[
+L_{\text{rel}} = \frac{1}{2}\mu\dot{\vec{r}}^{\,2} + \frac{\mu\mathcal{G}}{r},
+\qquad
+\mathcal{G}=G(m_1+m_2).
+\]
+
+Al pasar luego a coordenadas polares o esféricas y fijar el plano orbital, aparece el \textbf{potencial efectivo}
+\[
+V_{\text{eff}}(r) = -\frac{\mu\mathcal{G}}{r} + \frac{h^2}{2r^2},
+\]
+que permite analizar de manera cualitativa la existencia de órbitas ligadas, no ligadas, periapsis, apoapsis y órbitas circulares estables, todo ello sin integrar directamente las ecuaciones de movimiento.
+
+\subsection{Perturbaciones y elementos osculantes}
+Cuando un tercer cuerpo o una fuerza no newtoniana introduce una perturbación pequeña, el lagrangiano se modifica ligeramente. A partir de él puede desarrollarse de manera sistemática la teoría de perturbaciones lagrangiana y derivarse la evolución temporal de los elementos orbitales osculantes. De este modo, la mecánica lagrangiana se convierte en el marco natural para pasar del problema kepleriano idealizado a la dinámica celeste realista.
+
+\section{Síntesis final}
+La transición del problema de los tres cuerpos a la mecánica lagrangiana no es un cambio de tema, sino un cambio de nivel conceptual. En esta clase se ha visto que:
+\begin{enumerate}
+    \item la complejidad del problema de \(N\) cuerpos obliga a abandonar la dependencia explícita en fuerzas de restricción y coordenadas redundantes,
+    \item el principio de d'Alembert--Lagrange reformula la dinámica como una condición escalar sobre desplazamientos virtuales compatibles,
+    \item las coordenadas generalizadas describen el sistema con el número mínimo de variables independientes,
+    \item el lagrangiano \(L=T-U\) unifica cinemática y dinámica en una sola función escalar,
+    \item el principio de Hamilton y el teorema de Noether revelan la estructura variacional y simétrica profunda de la mecánica,
+    \item en mecánica celeste, este formalismo permite describir desde el problema de dos cuerpos hasta la teoría de perturbaciones con una claridad muy superior al enfoque vectorial elemental.
+\end{enumerate}
+
+En consecuencia, la mecánica lagrangiana no debe verse únicamente como una técnica alternativa. Es el lenguaje natural para estudiar sistemas gravitacionales complejos y constituye el puente indispensable hacia formulaciones aún más generales, como la mecánica hamiltoniana, la teoría de perturbaciones moderna y, en última instancia, la física del siglo XX y XXI.
