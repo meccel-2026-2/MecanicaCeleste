@@ -28,9 +28,9 @@
   \centering
   {\Large Universidad de Antioquia\par}
   \vspace{2cm}
-  {\huge\bfseries Física Matemática I\par}
+  {\huge\bfseries Mecánica Celeste\par}
   \vspace{0.4cm}
-  {\Large Solución al Taller 8 \par}
+  {\Large Solución al Problemset 3 \par}
   \vspace{2.5cm}
   {\large Autor:\par}
   \vspace{0.2cm}
@@ -69,6 +69,116 @@ $$L = \frac{1}{2}m_r \left(\dot{r}^2 + r^2\dot{\theta}^2\right) + \frac{k}{r}.$$
     \item Finalmente, regrese a la variable original $r$ utilizando $u(\theta) = 1/r(\theta)$ y demuestre que la masa $m_r$ describe una órbita cónica alrededor del centro de fuerzas.
 \end{enumerate}
 
+\subsection{Solución problema 1}
+
+\subsubsection*{a) Conservación del momento angular asociado a la variable cíclica $\theta$}
+
+El lagrangiano del problema de los dos cuerpos, reducido al movimiento de la masa reducida $m_r$ en coordenadas polares $(r, \theta)$, está dado por:
+$$L = \frac{1}{2}m_r \left(\dot{r}^2 + r^2\dot{\theta}^2\right) + \frac{k}{r}$$
+
+Para identificar las cantidades conservadas, analizamos las simetrías del lagrangiano. Observamos que la coordenada angular $\theta$ no aparece explícitamente en la expresión de $L$, es decir, $\frac{\partial L}{\partial \theta} = 0$. 
+
+De acuerdo con la \textbf{Definición 9.10 (Variable cíclica y momento generalizado)} del libro de Zuluaga, una variable generalizada que no aparece explícitamente en el lagrangiano se denomina \textit{variable cíclica} o \textit{ignorable}. El teorema de Noether para el lagrangiano (Proposición 9.2 en Zuluaga) establece que a cada variable cíclica le corresponde un momento generalizado conservado. 
+
+El momento generalizado conjugado a $\theta$ se define como:
+$$p_\theta = \frac{\partial L}{\partial \dot{\theta}}$$
+
+Calculando esta derivada parcial a partir del lagrangiano dado:
+$$p_\theta = \frac{\partial}{\partial \dot{\theta}} \left[ \frac{1}{2}m_r \left(\dot{r}^2 + r^2\dot{\theta}^2\right) + \frac{k}{r} \right] = m_r r^2 \dot{\theta}$$
+
+Dado que $\frac{\partial L}{\partial \theta} = 0$, la ecuación de Euler-Lagrange para $\theta$,
+$$\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{\theta}}\right) - \frac{\partial L}{\partial \theta} = 0$$
+se reduce a $\frac{d}{dt}(p_\theta) = 0$. Por lo tanto, $p_\theta$ es una constante de movimiento. Denotando esta constante como $l$, obtenemos la expresión para el momento angular específico del sistema:
+$$l = m_r r^2 \dot{\theta}$$
+
+\subsubsection*{b) Energía orbital en términos de $u$ y $\theta$}
+
+Partimos de la expresión de la conservación de la energía mecánica. Como el lagrangiano no depende explícitamente del tiempo ($\frac{\partial L}{\partial t} = 0$) y las transformaciones a coordenadas polares son esclerónomas, la función de Jacobi coincide con la energía mecánica total $E$ y se conserva (Proposición 9.5, Zuluaga). La energía se escribe como la suma de la energía cinética y el potencial efectivo $U_{\text{eff}}(r)$:
+$$E = \frac{1}{2}m_r \dot{r}^2 + U_{\text{eff}}(r)$$
+donde, sustituyendo $\dot{\theta} = \frac{l}{m_r r^2}$ en la energía cinética rotacional, el potencial efectivo queda:
+$$U_{\text{eff}}(r) = \frac{l^2}{2m_r r^2} - \frac{k}{r}$$
+
+El enunciado nos pide introducir la variable $u = 1/r$. Para transformar la derivada temporal $\dot{r}$ en una derivada respecto a $\theta$, aplicamos la regla de la cadena:
+$$\dot{r} = \frac{dr}{dt} = \frac{dr}{d\theta} \frac{d\theta}{dt} = \frac{dr}{d\theta} \dot{\theta}$$
+
+Dado que $r = u^{-1}$, su derivada respecto a $\theta$ es:
+$$\frac{dr}{d\theta} = \frac{d}{d\theta}(u^{-1}) = -\frac{1}{u^2} \frac{du}{d\theta}$$
+
+Sustituyendo esto y la expresión $\dot{\theta} = \frac{l}{m_r} u^2$ en la ecuación de $\dot{r}$:
+$$\dot{r} = \left( -\frac{1}{u^2} \frac{du}{d\theta} \right) \left( \frac{l}{m_r} u^2 \right) = -\frac{l}{m_r} \frac{du}{d\theta}$$
+
+Ahora sustituimos $\dot{r}$ y $r = 1/u$ en la ecuación de la energía:
+$$E = \frac{1}{2}m_r \left( -\frac{l}{m_r} \frac{du}{d\theta} \right)^2 + \frac{l^2}{2m_r} \left(\frac{1}{r}\right)^2 - k\left(\frac{1}{r}\right)$$
+$$E = \frac{1}{2}m_r \left( \frac{l^2}{m_r^2} \left(\frac{du}{d\theta}\right)^2 \right) + \frac{l^2}{2m_r} u^2 - ku$$
+
+Simplificando el primer término:
+$$E = \frac{l^2}{2m_r} \left(\frac{du}{d\theta}\right)^2 + \frac{l^2}{2m_r} u^2 - ku$$
+
+Factorizando $\frac{l^2}{2m_r}$ en los dos primeros términos, obtenemos la expresión requerida:
+$$E = \frac{l^2}{2m_r} \left[ \left(\frac{du}{d\theta}\right)^2 + u^2 \right] - ku$$
+
+\subsubsection*{c) Ecuación diferencial de la órbita}
+
+Dado que la energía $E$ es una constante de movimiento, su derivada total respecto a cualquier variable, incluyendo el ángulo $\theta$, debe ser nula: $\frac{dE}{d\theta} = 0$. Derivamos la expresión obtenida en el inciso anterior respecto a $\theta$:
+$$\frac{dE}{d\theta} = \frac{l^2}{2m_r} \left[ 2 \left(\frac{du}{d\theta}\right) \left(\frac{d^2u}{d\theta^2}\right) + 2u \frac{du}{d\theta} \right] - k \frac{du}{d\theta} = 0$$
+
+Podemos factorizar $2 \frac{du}{d\theta}$ en el término entre corchetes:
+$$\frac{dE}{d\theta} = \frac{l^2}{m_r} \frac{du}{d\theta} \left[ \frac{d^2u}{d\theta^2} + u \right] - k \frac{du}{d\theta} = 0$$
+
+Factorizando $\frac{du}{d\theta}$ en toda la ecuación:
+$$\frac{du}{d\theta} \left( \frac{l^2}{m_r} \left[ \frac{d^2u}{d\theta^2} + u \right] - k \right) = 0$$
+
+Para una órbita no radial (donde la partícula no se mueve directamente hacia o desde el centro de fuerza), $\frac{du}{d\theta} \neq 0$. Por lo tanto, el término entre paréntesis debe ser cero:
+$$\frac{l^2}{m_r} \left( \frac{d^2u}{d\theta^2} + u \right) - k = 0$$
+
+Despejando el término entre paréntesis y reordenando, llegamos a la \textbf{ecuación de la forma orbital} (Sección 9.8.7, Zuluaga):
+$$\frac{d^2u}{d\theta^2} + u = \frac{k m_r}{l^2}$$
+
+\subsubsection*{d) Verificación de la solución por sustitución directa}
+
+Se propone la solución:
+$$u(\theta) = \frac{m_r k}{l^2} + A\cos(\theta + \theta_0)$$
+donde $A$ y $\theta_0$ son constantes de integración determinadas por las condiciones iniciales. Para verificar que esta es solución de la ecuación diferencial, calculamos sus derivadas respecto a $\theta$.
+
+La primera derivada es:
+$$\frac{du}{d\theta} = -A\sin(\theta + \theta_0)$$
+
+La segunda derivada es:
+$$\frac{d^2u}{d\theta^2} = -A\cos(\theta + \theta_0)$$
+
+Sustituimos $u$ y $\frac{d^2u}{d\theta^2}$ en el lado izquierdo de la ecuación diferencial:
+$$\frac{d^2u}{d\theta^2} + u = \left[ -A\cos(\theta + \theta_0) \right] + \left[ \frac{m_r k}{l^2} + A\cos(\theta + \theta_0) \right]$$
+
+Los términos que contienen $A\cos(\theta + \theta_0)$ se cancelan mutuamente, dejando:
+$$\frac{d^2u}{d\theta^2} + u = \frac{m_r k}{l^2}$$
+
+Este resultado coincide exactamente con el lado derecho de la ecuación diferencial, lo que demuestra que la función propuesta es, efectivamente, la solución general de la ecuación de la órbita.
+
+\subsubsection*{e) La órbita como una cónica}
+
+Finalmente, regresamos a la variable original $r$ utilizando la relación $u(\theta) = 1/r(\theta)$. Sustituyendo esto en la solución verificada:
+$$\frac{1}{r} = \frac{m_r k}{l^2} + A\cos(\theta + \theta_0)$$
+
+Factorizamos el término constante $\frac{m_r k}{l^2}$ en el lado derecho:
+$$\frac{1}{r} = \frac{m_r k}{l^2} \left[ 1 + \left( \frac{A l^2}{m_r k} \right) \cos(\theta + \theta_0) \right]$$
+
+Definimos dos nuevas constantes físicas fundamentales para la geometría de la órbita:
+1. El \textit{semilatus rectum} $p \equiv \frac{l^2}{m_r k}$.
+2. La \textit{excentricidad} $e \equiv \frac{A l^2}{m_r k} = A \cdot p$.
+
+Sustituyendo estas definiciones en la ecuación:
+$$\frac{1}{r} = \frac{1}{p} \left[ 1 + e \cos(\theta + \theta_0) \right]$$
+
+Invirtiendo la fracción, obtenemos la ecuación polar de la trayectoria:
+$$r(\theta) = \frac{p}{1 + e \cos(\theta + \theta_0)}$$
+
+Esta es la ecuación general de una curva cónica en coordenadas polares con el origen (el centro de fuerzas) ubicado en uno de sus focos (Sección 4.2.13, Ecuación 4.95, y Sección 7.4 "Primer teorema del movimiento orbital" en Zuluaga). Dependiendo del valor de la constante de excentricidad $e$ (que a su vez depende de la energía $E$ y el momento angular $l$ del sistema), la masa reducida $m_r$ describirá:
+- Una circunferencia si $e = 0$.
+- Una elipse si $0 < e < 1$.
+- Una parábola si $e = 1$.
+- Una hipérbola si $e > 1$.
+
+Esto concluye la demostración de que la masa reducida en un problema de dos cuerpos sometido a una fuerza central inversamente proporcional al cuadrado de la distancia describe inevitablemente una trayectoria cónica.
 
 \section{Problema 2: Partícula en campo electromagnético.}
 
@@ -89,6 +199,88 @@ $$\vec{E} = -\vec{\nabla}\phi - \frac{1}{c}\frac{\partial \vec{A}}{\partial t}, 
   donde $\psi(\vec{r}, t)$ es una función arbitraria, pero diferenciable. ¿Qué efecto tiene esta transformación \textit{gauge} sobre el lagrangiano de la partícula en el campo electromagnético? ¿Se ve afectado el movimiento de la partícula?
 \end{enumerate}
 
+
+\subsection{Solución problema 2}
+
+\subsubsection*{a) Ecuaciones de Euler-Lagrange y la fuerza de Lorentz}
+
+Partimos del lagrangiano dado para una partícula de masa $m$ y carga $q$ en un campo electromagnético:
+$$L = \frac{1}{2}m(\dot{x}^2 + \dot{y}^2 + \dot{z}^2) - q\phi(x,y,z,t) + \frac{q}{c}(\dot{x}A_x + \dot{y}A_y + \dot{z}A_z)$$
+donde hemos expresado explícitamente el producto punto $\vec{A} \cdot \vec{v}$ en coordenadas cartesianas. 
+
+Para encontrar la ecuación de movimiento correspondiente a la coordenada $x$, aplicamos la ecuación de Euler-Lagrange (Zuluaga, Sección 9.4 "Las ecuaciones de Lagrange"):
+$$\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{x}}\right) - \frac{\partial L}{\partial x} = 0$$
+
+Primero, calculamos la derivada parcial del lagrangiano respecto a la coordenada $x$:
+$$\frac{\partial L}{\partial x} = -q\frac{\partial \phi}{\partial x} + \frac{q}{c}\left(\dot{x}\frac{\partial A_x}{\partial x} + \dot{y}\frac{\partial A_y}{\partial x} + \dot{z}\frac{\partial A_z}{\partial x}\right)$$
+
+A continuación, calculamos la derivada parcial del lagrangiano respecto a la velocidad generalizada $\dot{x}$:
+$$\frac{\partial L}{\partial \dot{x}} = m\dot{x} + \frac{q}{c}A_x$$
+
+Ahora, debemos tomar la derivada total respecto al tiempo de esta última expresión. Es crucial recordar que el potencial vectorial $\vec{A}$ depende tanto de la posición como del tiempo, $\vec{A} = \vec{A}(x(t), y(t), z(t), t)$. Por lo tanto, aplicamos la regla de la cadena para la derivada total (Zuluaga, Ec. 4.17):
+$$\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{x}}\right) = m\ddot{x} + \frac{q}{c}\frac{d A_x}{dt} = m\ddot{x} + \frac{q}{c}\left( \frac{\partial A_x}{\partial t} + \dot{x}\frac{\partial A_x}{\partial x} + \dot{y}\frac{\partial A_x}{\partial y} + \dot{z}\frac{\partial A_x}{\partial z} \right)$$
+
+Sustituyendo estas expresiones en la ecuación de Euler-Lagrange y reorganizando los términos para aislar la aceleración $m\ddot{x}$, obtenemos:
+$$m\ddot{x} = -q\frac{\partial \phi}{\partial x} - \frac{q}{c}\frac{\partial A_x}{\partial t} + \frac{q}{c}\left[ \dot{y}\left(\frac{\partial A_y}{\partial x} - \frac{\partial A_x}{\partial y}\right) + \dot{z}\left(\frac{\partial A_z}{\partial x} - \frac{\partial A_x}{\partial z}\right) \right]$$
+
+Podemos identificar los términos de esta ecuación con las componentes de los campos electromagnéticos. Por definición, la componente $x$ del campo eléctrico es:
+$$E_x = -\frac{\partial \phi}{\partial x} - \frac{1}{c}\frac{\partial A_x}{\partial t}$$
+Por otro lado, la componente $x$ del producto cruz $\vec{v} \times \vec{B}$, dado que $\vec{B} = \vec{\nabla} \times \vec{A}$, es:
+$$(\vec{v} \times \vec{B})_x = \dot{y}(\vec{\nabla} \times \vec{A})_z - \dot{z}(\vec{\nabla} \times \vec{A})_y = \dot{y}\left(\frac{\partial A_y}{\partial x} - \frac{\partial A_x}{\partial y}\right) - \dot{z}\left(\frac{\partial A_x}{\partial z} - \frac{\partial A_z}{\partial x}\right)$$
+Notamos que esto coincide exactamente con el término entre corchetes en nuestra ecuación de movimiento. Por lo tanto, la ecuación para la coordenada $x$ se simplifica a:
+$$m\ddot{x} = qE_x + \frac{q}{c}(\vec{v} \times \vec{B})_x$$
+
+Generalizando este resultado a las tres dimensiones espaciales (repitiendo el proceso para $y$ y $z$), obtenemos la ecuación vectorial de movimiento:
+$$m\vec{a} = q\vec{E} + \frac{q}{c}\vec{v} \times \vec{B}$$
+Esta es precisamente la expresión clásica de la fuerza de Lorentz, lo que verifica que el lagrangiano propuesto describe correctamente la dinámica de una partícula cargada en un campo electromagnético.
+
+\subsubsection*{b) Invarianza de las ecuaciones de Euler-Lagrange bajo una derivada total}
+
+Consideremos un nuevo lagrangiano $L'$ definido como:
+$$L'(q_i, \dot{q}_i, t) = L(q_i, \dot{q}_i, t) + \frac{d}{dt}F(q_1, q_2, \dots, q_n, t)$$
+donde $F$ es una función arbitraria diferenciable de las coordenadas generalizadas y del tiempo. Expandiendo la derivada total de $F$ usando la regla de la cadena, tenemos:
+$$L' = L + \sum_{j=1}^n \frac{\partial F}{\partial q_j}\dot{q}_j + \frac{\partial F}{\partial t}$$
+
+Para ver si este nuevo lagrangiano produce las mismas ecuaciones de movimiento, evaluamos la ecuación de Euler-Lagrange para $L'$ respecto a una coordenada arbitraria $q_i$. Primero, la derivada parcial respecto a $q_i$:
+$$\frac{\partial L'}{\partial q_i} = \frac{\partial L}{\partial q_i} + \sum_{j=1}^n \frac{\partial^2 F}{\partial q_i \partial q_j}\dot{q}_j + \frac{\partial^2 F}{\partial q_i \partial t}$$
+
+Luego, la derivada parcial respecto a la velocidad generalizada $\dot{q}_i$:
+$$\frac{\partial L'}{\partial \dot{q}_i} = \frac{\partial L}{\partial \dot{q}_i} + \frac{\partial F}{\partial q_i}$$
+donde hemos usado el hecho de que $\frac{\partial \dot{q}_j}{\partial \dot{q}_i} = \delta_{ij}$ (delta de Kronecker).
+
+Ahora tomamos la derivada total respecto al tiempo de esta última expresión:
+$$\frac{d}{dt}\left(\frac{\partial L'}{\partial \dot{q}_i}\right) = \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_i}\right) + \frac{d}{dt}\left(\frac{\partial F}{\partial q_i}\right)$$
+Aplicando nuevamente la regla de la cadena al segundo término del lado derecho:
+$$\frac{d}{dt}\left(\frac{\partial L'}{\partial \dot{q}_i}\right) = \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_i}\right) + \sum_{j=1}^n \frac{\partial^2 F}{\partial q_i \partial q_j}\dot{q}_j + \frac{\partial^2 F}{\partial q_i \partial t}$$
+
+Finalmente, sustituimos en la ecuación de Euler-Lagrange para $L'$:
+$$\frac{d}{dt}\left(\frac{\partial L'}{\partial \dot{q}_i}\right) - \frac{\partial L'}{\partial q_i} = \left[ \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_i}\right) + \sum_{j} \frac{\partial^2 F}{\partial q_i \partial q_j}\dot{q}_j + \frac{\partial^2 F}{\partial q_i \partial t} \right] - \left[ \frac{\partial L}{\partial q_i} + \sum_{j} \frac{\partial^2 F}{\partial q_i \partial q_j}\dot{q}_j + \frac{\partial^2 F}{\partial q_i \partial t} \right]$$
+Los términos que involucran las segundas derivadas de $F$ se cancelan exactamente, dejando:
+$$\frac{d}{dt}\left(\frac{\partial L'}{\partial \dot{q}_i}\right) - \frac{\partial L'}{\partial q_i} = \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_i}\right) - \frac{\partial L}{\partial q_i}$$
+Esto demuestra que si $L$ satisface las ecuaciones de Euler-Lagrange (el lado derecho es cero), entonces $L'$ también las satisface. Este resultado fundamental se conoce como la libertad del lagrangiano (Zuluaga, Proposición 9.6 "Libertad del Lagrangiano").
+
+\subsubsection*{c) Invarianza gauge del campo electromagnético}
+
+Analicemos el efecto de la transformación gauge sobre el lagrangiano original. Sustituimos los potenciales transformados $\vec{A}' = \vec{A} + \vec{\nabla}\psi$ y $\phi' = \phi - \frac{1}{c}\frac{\partial \psi}{\partial t}$ en la expresión de $L$:
+$$L' = \frac{1}{2}mv^2 - q\left(\phi - \frac{1}{c}\frac{\partial \psi}{\partial t}\right) + \frac{q}{c}(\vec{A} + \vec{\nabla}\psi) \cdot \vec{v}$$
+
+Expandiendo los términos y reordenando, obtenemos:
+$$L' = \left( \frac{1}{2}mv^2 - q\phi + \frac{q}{c}\vec{A} \cdot \vec{v} \right) + \frac{q}{c}\frac{\partial \psi}{\partial t} + \frac{q}{c}\vec{\nabla}\psi \cdot \vec{v}$$
+El término entre paréntesis es exactamente el lagrangiano original $L$. Por lo tanto:
+$$L' = L + \frac{q}{c}\left( \frac{\partial \psi}{\partial t} + \vec{v} \cdot \vec{\nabla}\psi \right)$$
+
+Reconocemos que la expresión entre paréntesis es precisamente la derivada total respecto al tiempo de la función escalar $\psi(\vec{r}, t)$, ya que $\vec{v} = \frac{d\vec{r}}{dt}$. Es decir:
+$$\frac{d\psi}{dt} = \frac{\partial \psi}{\partial t} + \frac{d\vec{r}}{dt} \cdot \vec{\nabla}\psi = \frac{\partial \psi}{\partial t} + \vec{v} \cdot \vec{\nabla}\psi$$
+
+Sustituyendo esto en la expresión de $L'$, llegamos a:
+$$L' = L + \frac{d}{dt}\left( \frac{q}{c}\psi(\vec{r}, t) \right)$$
+
+Esta ecuación muestra que el nuevo lagrangiano $L'$ difiere del lagrangiano original $L$ únicamente por la derivada total respecto al tiempo de una función $F(\vec{r}, t) = \frac{q}{c}\psi(\vec{r}, t)$. 
+
+De acuerdo con el resultado demostrado en el inciso (b) (y formalizado en la Proposición 9.6 de Zuluaga), la adición de una derivada total temporal a un lagrangiano no altera las ecuaciones de Euler-Lagrange. 
+
+\textbf{Conclusión:} La transformación gauge de los potenciales electromagnéticos tiene el efecto de añadir una derivada total temporal al lagrangiano de la partícula. Como consecuencia directa de la libertad del lagrangiano, las ecuaciones de movimiento derivadas de $L'$ son idénticas a las derivadas de $L$. Por lo tanto, el movimiento físico de la partícula \textbf{no se ve afectado en absoluto} por la elección del gauge, lo que confirma la invarianza gauge de la dinámica clásica de una partícula cargada.
+
 \section{Problema 3: Péndulo doble.}
 
 El péndulo doble está formado por dos péndulos simples de longitudes $l_1$ y $l_2$, de los que cuelgan masas puntuales $m_1$ y $m_2$. En un instante de tiempo $t$, los hilos inextensibles forman ángulos $\theta_1$ y $\theta_2$ con la vertical.
@@ -98,6 +290,86 @@ El péndulo doble está formado por dos péndulos simples de longitudes $l_1$ y 
     
     \item Resuelva numéricamente las ecuaciones del péndulo doble y grafique su movimiento en el espacio de configuración $(\theta_1, \theta_2)$. Luego, estudie el caos en este sistema: grafique simultáneamente dos péndulos dobles que comiencen con condiciones iniciales muy cercanas, de modo que se aprecie cómo sus trayectorias divergen con el tiempo (puede presentar también una bella animación).
 \end{enumerate}
+
+\subsection{Solución problema 3}
+
+\subsubsection*{a) Ecuaciones de movimiento del péndulo doble}
+
+El péndulo doble es un sistema mecánico clásico que ilustra perfectamente el poder del formalismo escalar de la mecánica frente al formalismo vectorial, especialmente cuando existen fuerzas de restricción (como la tensión en los hilos) que son difíciles de modelar directamente pero que quedan excluidas de forma natural al elegir las variables generalizadas adecuadas.
+
+\paragraph{1. Elección de las variables generalizadas y reglas de transformación}
+El sistema está compuesto por dos masas puntuales $m_1$ y $m_2$ unidas por hilos inextensibles de longitudes $l_1$ y $l_2$. El sistema posee 4 coordenadas cartesianas en total ($x_1, y_1, x_2, y_2$), pero está sujeto a 2 restricciones holonómicas esclerónomas (la longitud fija de cada hilo). Por lo tanto, el número de grados de libertad es $M = 4 - 2 = 2$. 
+
+Como indica el enunciado, elegimos como variables generalizadas los ángulos que forman los hilos con la vertical:
+$$q_1 = \theta_1, \quad q_2 = \theta_2$$
+
+Definimos un sistema de coordenadas cartesianas con el origen en el punto de pivote del primer péndulo, con el eje $x$ horizontal y el eje $y$ vertical apuntando hacia abajo (para simplificar los signos en la energía potencial). Según la \textbf{Sección 9.3 "Restricciones y variables generalizadas"} de Zuluaga, las coordenadas cartesianas se pueden expresar como funciones de las variables generalizadas a través de las reglas de transformación (análogas a la Ec. 9.19):
+$$x_1 = l_1 \sin\theta_1$$
+$$y_1 = l_1 \cos\theta_1$$
+$$x_2 = l_1 \sin\theta_1 + l_2 \sin\theta_2$$
+$$y_2 = l_1 \cos\theta_1 + l_2 \cos\theta_2$$
+
+\paragraph{2. Cálculo de las velocidades}
+Para construir la función de energía cinética, necesitamos las componentes de la velocidad de cada masa, las cuales se obtienen derivando las reglas de transformación respecto al tiempo (aplicando la regla de la cadena, como se discute en la \textbf{Sección 9.3.3 "Propiedades matemáticas de las reglas de transformación"}):
+$$\dot{x}_1 = l_1 \dot{\theta}_1 \cos\theta_1$$
+$$\dot{y}_1 = -l_1 \dot{\theta}_1 \sin\theta_1$$
+$$\dot{x}_2 = l_1 \dot{\theta}_1 \cos\theta_1 + l_2 \dot{\theta}_2 \cos\theta_2$$
+$$\dot{y}_2 = -l_1 \dot{\theta}_1 \sin\theta_1 - l_2 \dot{\theta}_2 \sin\theta_2$$
+
+El cuadrado de la rapidez de cada masa ($v_i^2 = \dot{x}_i^2 + \dot{y}_i^2$) resulta ser:
+$$v_1^2 = l_1^2 \dot{\theta}_1^2 (\cos^2\theta_1 + \sin^2\theta_1) = l_1^2 \dot{\theta}_1^2$$
+$$v_2^2 = (l_1 \dot{\theta}_1 \cos\theta_1 + l_2 \dot{\theta}_2 \cos\theta_2)^2 + (-l_1 \dot{\theta}_1 \sin\theta_1 - l_2 \dot{\theta}_2 \sin\theta_2)^2$$
+Desarrollando los cuadrados y agrupando términos, y usando la identidad trigonométrica $\cos\theta_1 \cos\theta_2 + \sin\theta_1 \sin\theta_2 = \cos(\theta_1 - \theta_2)$, obtenemos:
+$$v_2^2 = l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 + 2 l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos(\theta_1 - \theta_2)$$
+
+\paragraph{3. Construcción del Lagrangiano}
+La energía cinética total del sistema es la suma de las energías cinéticas de las dos partículas. Como se menciona en la \textbf{Sección 9.4 "Las ecuaciones de Lagrange"} (Ec. 9.26), la energía cinética $T$ es un funcional de las variables generalizadas y sus velocidades:
+$$T = \frac{1}{2}m_1 v_1^2 + \frac{1}{2}m_2 v_2^2$$
+$$T = \frac{1}{2}m_1 l_1^2 \dot{\theta}_1^2 + \frac{1}{2}m_2 \left[ l_1^2 \dot{\theta}_1^2 + l_2^2 \dot{\theta}_2^2 + 2 l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos(\theta_1 - \theta_2) \right]$$
+
+La energía potencial gravitacional $V$ del sistema, asumiendo que el potencial es cero en el nivel del pivote y que la gravedad $g$ actúa en la dirección positiva de $y$, se obtiene sumando las energías potenciales individuales (ver \textbf{Sección 5.3.12 "Energía potencial gravitacional"}):
+$$V = -m_1 g y_1 - m_2 g y_2$$
+$$V = -m_1 g l_1 \cos\theta_1 - m_2 g (l_1 \cos\theta_1 + l_2 \cos\theta_2)$$
+$$V = -(m_1 + m_2) g l_1 \cos\theta_1 - m_2 g l_2 \cos\theta_2$$
+
+De acuerdo con la \textbf{Definición 9.9 "Función Lagrangiana"} de Zuluaga, el Lagrangiano del sistema se define como $L = T - V$. Por lo tanto:
+$$L(\theta_1, \theta_2, \dot{\theta}_1, \dot{\theta}_2) = \frac{1}{2}(m_1 + m_2) l_1^2 \dot{\theta}_1^2 + \frac{1}{2}m_2 l_2^2 \dot{\theta}_2^2 + m_2 l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \cos(\theta_1 - \theta_2) + (m_1 + m_2) g l_1 \cos\theta_1 + m_2 g l_2 \cos\theta_2$$
+
+\paragraph{4. Aplicación de las Ecuaciones de Euler-Lagrange}
+Para encontrar las ecuaciones de movimiento, aplicamos las Ecuaciones de Euler-Lagrange (Ec. 9.37 en la \textbf{Sección 9.5 "La función lagrangiana"}):
+$$\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{\theta}_i}\right) - \frac{\partial L}{\partial \theta_i} = 0, \quad \text{para } i = 1, 2$$
+
+\textbf{Para la coordenada $\theta_1$:}
+Calculamos las derivadas parciales necesarias:
+$$\frac{\partial L}{\partial \dot{\theta}_1} = (m_1 + m_2) l_1^2 \dot{\theta}_1 + m_2 l_1 l_2 \dot{\theta}_2 \cos(\theta_1 - \theta_2)$$
+Derivando respecto al tiempo (regla del producto y de la cadena):
+$$\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{\theta}_1}\right) = (m_1 + m_2) l_1^2 \ddot{\theta}_1 + m_2 l_1 l_2 \ddot{\theta}_2 \cos(\theta_1 - \theta_2) - m_2 l_1 l_2 \dot{\theta}_2 (\dot{\theta}_1 - \dot{\theta}_2) \sin(\theta_1 - \theta_2)$$
+La derivada parcial respecto a $\theta_1$ es:
+$$\frac{\partial L}{\partial \theta_1} = -m_2 l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \sin(\theta_1 - \theta_2) - (m_1 + m_2) g l_1 \sin\theta_1$$
+Sustituyendo en la ecuación de Euler-Lagrange y agrupando términos:
+$$(m_1 + m_2) l_1^2 \ddot{\theta}_1 + m_2 l_1 l_2 \ddot{\theta}_2 \cos(\theta_1 - \theta_2) - m_2 l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \sin(\theta_1 - \theta_2) + m_2 l_1 l_2 \dot{\theta}_2^2 \sin(\theta_1 - \theta_2) + m_2 l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \sin(\theta_1 - \theta_2) + (m_1 + m_2) g l_1 \sin\theta_1 = 0$$
+Simplificando los términos que contienen $\dot{\theta}_1 \dot{\theta}_2 \sin(\theta_1 - \theta_2)$, obtenemos la primera ecuación de movimiento:
+$$(m_1 + m_2) l_1^2 \ddot{\theta}_1 + m_2 l_1 l_2 \ddot{\theta}_2 \cos(\theta_1 - \theta_2) + m_2 l_1 l_2 \dot{\theta}_2^2 \sin(\theta_1 - \theta_2) + (m_1 + m_2) g l_1 \sin\theta_1 = 0$$
+
+\textbf{Para la coordenada $\theta_2$:}
+Calculamos las derivadas parciales necesarias:
+$$\frac{\partial L}{\partial \dot{\theta}_2} = m_2 l_2^2 \dot{\theta}_2 + m_2 l_1 l_2 \dot{\theta}_1 \cos(\theta_1 - \theta_2)$$
+Derivando respecto al tiempo:
+$$\frac{d}{dt}\left(\frac{\partial L}{\partial \dot{\theta}_2}\right) = m_2 l_2^2 \ddot{\theta}_2 + m_2 l_1 l_2 \ddot{\theta}_1 \cos(\theta_1 - \theta_2) - m_2 l_1 l_2 \dot{\theta}_1 (\dot{\theta}_1 - \dot{\theta}_2) \sin(\theta_1 - \theta_2)$$
+La derivada parcial respecto a $\theta_2$ es:
+$$\frac{\partial L}{\partial \theta_2} = m_2 l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \sin(\theta_1 - \theta_2) - m_2 g l_2 \sin\theta_2$$
+Sustituyendo en la ecuación de Euler-Lagrange y agrupando términos:
+$$m_2 l_2^2 \ddot{\theta}_2 + m_2 l_1 l_2 \ddot{\theta}_1 \cos(\theta_1 - \theta_2) - m_2 l_1 l_2 \dot{\theta}_1^2 \sin(\theta_1 - \theta_2) + m_2 l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \sin(\theta_1 - \theta_2) - m_2 l_1 l_2 \dot{\theta}_1 \dot{\theta}_2 \sin(\theta_1 - \theta_2) + m_2 g l_2 \sin\theta_2 = 0$$
+Simplificando los términos que contienen $\dot{\theta}_1 \dot{\theta}_2 \sin(\theta_1 - \theta_2)$, obtenemos la segunda ecuación de movimiento:
+$$m_2 l_2^2 \ddot{\theta}_2 + m_2 l_1 l_2 \ddot{\theta}_1 \cos(\theta_1 - \theta_2) - m_2 l_1 l_2 \dot{\theta}_1^2 \sin(\theta_1 - \theta_2) + m_2 g l_2 \sin\theta_2 = 0$$
+
+\paragraph{5. Síntesis final}
+El sistema de ecuaciones diferenciales ordinarias no lineales de segundo orden acopladas que describe completamente la dinámica del péndulo doble en el formalismo lagrangiano es:
+
+$$(m_1 + m_2) l_1 \ddot{\theta}_1 + m_2 l_2 \ddot{\theta}_2 \cos(\theta_1 - \theta_2) + m_2 l_2 \dot{\theta}_2^2 \sin(\theta_1 - \theta_2) + (m_1 + m_2) g \sin\theta_1 = 0$$
+$$l_2 \ddot{\theta}_2 + l_1 \ddot{\theta}_1 \cos(\theta_1 - \theta_2) - l_1 \dot{\theta}_1^2 \sin(\theta_1 - \theta_2) + g \sin\theta_2 = 0$$
+
+(Nota: En la primera ecuación se ha dividido por $l_1$ y en la segunda por $m_2 l_2$ para presentar una forma ligeramente más compacta y estándar, aunque la forma expandida anterior es igualmente válida y directa del cálculo). Este resultado demuestra cómo el formalismo lagrangiano permite obtener las ecuaciones de movimiento de sistemas complejos de manera sistemática, evitando el cálculo explícito de las fuerzas de tensión en los hilos.
 
 
 \section{Problema 4: Principio de acción mínima en un campo gravitatorio uniforme.}
@@ -136,14 +408,200 @@ Se proponen las siguientes trayectorias posibles entre los puntos extremos:
     \item Proponga una trayectoria alternativa que cumpla las condiciones de frontera $y(0) = 0$ y $y(T) = 0$, calcule su acción y compárela con las acciones obtenidas para las trayectorias anteriores.
 \end{enumerate}
 
+\subsection{Solución problema 4}
+
+\subsubsection*{a) Cálculo explícito de la acción para las trayectorias propuestas}
+
+La acción $S$ de un sistema se define como la integral temporal del Lagrangiano a lo largo de una trayectoria dada (Zuluaga, Sección 9.6, "El principio de Hamilton"):
+$$S = \int_{0}^{T} L(y, \dot{y}, t) \, dt = \int_{0}^{T} \left( \frac{1}{2}m\dot{y}^2 - mgy \right) dt$$
+
+\textbf{1. Trayectoria de caída libre (parabólica)}
+
+La trayectoria está dada por $y_{\text{libre}}(t) = v_0t - \frac{1}{2}gt^2$. La condición de frontera $y(T) = 0$ impone:
+$$v_0T - \frac{1}{2}gT^2 = 0 \implies v_0 = \frac{1}{2}gT$$
+Por lo tanto, la trayectoria y su derivada son:
+$$y_{\text{libre}}(t) = \frac{1}{2}gTt - \frac{1}{2}gt^2, \qquad \dot{y}_{\text{libre}}(t) = \frac{1}{2}gT - gt$$
+Sustituyendo en el Lagrangiano:
+$$L_{\text{libre}} = \frac{1}{2}m\left(\frac{1}{2}gT - gt\right)^2 - mg\left(\frac{1}{2}gTt - \frac{1}{2}gt^2\right)$$
+Desarrollando los cuadrados y agrupando términos:
+$$L_{\text{libre}} = \frac{1}{2}m\left(\frac{1}{4}g^2T^2 - g^2Tt + g^2t^2\right) - \frac{1}{2}mg^2Tt + \frac{1}{2}mg^2t^2$$
+$$L_{\text{libre}} = \frac{1}{8}mg^2T^2 - mg^2Tt + mg^2t^2$$
+Integrando desde $t=0$ hasta $t=T$ para obtener la acción $S_{\text{libre}}$:
+$$S_{\text{libre}} = \int_{0}^{T} \left( \frac{1}{8}mg^2T^2 - mg^2Tt + mg^2t^2 \right) dt$$
+$$S_{\text{libre}} = mg^2 \left[ \frac{1}{8}T^2t - \frac{1}{2}Tt^2 + \frac{1}{3}t^3 \right]_{0}^{T} = mg^2T^3 \left( \frac{1}{8} - \frac{1}{2} + \frac{1}{3} \right)$$
+$$S_{\text{libre}} = mg^2T^3 \left( \frac{3 - 12 + 8}{24} \right) = -\frac{1}{24}mg^2T^3$$
+
+\textbf{2. Movimiento rectilíneo uniforme por tramos}
+
+La trayectoria está definida por partes. Debido a la simetría del problema, calcularemos la acción en el intervalo $[0, T/2]$ y la multiplicaremos por 2.
+Para $0 \le t \le T/2$:
+$$y_{\text{recta}}(t) = \frac{2H}{T}t, \qquad \dot{y}_{\text{recta}}(t) = \frac{2H}{T}$$
+El Lagrangiano en este tramo es:
+$$L_{\text{recta}} = \frac{1}{2}m\left(\frac{2H}{T}\right)^2 - mg\left(\frac{2H}{T}t\right) = \frac{2mH^2}{T^2} - \frac{2mgH}{T}t$$
+La acción total es la suma de las integrales en ambos tramos. Por simetría, la integral en $[T/2, T]$ es idéntica a la de $[0, T/2]$:
+$$S_{\text{recta}} = 2 \int_{0}^{T/2} \left( \frac{2mH^2}{T^2} - \frac{2mgH}{T}t \right) dt$$
+$$S_{\text{recta}} = 2 \left[ \frac{2mH^2}{T^2}t - \frac{mgH}{T}t^2 \right]_{0}^{T/2} = 2 \left( \frac{mH^2}{T} - \frac{mgH}{T}\frac{T^2}{4} \right)$$
+$$S_{\text{recta}} = \frac{2mH^2}{T} - \frac{1}{2}mgHT$$
+
+\textbf{3. Trayectoria perturbada}
+
+La trayectoria es $y_{\text{pert}}(t) = y_{\text{libre}}(t) + \varepsilon f(t)$, con $f(0)=f(T)=0$. Su derivada es $\dot{y}_{\text{pert}} = \dot{y}_{\text{libre}} + \varepsilon \dot{f}$.
+Sustituyendo en el Lagrangiano y expandiendo:
+$$L_{\text{pert}} = \frac{1}{2}m(\dot{y}_{\text{libre}} + \varepsilon \dot{f})^2 - mg(y_{\text{libre}} + \varepsilon f)$$
+$$L_{\text{pert}} = \underbrace{\left( \frac{1}{2}m\dot{y}_{\text{libre}}^2 - mgy_{\text{libre}} \right)}_{L_{\text{libre}}} + \varepsilon \underbrace{\left( m\dot{y}_{\text{libre}}\dot{f} - mgf \right)}_{\text{Término lineal en } \varepsilon} + \frac{1}{2}m\varepsilon^2\dot{f}^2$$
+La acción perturbada es $S_{\text{pert}} = S_{\text{libre}} + \delta S^{(1)} + \delta S^{(2)}$. Analicemos el término de primer orden en $\varepsilon$ (la primera variación, $\delta S$):
+$$\delta S^{(1)} = \varepsilon \int_{0}^{T} \left( m\dot{y}_{\text{libre}}\dot{f} - mgf \right) dt$$
+Aplicando integración por partes al primer término, y recordando que $f(0)=f(T)=0$ (Zuluaga, Sección 4.1.10, "Cálculo de variaciones"):
+$$\int_{0}^{T} m\dot{y}_{\text{libre}}\dot{f} \, dt = \left[ m\dot{y}_{\text{libre}}f \right]_{0}^{T} - \int_{0}^{T} m\ddot{y}_{\text{libre}}f \, dt = - \int_{0}^{T} m\ddot{y}_{\text{libre}}f \, dt$$
+Dado que la trayectoria de caída libre satisface la ecuación de movimiento $\ddot{y}_{\text{libre}} = -g$, tenemos:
+$$\delta S^{(1)} = \varepsilon \int_{0}^{T} \left( -m(-g)f - mgf \right) dt = \varepsilon \int_{0}^{T} (mgf - mgf) \, dt = 0$$
+Este resultado confirma el Principio de Hamilton: la primera variación de la acción se anula para la trayectoria clásica. Por lo tanto, la acción perturbada es:
+$$S_{\text{pert}} = S_{\text{libre}} + \frac{1}{2}m\varepsilon^2 \int_{0}^{T} \dot{f}^2 \, dt$$
+Para el caso específico $f(t) = \sin\left(\frac{\pi t}{T}\right)$, tenemos $\dot{f}(t) = \frac{\pi}{T}\cos\left(\frac{\pi t}{T}\right)$. La integral es:
+$$\int_{0}^{T} \dot{f}^2 \, dt = \frac{\pi^2}{T^2} \int_{0}^{T} \cos^2\left(\frac{\pi t}{T}\right) dt = \frac{\pi^2}{T^2} \left( \frac{T}{2} \right) = \frac{\pi^2}{2T}$$
+Sustituyendo, obtenemos:
+$$S_{\text{pert}} = -\frac{1}{24}mg^2T^3 + \frac{m\varepsilon^2\pi^2}{4T}$$
+
+\subsubsection*{b) Análisis de los resultados y demostración del mínimo de acción}
+
+Para demostrar que la trayectoria de caída libre corresponde a un mínimo de la acción, analizamos la diferencia $\Delta S = S_{\text{pert}} - S_{\text{libre}}$:
+$$\Delta S = \frac{1}{2}m\varepsilon^2 \int_{0}^{T} \dot{f}^2 \, dt$$
+Dado que la masa $m > 0$, $\varepsilon^2 \ge 0$, y el cuadrado de la derivada $\dot{f}^2 \ge 0$ para todo $t$, la integral es estrictamente positiva para cualquier perturbación no trivial ($f(t) \neq 0$). Por lo tanto, $\Delta S > 0$, lo que prueba que $S_{\text{libre}}$ es un mínimo local (y en este caso, global, dado que el Lagrangiano es convexo en $\dot{y}$).
+
+Adicionalmente, podemos comparar $S_{\text{recta}}$ con $S_{\text{libre}}$ eligiendo una altura $H$ comparable. La altura máxima de la trayectoria de caída libre se alcanza en $t=T/2$:
+$$H_{\text{libre}} = y_{\text{libre}}(T/2) = \frac{1}{2}gT\left(\frac{T}{2}\right) - \frac{1}{2}g\left(\frac{T}{2}\right)^2 = \frac{1}{8}gT^2$$
+Sustituyendo $H = \frac{1}{8}gT^2$ en la acción de la trayectoria rectilínea:
+$$S_{\text{recta}}(H_{\text{libre}}) = \frac{2m}{T}\left(\frac{1}{8}gT^2\right)^2 - \frac{1}{2}mgT\left(\frac{1}{8}gT^2\right) = \frac{1}{32}mg^2T^3 - \frac{1}{16}mg^2T^3 = -\frac{1}{32}mg^2T^3$$
+Comparando los valores numéricos: $S_{\text{libre}} = -\frac{1}{24}mg^2T^3 \approx -0.0416 \, mg^2T^3$, mientras que $S_{\text{recta}} = -\frac{1}{32}mg^2T^3 \approx -0.03125 \, mg^2T^3$. 
+Dado que $-\frac{1}{32} > -\frac{1}{24}$, se cumple que $S_{\text{recta}} > S_{\text{libre}}$, reforzando la conclusión de que la trayectoria clásica minimiza la acción.
+
+\subsubsection*{c) Propuesta de una trayectoria alternativa}
+
+Proponemos una trayectoria polinómica que satisfaga las condiciones de frontera $y(0)=0$ y $y(T)=0$:
+$$y_{\text{alt}}(t) = A t (T - t) = A(Tt - t^2)$$
+donde $A$ es un parámetro libre con unidades de aceleración. La derivada es $\dot{y}_{\text{alt}}(t) = A(T - 2t)$.
+El Lagrangiano para esta trayectoria es:
+$$L_{\text{alt}} = \frac{1}{2}mA^2(T - 2t)^2 - mgA(Tt - t^2)$$
+Calculamos la acción $S_{\text{alt}}(A)$ integrando de $0$ a $T$:
+$$S_{\text{alt}}(A) = \int_{0}^{T} \left[ \frac{1}{2}mA^2(T^2 - 4Tt + 4t^2) - mgA(Tt - t^2) \right] dt$$
+Evaluando las integrales por separado:
+$$\int_{0}^{T} (T^2 - 4Tt + 4t^2) dt = \left[ T^2t - 2Tt^2 + \frac{4}{3}t^3 \right]_{0}^{T} = T^3 - 2T^3 + \frac{4}{3}T^3 = \frac{1}{3}T^3$$
+$$\int_{0}^{T} (Tt - t^2) dt = \left[ \frac{1}{2}Tt^2 - \frac{1}{3}t^3 \right]_{0}^{T} = \frac{1}{2}T^3 - \frac{1}{3}T^3 = \frac{1}{6}T^3$$
+Sustituyendo estos resultados:
+$$S_{\text{alt}}(A) = \frac{1}{2}mA^2 \left(\frac{1}{3}T^3\right) - mgA \left(\frac{1}{6}T^3\right) = \frac{1}{6}mT^3 (A^2 - gA)$$
+Esta expresión nos permite ver cómo varía la acción en función del parámetro $A$. Para encontrar el valor de $A$ que minimiza esta acción, derivamos respecto a $A$ e igualamos a cero:
+$$\frac{dS_{\text{alt}}}{dA} = \frac{1}{6}mT^3 (2A - g) = 0 \implies A = \frac{g}{2}$$
+Si sustituimos $A = g/2$ en nuestra trayectoria propuesta, obtenemos:
+$$y_{\text{alt}}(t) = \frac{g}{2}(Tt - t^2) = \frac{1}{2}gTt - \frac{1}{2}gt^2$$
+¡Esta es exactamente la trayectoria de caída libre $y_{\text{libre}}(t)$! 
+Finalmente, el valor mínimo de la acción para esta familia de trayectorias es:
+$$S_{\text{alt}}\left(\frac{g}{2}\right) = \frac{1}{6}mT^3 \left( \left(\frac{g}{2}\right)^2 - g\left(\frac{g}{2}\right) \right) = \frac{1}{6}mT^3 \left( \frac{g^2}{4} - \frac{g^2}{2} \right) = -\frac{1}{24}mg^2T^3$$
+Este resultado coincide perfectamente con $S_{\text{libre}}$, ilustrando de manera elegante y contundente el Principio de Acción Estacionaria (Zuluaga, Sección 9.6): cualquier desviación de la trayectoria que satisface las ecuaciones de Euler-Lagrange resulta en un incremento del valor de la acción.
+
+
 
 \section{Problema 5: Ecuaciones de movimiento en el problema de los dos cuerpos.}
 
-\begin{enumerate}[a)]
-    \item Demuestre que el Hamiltoniano para el problema de dos cuerpos de masas $m_1$ y $m_2$ en órbita alrededor de su centro de masa común está dado por
+Demuestre que el Hamiltoniano para el problema de dos cuerpos de masas $m_1$ y $m_2$ en órbita alrededor de su centro de masa común está dado por
     $$H(x, y, z, p_x, p_y, p_z) = \frac{1}{2m_r} \left(p_x^2 + p_y^2 + p_z^2\right) - \frac{\mu m_r}{\sqrt{x^2 + y^2 + z^2}},$$
     donde $\mu = G(m_1 + m_2)$ y $m_r$ es la masa reducida. Deduzca las ecuaciones hamiltonianas de movimiento para este sistema.
-\end{enumerate}
+
+\subsection{Solución problema 5}
+
+\subsubsection*{a) Demostración del Hamiltoniano del problema de los dos cuerpos}
+
+De acuerdo con la Sección 9.8.3 ("El lagrangiano de un sistema de N cuerpos jerárquico") y la Sección 9.8.4 ("El problema general de los dos cuerpos") del libro de Zuluaga, el movimiento de un sistema de dos cuerpos puede desacoplarse en el movimiento del centro de masa y el movimiento relativo. El Lagrangiano para el movimiento relativo, expresado en coordenadas cartesianas $(x, y, z)$, es:
+
+$$L = \frac{1}{2}m_r (\dot{x}^2 + \dot{y}^2 + \dot{z}^2) + \frac{G m_1 m_2}{r}$$
+
+donde $r = \sqrt{x^2 + y^2 + z^2}$ es la magnitud del vector de posición relativa. En la Sección 5.4.2 ("Centro de masa de un sistema de dos cuerpos"), se define la masa reducida del sistema como $m_r = \frac{m_1 m_2}{m_1 + m_2}$. 
+
+Adicionalmente, definimos el parámetro gravitacional estándar del sistema como $\mu = G(m_1 + m_2)$. Notemos una identidad algebraica crucial que relaciona estos parámetros:
+
+$$G m_1 m_2 = G(m_1 + m_2) \left( \frac{m_1 m_2}{m_1 + m_2} \right) = \mu m_r$$
+
+Sustituyendo esta identidad en el Lagrangiano, obtenemos una forma más compacta:
+
+$$L = \frac{1}{2}m_r (\dot{x}^2 + \dot{y}^2 + \dot{z}^2) + \frac{\mu m_r}{\sqrt{x^2 + y^2 + z^2}}$$
+
+Para pasar al formalismo hamiltoniano, debemos definir los momentos canónicos conjugados a las coordenadas generalizadas $(x, y, z)$. Según la Definición 10.1 y la Sección 10.2 de Zuluaga, los momentos se definen como $p_i = \frac{\partial L}{\partial \dot{q}_i}$. Calculamos las derivadas parciales:
+
+$$p_x = \frac{\partial L}{\partial \dot{x}} = m_r \dot{x}$$
+$$p_y = \frac{\partial L}{\partial \dot{y}} = m_r \dot{y}$$
+$$p_z = \frac{\partial L}{\partial \dot{z}} = m_r \dot{z}$$
+
+Despejando las velocidades generalizadas en términos de los momentos canónicos, obtenemos las relaciones de transformación inversa:
+
+$$\dot{x} = \frac{p_x}{m_r}, \quad \dot{y} = \frac{p_y}{m_r}, \quad \dot{z} = \frac{p_z}{m_r}$$
+
+El Hamiltoniano del sistema se define mediante la transformación de Legendre (Sección 10.3 de Zuluaga):
+
+$$H = \sum_{i} p_i \dot{q}_i - L = p_x \dot{x} + p_y \dot{y} + p_z \dot{z} - L$$
+
+Sustituyendo las expresiones de las velocidades y el Lagrangiano original en términos de las nuevas variables $(x, y, z, p_x, p_y, p_z)$:
+
+$$H = p_x \left(\frac{p_x}{m_r}\right) + p_y \left(\frac{p_y}{m_r}\right) + p_z \left(\frac{p_z}{m_r}\right) - \left[ \frac{1}{2}m_r \left( \left(\frac{p_x}{m_r}\right)^2 + \left(\frac{p_y}{m_r}\right)^2 + \left(\frac{p_z}{m_r}\right)^2 \right) + \frac{\mu m_r}{\sqrt{x^2 + y^2 + z^2}} \right]$$
+
+Simplificando los términos cinéticos:
+
+$$H = \frac{1}{m_r}(p_x^2 + p_y^2 + p_z^2) - \frac{1}{2m_r}(p_x^2 + p_y^2 + p_z^2) - \frac{\mu m_r}{\sqrt{x^2 + y^2 + z^2}}$$
+
+Agrupando los términos, llegamos a la expresión final del Hamiltoniano:
+
+$$H(x, y, z, p_x, p_y, p_z) = \frac{1}{2m_r} \left(p_x^2 + p_y^2 + p_z^2\right) - \frac{\mu m_r}{\sqrt{x^2 + y^2 + z^2}}$$
+
+Esto demuestra la primera parte del enunciado. Como se menciona en la Proposición 10.2 (Sección 10.6.3), dado que el Hamiltoniano no depende explícitamente del tiempo y las transformaciones de coordenadas son esclerónomas, $H$ representa la energía mecánica total del sistema relativo.
+
+\subsubsection*{b) Deducción de las ecuaciones hamiltonianas de movimiento}
+
+Para deducir las ecuaciones de movimiento, aplicamos las ecuaciones canónicas de Hamilton (Sección 10.3, Ecs. 10.10 y 10.11 en Zuluaga), las cuales establecen que para cada par de variables canónicas conjugadas $(q_i, p_i)$ se cumple:
+
+$$\dot{q}_i = \frac{\partial H}{\partial p_i}, \quad \dot{p}_i = -\frac{\partial H}{\partial q_i}$$
+
+\textbf{1. Ecuaciones para las coordenadas de posición:}
+
+Derivando el Hamiltoniano respecto a los momentos:
+
+$$\dot{x} = \frac{\partial H}{\partial p_x} = \frac{p_x}{m_r}$$
+$$\dot{y} = \frac{\partial H}{\partial p_y} = \frac{p_y}{m_r}$$
+$$\dot{z} = \frac{\partial H}{\partial p_z} = \frac{p_z}{m_r}$$
+
+Estas ecuaciones simplemente recuperan la definición cinemática de los momentos canónicos.
+
+\textbf{2. Ecuaciones para las coordenadas de momento:}
+
+Para derivar el Hamiltoniano respecto a las coordenadas, nos enfocamos en el término potencial $V = -\frac{\mu m_r}{\sqrt{x^2 + y^2 + z^2}} = -\mu m_r (x^2 + y^2 + z^2)^{-1/2}$. 
+
+Calculamos la derivada parcial respecto a $x$ usando la regla de la cadena:
+
+$$\frac{\partial H}{\partial x} = -\mu m_r \left( -\frac{1}{2} \right) (x^2 + y^2 + z^2)^{-3/2} (2x) = \frac{\mu m_r x}{(x^2 + y^2 + z^2)^{3/2}} = \frac{\mu m_r x}{r^3}$$
+
+Por lo tanto, la ecuación canónica para $p_x$ es:
+
+$$\dot{p}_x = -\frac{\partial H}{\partial x} = -\frac{\mu m_r x}{r^3}$$
+
+De manera completamente análoga para las coordenadas $y$ y $z$:
+
+$$\dot{p}_y = -\frac{\partial H}{\partial y} = -\frac{\mu m_r y}{r^3}$$
+$$\dot{p}_z = -\frac{\partial H}{\partial z} = -\frac{\mu m_r z}{r^3}$$
+
+\textbf{3. Síntesis vectorial y validación:}
+
+En forma vectorial, este conjunto de 6 ecuaciones diferenciales de primer orden se escribe como:
+
+$$\dot{\vec{r}} = \frac{\vec{p}}{m_r}$$
+$$\dot{\vec{p}} = -\frac{\mu m_r}{r^3} \vec{r}$$
+
+Si derivamos la primera ecuación respecto al tiempo y sustituimos la segunda, obtenemos:
+
+$$m_r \ddot{\vec{r}} = \dot{\vec{p}} = -\frac{\mu m_r}{r^3} \vec{r}$$
+
+Cancelando la masa reducida $m_r$ en ambos lados, llegamos a:
+
+$$\ddot{\vec{r}} = -\frac{\mu}{r^3} \vec{r}$$
+
+Esta es exactamente la ecuación de movimiento relativa del problema de los dos cuerpos (Ec. 7.4 en la Sección 7.2 de Zuluaga). Este resultado valida la consistencia interna del formalismo hamiltoniano, demostrando que las ecuaciones canónicas reproducen fielmente la dinámica newtoniana del sistema.
+
 
 \section{Problema 6: Problema restringido de los tres cuerpos circulares (CRTBP).}
 
@@ -159,6 +617,91 @@ Considere el problema restringido de los tres cuerpos circulares, en el cual dos
     y discuta el significado físico de esta constante en el contexto del movimiento del tercer cuerpo.
 \end{enumerate}
 
+\subsection{Solución problema 6}
+
+\subsubsection*{a) Hamiltoniano del CRTBP en el sistema rotante}
+
+En el CRTBP, analizamos el movimiento de una partícula de masa despreciable bajo la influencia gravitacional de dos cuerpos primarios de masas $m_1$ y $m_2$, los cuales describen órbitas circulares alrededor de su centro de masas. Utilizamos un sistema de referencia rotante con velocidad angular $\vec{\omega} = \hat{k}$ (donde $\omega = 1$ en unidades canónicas) y origen en el centro de masas del sistema. 
+
+Como se establece en la \textbf{Sección 8.4 (Las unidades canónicas del CRTBP)} de Zuluaga, definimos el parámetro de masa $\alpha \equiv \mu_2 = m_2 / (m_1 + m_2)$, de modo que $\mu_1 = 1 - \alpha$. En este sistema, las posiciones de los cuerpos primarios son fijas: el cuerpo 1 en $(-\alpha, 0, 0)$ y el cuerpo 2 en $(1-\alpha, 0, 0)$. Las distancias de la partícula de prueba a cada cuerpo son $r_1 = \sqrt{(x+\alpha)^2 + y^2 + z^2}$ y $r_2 = \sqrt{(x-1+\alpha)^2 + y^2 + z^2}$.
+
+El Lagrangiano del sistema en el marco rotante, dado por la \textbf{Ec. (8.7)} de Zuluaga, es:
+$$L = \frac{1}{2}(\dot{x}^2 + \dot{y}^2 + \dot{z}^2) - \dot{x}y + \dot{y}x + \frac{1}{2}(x^2 + y^2) + \frac{1-\alpha}{r_1} + \frac{\alpha}{r_2}$$
+
+Para pasar al formalismo hamiltoniano, definimos los momentos canónicos conjugados ($p_i = \partial L / \partial \dot{q}_i$):
+$$p_x = \frac{\partial L}{\partial \dot{x}} = \dot{x} - y \implies \dot{x} = p_x + y$$
+$$p_y = \frac{\partial L}{\partial \dot{y}} = \dot{y} + x \implies \dot{y} = p_y - x$$
+$$p_z = \frac{\partial L}{\partial \dot{z}} = \dot{z} \implies \dot{z} = p_z$$
+
+El Hamiltoniano se obtiene mediante la transformación de Legendre $H = p_x \dot{x} + p_y \dot{y} + p_z \dot{z} - L$. Sustituyendo las velocidades en función de los momentos:
+$$H = p_x(p_x + y) + p_y(p_y - x) + p_z^2 - \left[ \frac{1}{2}\left((p_x+y)^2 + (p_y-x)^2 + p_z^2\right) - (p_x+y)y + (p_y-x)x + \frac{1}{2}(x^2+y^2) + \frac{1-\alpha}{r_1} + \frac{\alpha}{r_2} \right]$$
+
+Al expandir y simplificar algebraicamente los términos, las contribuciones cuadráticas en las coordenadas y los términos cruzados se cancelan exactamente, dejando:
+$$H(x, y, z, p_x, p_y, p_z) = \frac{1}{2}(p_x^2 + p_y^2 + p_z^2) + y p_x - x p_y - \frac{1-\alpha}{r_1} - \frac{\alpha}{r_2}$$
+
+Podemos identificar claramente los términos de este Hamiltoniano:
+1. \textbf{Término cinético}: $\frac{1}{2}(p_x^2 + p_y^2 + p_z^2)$, que representa la energía cinética en el espacio de momentos.
+2. \textbf{Término asociado a la rotación (Coriolis)}: $y p_x - x p_y$, que surge del acoplamiento entre el momento lineal y la velocidad angular del sistema de referencia ($\vec{\omega} \cdot (\vec{r} \times \vec{p})$).
+3. \textbf{Término gravitacional}: $-\frac{1-\alpha}{r_1} - \frac{\alpha}{r_2}$, que corresponde al potencial gravitacional newtoniano de los dos cuerpos primarios.
+
+\subsubsection*{b) Ecuaciones del movimiento del tercer cuerpo}
+
+Para derivar las ecuaciones de movimiento, aplicamos las \textbf{ecuaciones canónicas de Hamilton} (definidas en la \textbf{Sección 10.3} de Zuluaga): $\dot{q}_i = \partial H / \partial p_i$ y $\dot{p}_i = -\partial H / \partial q_i$.
+
+Para las coordenadas:
+$$\dot{x} = \frac{\partial H}{\partial p_x} = p_x + y$$
+$$\dot{y} = \frac{\partial H}{\partial p_y} = p_y - x$$
+$$\dot{z} = \frac{\partial H}{\partial p_z} = p_z$$
+
+Para los momentos, calculamos las derivadas parciales del Hamiltoniano respecto a las coordenadas:
+$$\dot{p}_x = -\frac{\partial H}{\partial x} = p_y + (1-\alpha)\frac{x+\alpha}{r_1^3} + \alpha\frac{x-1+\alpha}{r_2^3}$$
+$$\dot{p}_y = -\frac{\partial H}{\partial y} = -p_x + (1-\alpha)\frac{y}{r_1^3} + \alpha\frac{y}{r_2^3}$$
+$$\dot{p}_z = -\frac{\partial H}{\partial z} = (1-\alpha)\frac{z}{r_1^3} + \alpha\frac{z}{r_2^3}$$
+
+Para recuperar la forma familiar de las ecuaciones de movimiento en coordenadas, derivamos las expresiones de $\dot{x}$ y $\dot{y}$ respecto al tiempo y sustituimos $\dot{p}_x$ y $\dot{p}_y$:
+$$\ddot{x} = \dot{p}_x + \dot{y} = \left( p_y + (1-\alpha)\frac{x+\alpha}{r_1^3} + \alpha\frac{x-1+\alpha}{r_2^3} \right) + \dot{y}$$
+Sustituyendo $p_y = \dot{y} + x$:
+$$\ddot{x} = (\dot{y} + x) + (1-\alpha)\frac{x+\alpha}{r_1^3} + \alpha\frac{x-1+\alpha}{r_2^3} + \dot{y}$$
+Reordenando, obtenemos la componente $x$ de la \textbf{Ec. (8.26)} de Zuluaga:
+$$\ddot{x} - 2\dot{y} = x - (1-\alpha)\frac{x+\alpha}{r_1^3} - \alpha\frac{x-1+\alpha}{r_2^3}$$
+
+De manera análoga para la coordenada $y$:
+$$\ddot{y} = \dot{p}_y - \dot{x} = \left( -p_x + (1-\alpha)\frac{y}{r_1^3} + \alpha\frac{y}{r_2^3} \right) - \dot{x}$$
+Sustituyendo $p_x = \dot{x} - y$:
+$$\ddot{y} = -(\dot{x} - y) + (1-\alpha)\frac{y}{r_1^3} + \alpha\frac{y}{r_2^3} - \dot{x}$$
+Reordenando, obtenemos la componente $y$ de la \textbf{Ec. (8.27)} de Zuluaga:
+$$\ddot{y} + 2\dot{x} = y - (1-\alpha)\frac{y}{r_1^3} - \alpha\frac{y}{r_2^3}$$
+
+Finalmente, para la coordenada $z$:
+$$\ddot{z} = \dot{p}_z = -(1-\alpha)\frac{z}{r_1^3} - \alpha\frac{z}{r_2^3}$$
+
+Este conjunto de ecuaciones diferenciales de segundo orden describe completamente la dinámica de la partícula de prueba en el sistema rotante.
+
+\subsubsection*{c) Relación entre el Hamiltoniano y la constante de Jacobi}
+
+En la \textbf{Sección 8.7 (La constante de Jacobi)} de Zuluaga, se define la constante de Jacobi $C_J$ (o simplemente $C$) para el CRTBP como la siguiente cantidad conservada:
+$$C_J = 2\left(\frac{1-\alpha}{r_1} + \frac{\alpha}{r_2}\right) + (x^2 + y^2) - v^2$$
+donde $v^2 = \dot{x}^2 + \dot{y}^2 + \dot{z}^2$ es el cuadrado de la rapidez de la partícula en el sistema rotante.
+
+Para relacionar esta expresión con el Hamiltoniano, expresamos $v^2$ en términos de los momentos canónicos. Usando las relaciones $\dot{x} = p_x + y$, $\dot{y} = p_y - x$ y $\dot{z} = p_z$:
+$$v^2 = (p_x + y)^2 + (p_y - x)^2 + p_z^2 = p_x^2 + p_y^2 + p_z^2 + 2yp_x - 2xp_y + x^2 + y^2$$
+
+Sustituyendo esta expresión de $v^2$ en la definición de $C_J$:
+$$C_J = 2\left(\frac{1-\alpha}{r_1} + \frac{\alpha}{r_2}\right) + x^2 + y^2 - \left( p_x^2 + p_y^2 + p_z^2 + 2yp_x - 2xp_y + x^2 + y^2 \right)$$
+
+Los términos $x^2 + y^2$ se cancelan, y factorizando $-2$ en los términos restantes, obtenemos:
+$$C_J = -2 \left[ \frac{1}{2}(p_x^2 + p_y^2 + p_z^2) + y p_x - x p_y - \frac{1-\alpha}{r_1} - \frac{\alpha}{r_2} \right]$$
+
+Al comparar la expresión entre corchetes con el Hamiltoniano derivado en el inciso (a), reconocemos inmediatamente que es exactamente $H$. Por lo tanto, queda demostrada la relación fundamental:
+$$C_J = -2H$$
+
+\textbf{Significado físico de la constante de Jacobi:}
+Como se discute en la \textbf{Sección 8.11 (Las regiones de exclusión)} de Zuluaga, la constante de Jacobi es la única cantidad estrictamente conservada en el CRTBP (a diferencia de la energía mecánica, que no se conserva en el sistema rotante debido al trabajo realizado por la fuerza de Coriolis, que depende de la velocidad). 
+
+Físicamente, $C_J$ impone una restricción cinemática absoluta sobre el movimiento de la partícula. Dado que el cuadrado de la rapidez debe ser no negativo ($v^2 \ge 0$), la partícula solo puede existir en las regiones del espacio que satisfagan la desigualdad:
+$$2\left(\frac{1-\alpha}{r_1} + \frac{2\alpha}{r_2}\right) + (x^2 + y^2) - C_J \ge 0$$
+Las fronteras de estas regiones, donde $v=0$, se denominan \textit{superficies de cero velocidad}. Estas superficies actúan como barreras dinámicas impenetrables: una partícula que se mueve dentro de una región permitida nunca puede cruzar una superficie de cero velocidad hacia una región de exclusión, independientemente de la complejidad de su trayectoria. Esto permite a los astrónomos e ingenieros aeroespaciales determinar \textit{a priori} las zonas del espacio a las que un vehículo espacial o un cuerpo natural tiene acceso, sin necesidad de integrar numéricamente las ecuaciones de movimiento (Zuluaga, Sección 8.11 "Las regiones de exclusión").
+
 \section{Problema 7: Hamiltoniano, energía y corchetes de Poisson.}
 
 \begin{enumerate}[a)]
@@ -170,6 +713,80 @@ Considere el problema restringido de los tres cuerpos circulares, en el cual dos
     $$F = x - \frac{pt}{m}.$$
     Verifique que $F$ es constante de movimiento y analice cómo este ejemplo ilustra la propiedad de los corchetes de Poisson entre constantes de movimiento.
 \end{enumerate}
+
+\subsection{Solución problema 7}
+
+\subsubsection*{a) Circunstancias para que el Hamiltoniano corresponda a la energía y sea una cantidad conservada}
+
+Para determinar cuándo el Hamiltoniano $H$ de un sistema coincide con su energía mecánica total $E$, debemos remitirnos a las condiciones establecidas en el \textbf{Teorema de conservación de la energía mecánica (Proposición 9.5 y Proposición 10.2 en Zuluaga)}. El Hamiltoniano se define mediante la transformación de Legendre del Lagrangiano:
+$$H(\{q_j\}, \{p_j\}, t) = \sum_j p_j \dot{q}_j - L(\{q_j\}, \{\dot{q}_j\}, t)$$
+Para que $H = E = T + U$, deben cumplirse simultáneamente las siguientes condiciones:
+1. Las ecuaciones de transformación entre las coordenadas cartesianas y las variables generalizadas no deben depender explícitamente del tiempo (restricciones esclerónomas), es decir, $\vec{r}_i = \vec{r}_i(\{q_j\})$. Esto garantiza que la energía cinética $T$ sea una función homogénea de grado 2 en las velocidades generalizadas $\dot{q}_j$.
+2. La función de energía potencial $U$ debe depender únicamente de las coordenadas generalizadas $\{q_j\}$ y no de las velocidades generalizadas $\{\dot{q}_j\}$ ni explícitamente del tiempo.
+
+Bajo estas condiciones, el teorema de Euler para funciones homogéneas asegura que $\sum_j \dot{q}_j \frac{\partial T}{\partial \dot{q}_j} = 2T$, lo que lleva directamente a que la función de Jacobi (y por ende el Hamiltoniano) sea igual a $T + U$.
+
+Por otro lado, para determinar bajo qué condiciones el Hamiltoniano es una cantidad conservada, utilizamos la derivada total de $H$ respecto al tiempo. Según la \textbf{Proposición 10.2 (Conservación del Hamiltoniano)} de Zuluaga, la derivada total es:
+$$\frac{dH}{dt} = \sum_j \left( \frac{\partial H}{\partial q_j} \dot{q}_j + \frac{\partial H}{\partial p_j} \dot{p}_j \right) + \frac{\partial H}{\partial t}$$
+Sustituyendo las ecuaciones canónicas de Hamilton ($\dot{q}_j = \frac{\partial H}{\partial p_j}$ y $\dot{p}_j = -\frac{\partial H}{\partial q_j}$), los términos de la sumatoria se cancelan mutuamente, dejando:
+$$\frac{dH}{dt} = \frac{\partial H}{\partial t}$$
+Por lo tanto, el Hamiltoniano es una cantidad conservada (una constante de movimiento) si y solo si no depende explícitamente del tiempo, es decir, si $\frac{\partial H}{\partial t} = 0$. Esto representa la invarianza del sistema bajo traslaciones temporales.
+
+Podemos demostrar esto mismo valiéndonos de los corchetes de Poisson. La evolución temporal de cualquier función $f(\{q_j\}, \{p_j\}, t)$ está dada por la \textbf{Proposición 10.3}:
+$$\frac{df}{dt} = \{f, H\} + \frac{\partial f}{\partial t}$$
+Si aplicamos esto al propio Hamiltoniano ($f = H$), obtenemos:
+$$\frac{dH}{dt} = \{H, H\} + \frac{\partial H}{\partial t}$$
+Por la propiedad de antisimetría de los corchetes de Poisson (\textbf{Proposición 10.4}), sabemos que $\{H, H\} = 0$. Por lo tanto:
+$$\frac{dH}{dt} = \frac{\partial H}{\partial t}$$
+Concluimos nuevamente que si $\frac{\partial H}{\partial t} = 0$, entonces $\frac{dH}{dt} = 0$, confirmando que $H$ es una constante de movimiento.
+
+\subsubsection*{b) El corchete de Poisson de dos constantes de movimiento es una constante de movimiento}
+
+Sean $F(\{q_j\}, \{p_j\}, t)$ y $G(\{q_j\}, \{p_j\}, t)$ dos constantes de movimiento. Por definición (\textbf{Proposición 10.3}), sus derivadas totales respecto al tiempo son nulas:
+$$\frac{dF}{dt} = \{F, H\} + \frac{\partial F}{\partial t} = 0 \implies \{F, H\} = -\frac{\partial F}{\partial t}$$
+$$\frac{dG}{dt} = \{G, H\} + \frac{\partial G}{\partial t} = 0 \implies \{G, H\} = -\frac{\partial G}{\partial t}$$
+Queremos demostrar que la cantidad $C = \{F, G\}$ también es una constante de movimiento, es decir, que $\frac{dC}{dt} = 0$. Evaluamos la derivada total de $C$:
+$$\frac{d}{dt}\{F, G\} = \{\{F, G\}, H\} + \frac{\partial}{\partial t}\{F, G\}$$
+Para evaluar el primer término, utilizamos la \textbf{identidad de Jacobi} (\textbf{Proposición 10.4}):
+$$\{F, \{G, H\}\} + \{G, \{H, F\}\} + \{H, \{F, G\}\} = 0$$
+Sustituimos las relaciones $\{G, H\} = -\frac{\partial G}{\partial t}$ y $\{H, F\} = -\{F, H\} = \frac{\partial F}{\partial t}$ en la identidad de Jacobi:
+$$\left\{F, -\frac{\partial G}{\partial t}\right\} + \left\{G, \frac{\partial F}{\partial t}\right\} + \{H, \{F, G\}\} = 0$$
+Reordenando los términos, obtenemos una expresión para $\{H, \{F, G\}\}$:
+$$\{H, \{F, G\}\} = \left\{F, \frac{\partial G}{\partial t}\right\} - \left\{G, \frac{\partial F}{\partial t}\right\}$$
+Multiplicando por $-1$ y usando la antisimetría $\{A, B\} = -\{B, A\}$, tenemos:
+$$\{\{F, G\}, H\} = \left\{\frac{\partial F}{\partial t}, G\right\} + \left\{F, \frac{\partial G}{\partial t}\right\}$$
+Por otro lado, la derivada parcial respecto al tiempo de un corchete de Poisson satisface la regla de Leibniz (también derivable de las \textbf{Propiedades de los corchetes de Poisson, Proposición 10.4}):
+$$\frac{\partial}{\partial t}\{F, G\} = \left\{\frac{\partial F}{\partial t}, G\right\} + \left\{F, \frac{\partial G}{\partial t}\right\}$$
+Observamos que el lado derecho de esta última ecuación es idéntico a la expresión que obtuvimos para $\{\{F, G\}, H\}$. Por lo tanto:
+$$\{\{F, G\}, H\} = \frac{\partial}{\partial t}\{F, G\}$$
+Sustituyendo esto en la ecuación de la derivada total de $C$:
+$$\frac{d}{dt}\{F, G\} = \{\{F, G\}, H\} + \frac{\partial}{\partial t}\{F, G\} = \frac{\partial}{\partial t}\{F, G\} - \frac{\partial}{\partial t}\{F, G\} = 0$$
+Hemos demostrado que $\frac{d}{dt}\{F, G\} = 0$, lo que confirma que el corchete de Poisson de dos constantes de movimiento es, a su vez, una constante de movimiento, incluso si $F$ y $G$ dependen explícitamente del tiempo.
+
+\subsubsection*{c) Ilustración con una partícula libre}
+
+Consideremos una partícula libre de masa $m$ moviéndose en una dimensión. Su Hamiltoniano es puramente cinético:
+$$H = \frac{p^2}{2m}$$
+Se nos da la cantidad $F = x - \frac{pt}{m}$. Primero, verificamos que $F$ es una constante de movimiento calculando su derivada total:
+$$\frac{dF}{dt} = \{F, H\} + \frac{\partial F}{\partial t}$$
+Calculamos el corchete de Poisson $\{F, H\}$ usando la linealidad y las reglas básicas ($\{x, p\} = 1$, $\{p, p\} = 0$):
+$$\{F, H\} = \left\{x - \frac{pt}{m}, \frac{p^2}{2m}\right\} = \left\{x, \frac{p^2}{2m}\right\} - \frac{t}{m}\left\{p, \frac{p^2}{2m}\right\}$$
+El segundo término es cero porque $\{p, p^2\} = 0$. Para el primer término, usamos la propiedad $\{x, p^2\} = 2p\{x, p\} = 2p(1) = 2p$:
+$$\{F, H\} = \frac{1}{2m}(2p) = \frac{p}{m}$$
+Ahora calculamos la derivada parcial explícita de $F$ respecto al tiempo:
+$$\frac{\partial F}{\partial t} = \frac{\partial}{\partial t}\left(x - \frac{pt}{m}\right) = -\frac{p}{m}$$
+Sumando ambos resultados:
+$$\frac{dF}{dt} = \frac{p}{m} - \frac{p}{m} = 0$$
+Esto verifica que $F$ es efectivamente una constante de movimiento.
+
+Ahora, analicemos cómo este ejemplo ilustra la propiedad demostrada en el inciso (b). Tenemos dos constantes de movimiento: el Hamiltoniano $H$ y la cantidad $F$. Según el teorema, su corchete de Poisson $\{F, H\}$ debe ser también una constante de movimiento.
+Ya calculamos anteriormente que:
+$$\{F, H\} = \frac{p}{m}$$
+¿Es $\frac{p}{m}$ una constante de movimiento? Verifiquémoslo aplicando la regla de evolución temporal al momento lineal $p$:
+$$\frac{dp}{dt} = \{p, H\} + \frac{\partial p}{\partial t} = \left\{p, \frac{p^2}{2m}\right\} + 0 = 0$$
+Dado que $p$ es constante, cualquier múltiplo escalar de $p$, como $\frac{p}{m}$, también es constante. 
+
+\textbf{Conclusión del ejemplo:} El sistema posee dos constantes de movimiento dependientes del tiempo ($F$) e independientes del tiempo ($H$). Al tomar su corchete de Poisson, el término dependiente del tiempo en $F$ se cancela exactamente con la evolución dinámica generada por $H$, produciendo una nueva cantidad ($\frac{p}{m}$) que es puramente una constante de movimiento del sistema (el momento lineal conservado). Esto ilustra de manera elegante y concreta el poder del teorema de Poisson: la estructura algebraica de las constantes de movimiento se cierra bajo la operación del corchete de Poisson, generando nuevas simetrías o cantidades conservadas del sistema dinámico.
 
 \bibliographystyle{plainurl}
 \bibliography{bibliografia} 
