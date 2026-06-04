@@ -5,7 +5,7 @@
 
 ## Archivos revisados
 
-- Proyecto_AproximaciónApophis_MC2026_1.ipynb (entregado)
+- (Ningún archivo específico) (entregado)
 
 ## Historial de commits
 
@@ -27,22 +27,15 @@
 - Nota de ritmo de commits (promedio): 5.00 / 5.0
 
 Interpretación breve: Ritmo muy constante y sostenible durante el semestre.
+
 ## Retroalimentación
 
-- Archivo revisado: Proyecto_AproximaciónApophis_MC2026_1.ipynb
-
-### Aspectos positivos
-
-- Se evidencia el objetivo central del proyecto (trayectoria de Apophis, contexto de 2029 y estimación de acercamiento a la Tierra).
-- Hay secciones de metodología/resultados con interpretación de hallazgos.
-- El tamaño de las celdas de código es razonable para lectura y mantenimiento.
+- Archivo revisado: (Ningún archivo específico para revisar)
 
 ### Aspectos por mejorar
 
-- El trabajo parece apoyarse en pocas estrategias; se sugiere contrastar con más de un enfoque numerico/teórico.
-- La narrativa del notebook debe mejorar: muchas celdas de código no están antecedidas por explicación.
+- Debe indicar donde está la solución porque ninguno de los archivos entregados contiene la solución completa.
 
 ### Valoración global
 
-- Trabajo técnicamente sólido en términos generales, con oportunidades claras de mejora en presentación y calidad de reporte.
-- Estado de recepción: se recibe como fue entregado, con recomendaciones de mejora.
+- No entrego nada para la revisión inicial.
